@@ -17,8 +17,15 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// Test route untuk view tertentu
 Route::get('/test', function () {
     return view('dashboard0');
+});
+
+Route::middleware(['auth'])->group(function () {
+    //
+    
+    // -- Dashboard --
 });
 
 Route::get('/', function () {
