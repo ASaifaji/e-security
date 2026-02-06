@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTicketActivitiesTable extends Migration
+class CreateTicketChatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateTicketActivitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ticket_activities', function (Blueprint $table) {
+        Schema::create('ticket_chats', function (Blueprint $table) {
             $table->id();
+            $table->text('message');
+
+            // foreign key
             $table->foreignId('ticket_id')->constrained('tickets')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users'); // Siapa yang beraktivitas?
-            
-            $table->string('type'); // comment, status_change, assignment
-            $table->boolean('is_internal')->default(false); // Catatan khusus teknisi?
+            $table->foreignId('user_id')->constrained('users');
             
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ class CreateTicketActivitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ticket_activities');
+        Schema::dropIfExists('ticket_chats');
     }
 }
