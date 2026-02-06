@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Status;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,5 +15,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // User::factory(10)->create();
+        $this->call([
+            RoleSeeder::class,
+            DepartmentSeeder::class,
+            StatusSeeder::class,
+            CategorySeeder::class,
+            UserSeeder::class,
+        ]);
     }
 }
