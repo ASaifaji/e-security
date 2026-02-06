@@ -28,7 +28,6 @@ class CreateTicketsTable extends Migration
             $table->foreignId('priority_id')->constrained('priorities');
             $table->foreignId('severity_id')->nullable()->constrained('severities'); // Sesuai diagram
             $table->foreignId('status_id')->constrained('statuses');
-            $table->foreignId('asset_id')->nullable()->constrained('assets');
             
             // Timestamps SLA
             $table->dateTime('sla_due_at')->nullable();
