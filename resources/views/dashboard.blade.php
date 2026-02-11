@@ -40,12 +40,13 @@
             <!--begin::Page-->
             <div class="d-flex flex-row flex-column-fluid page">
 
-				@include('components.side-bar')
+                <x-side-bar />
 
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 
-                    @include('components.header')
+                    {{-- @include('components.header') --}}
+                    <x-header />
                     
                     <!--begin::Content-->
                     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -53,7 +54,8 @@
 						@if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2)
 							@include('pages.dashboard.tech-dashboard')
 						@else
-							@include('pages.dashboard.user-dashboard')
+							{{-- @include('pages.dashboard.user-dashboard') --}}
+                            @include('pages.dashboard.tech-dashboard')
 						@endif                
                         
                     </div>
