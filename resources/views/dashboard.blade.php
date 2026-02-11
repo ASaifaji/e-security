@@ -1,81 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-    {{-- begin::HEAD --}}
-    <head><base href="">
-        <meta charset="utf-8" />
-		<title>Metronic | Dashboard</title>
-		<meta name="description" content="Updates and statistics" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-		<!--begin::Fonts-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-		<!--end::Fonts-->
-		<!--begin::Page Vendors Styles(used by this page)-->
-		<link href="{{ asset('plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet" type="text/css" />
-		<!--end::Page Vendors Styles-->
-		
-        @include('theme.global-theme')
-		
-        @include('theme.layout-theme')
+<x-app-layout>
 
-		<link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
+    <x-slot name="page_vendor_style">
+        <x-theme.page-vendor-style href="{{ asset('plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" />
+    </x-slot>
 
-        <style>
-            body {
-                overflow: hidden; /* Sumbu X dan Y mati */
-                /* atau */
-                overflow-y: hidden; /* Hanya mematikan scroll vertikal */
-            }
-        </style>
-    </head>
-    {{-- end::HEAD --}}
-    {{-- begin::BODY --}}
-    <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-        <!--begin::Main-->
-		
-        <!--begin::Header Mobile-->
-        <x-header-mobile logo="{{ asset('media/logos/logo-light.png') }}" />
-        <!--end::Header Mobile-->
-
-        <div class="d-flex flex-column flex-root">
-            <!--begin::Page-->
-            <div class="d-flex flex-row flex-column-fluid page">
-
-                <x-side-bar logo="{{ asset('media/logos/logo-light.png') }}" />
-
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-                    
-                    <x-header />
-                    
-                    <!--begin::Content-->
-                    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-
-						@if(Auth::user()->role->id == 1 || Auth::user()->role->id == 2)
-                            <x-pages.dashboard.tech-dashboard />
-						@else
-                            {{-- <x-pages.dashboard.user-dashboard /> --}}
-                            <x-pages.dashboard.tech-dashboard />
-						@endif                
-                        
-                    </div>
-                    <!--end::Content-->
-                </div>
-                <!--end::Wrapper-->
-            </div>
-            <!--end::Page-->
-        </div>
-        <!--end::Main-->
-        
-        <x-user-panel />
-
-        @include('theme.global-theme-js')
-
+    <x-slot name="page_vendor_script">
         <!--begin::Page Vendors(used by this page)-->
 		<script src="{{ asset('plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
 		<!--end::Page Vendors-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{ asset('js/pages/widgets.js') }}"></script>
 		<!--end::Page Scripts-->
+    </x-slot>
 
-    </body>
-</html>
+    @if (Auth::user()->id == 1 || Auth::user()->id == 2)
+        <x-page.dashboard.tech-dashboard />
+    @else
+        <x-page.dashboard.user-dashboard />
+    @endif
+
+</x-app-layout>
