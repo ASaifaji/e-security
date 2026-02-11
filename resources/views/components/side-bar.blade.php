@@ -1,7 +1,7 @@
-@props([])
+@props(['logo'])
 
 <x-sidebar.aside 
-    :logo="asset('media/logos/logo-light.png')"
+    logo="{{ $logo }}"
 >
     <x-sidebar.menu-item href="{{ url('/') }}" text="Dashboard" :active="request()->routeIs('/')">
         <x-slot name="icon">
