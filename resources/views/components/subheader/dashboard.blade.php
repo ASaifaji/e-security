@@ -8,15 +8,6 @@
             <!--end::Page Title-->
         </div>
         <!--end::Info-->
-        <!--begin::Toolbar-->
-        <div class="d-flex align-items-center">
-            <!--begin::Actions-->
-            <a href="#" class="btn btn-clean btn-hover-light-primary- btn-sm font-weight-bold font-size-base mr-1">Today</a>
-            <a href="#" class="btn btn-clean btn-hover-light-primary- btn-sm font-weight-bold font-size-base mr-1">Month</a>
-            <a href="#" class="btn btn-clean btn-hover-light-primary- btn-sm font-weight-bold font-size-base mr-1">Year</a>
-            <!--end::Actions-->
-        </div>
-        <!--end::Toolbar-->
     </div>
 </div>
 <!--end::Subheader-->

@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Models\Ticket;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +28,15 @@ Route::middleware(['auth'])->group(function () {
     //
     
     // -- Dashboard --
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    // -- Ticket List --
+    Route::get('/tickets', function () {
+        $tickets = Ticket::all();
+        return view('tickets.index', compact('tickets'));
+    })->name('tickets.index');
 });
 
 Route::get('/', function () {

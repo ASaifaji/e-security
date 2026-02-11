@@ -1,3 +1,8 @@
-<button {{ $attributes->merge(['type' => 'submit', 'class' => 'btn btn-dark']) }}>
-    {{ $slot }}
-</button>
+@props(['href', 'text', 'icon' => null])
+
+<!--begin::Button-->
+<a href="{{ $href }}" class="btn btn-primary font-weight-bolder">
+<span class="svg-icon svg-icon-md">
+    {{ $icon }}
+</span>{{ $text }}</a>
+<!--end::Button-->
