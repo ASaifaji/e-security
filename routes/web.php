@@ -1,8 +1,10 @@
 <?php
 
+use App\Models\App;
 use Illuminate\Support\Facades\Route;
 
 use App\Models\Ticket;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +39,13 @@ Route::middleware(['auth'])->group(function () {
         $tickets = Ticket::all();
         return view('tickets.index', compact('tickets'));
     })->name('tickets.index');
+
+    // -- Create Ticket --
+    Route::get('/tickets/create', function(){
+        $users = User::all();
+        $apps = App::all();
+        return view('tickets.create-ticket', compact('users', 'apps'));
+    })->name('tickets.create');
 });
 
 Route::get('/', function () {

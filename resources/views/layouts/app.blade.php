@@ -1,4 +1,4 @@
-@props(['page_vendor_style' => null, 'page_vendor_script' => null])
+@props(['page_vendor_style' => null, 'page_vendor_script' => null, 'scroll' => false])
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -19,13 +19,15 @@
         <x-theme.layout-theme />
 
         <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
-        <style>
-            body {
-                overflow: hidden; /* Sumbu X dan Y mati */
-                /* atau */
-                overflow-y: hidden; /* Hanya mematikan scroll vertikal */
-            }
-        </style>
+        @if ($scroll == false)
+            <style>
+                body {
+                    overflow: hidden; /* Sumbu X dan Y mati */
+                    /* atau */
+                    overflow-y: hidden; /* Hanya mematikan scroll vertikal */
+                }
+            </style>
+        @endif
     </head>
     <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
@@ -66,6 +68,8 @@
         <x-theme.global-theme-js />
 
         {{ $page_vendor_script }}
+
+        @stack('scripts')
 
     </body>
 </html>
