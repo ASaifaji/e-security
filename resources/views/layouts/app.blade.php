@@ -1,34 +1,75 @@
+@props(['page_vendor_style' => null, 'page_vendor_script' => null, 'scroll' => false])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        {{ $page_vendor_style }}
+        
+        <x-theme.global-theme />
+        <x-theme.layout-theme />
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
+        @if ($scroll == false)
+            <style>
+                body {
+                    overflow: hidden; /* Sumbu X dan Y mati */
+                    /* atau */
+                    overflow-y: hidden; /* Hanya mematikan scroll vertikal */
+                }
+            </style>
+        @endif
     </head>
-    <body class="font-sans antialiased bg-light">
-        @include('layouts.navigation')
+    <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
-        <!-- Page Heading -->
-        <header class="d-flex py-3 bg-white shadow-sm border-bottom">
-            <div class="container">
-                {{ $header }}
+        <x-header-mobile logo="{{ asset('media/logos/logo-light.png') }}" />
+
+        <!--begin::Main-->
+        <div class="d-flex flex-column flex-root">
+            
+            <!--begin::Page-->
+            <div class="d-flex flex-row flex-column-fluid page">
+                
+                <x-side-bar logo="{{ asset('media/logos/logo-light.png') }}" />
+                
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+                    
+                    <x-header />
+
+                    <!--begin::Content-->
+                    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+                        {{ $slot }}             
+                        
+                    </div>
+                    <!--end::Content-->
+
+                </div>
+                <!--end::Wrapper-->
+
             </div>
-        </header>
+            <!--end::Page-->
 
-        <!-- Page Content -->
-        <main class="container my-5">
-            {{ $slot }}
-        </main>
+        </div>
+        <!--end::Main-->
+
+        <x-user-panel />
+
+        <x-theme.global-theme-js />
+
+        {{ $page_vendor_script }}
+
+        @stack('scripts')
+
     </body>
 </html>

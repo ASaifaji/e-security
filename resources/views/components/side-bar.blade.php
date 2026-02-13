@@ -11,8 +11,8 @@
 
     <x-sidebar.menu-section text="Applications"/>
     <x-sidebar.menu-submenu text="Tickets">
-        <x-sidebar.menu-item href="{{ url('/test1') }}" text="All Tickets" :active="request()->routeIs('test1')" />
-        <x-sidebar.menu-item href="{{ url('/test2') }}" text="Create Ticket" :active="request()->routeIs('test2')" />
+        <x-sidebar.menu-item href="{{ url('/tickets') }}" text="All Tickets" :active="request()->routeIs('tickets')" />
+        <x-sidebar.menu-item href="{{ url('/tickets/create') }}" text="Create Ticket" :active="request()->routeIs('tickets/create')" />
     </x-sidebar.menu-submenu>
 
     <x-sidebar.menu-section text="Settings"/>

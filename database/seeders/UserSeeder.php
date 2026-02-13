@@ -33,5 +33,23 @@ class UserSeeder extends Seeder
             'department_id' => 1,
             'is_active' => true,
         ]);
+
+        User::create([
+            'name' => 'test user1',
+            'email' => 'user1@helpdesk.com',
+            'password' => Hash::make('abcd1234'),
+            'role_id' => 3,
+            'department_id' => 1,
+            'is_active' => true,
+        ]);
+
+        User::create([
+            'name' => 'test user2',
+            'email' => 'user2@helpdesk.com',
+            'password' => Hash::make('abcd1234'),
+            'role_id' => 3,
+            'department_id' => 1,
+            'is_active' => true,
+        ]);
     }
 }

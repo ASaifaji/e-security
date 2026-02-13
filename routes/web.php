@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\TicketController;
+use App\Models\App;
 use Illuminate\Support\Facades\Route;
+
+use App\Models\Ticket;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +27,39 @@ Route::get('/test', function () {
     return view('dashboard0');
 });
 
+// View
 Route::middleware(['auth'])->group(function () {
     //
     
     // -- Dashboard --
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    // -- Ticket List --
+    Route::get('/tickets', function () {
+        $tickets = Ticket::all();
+        return view('tickets.index', compact('tickets'));
+    })->name('tickets.index');
+
+    // -- Create Ticket --
+    Route::get('/tickets/create', function(){
+        $users = User::all();
+        $apps = App::all();
+        return view('tickets.create-ticket', compact('users', 'apps'));
+    })->name('tickets.create');
+
+    // -- Show Ticket --
+    Route::get('/tickets/{ticket}', function(Ticket $ticket){
+        $ticket->load(['app', 'requester', 'tester', 'priority', 'severity', 'status']);
+
+        return view('tickets.show', compact('ticket'));
+    })->name('tickets.show');
 });
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// API
+Route::middleware(['auth'])->group(function(){
+    Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
+});
 
 require __DIR__.'/auth.php';
