@@ -28,6 +28,9 @@
                 }
             </style>
         @endif
+        <script>
+            window.GOOGLE_CALENDAR_API_KEY = "{{ config('services.google.api_key') }}";
+        </script>
     </head>
     <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
