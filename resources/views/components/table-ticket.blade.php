@@ -17,7 +17,7 @@
                 <x-dropdown.navi-item href="#" text="CSV" icon="la la-file-text-o" />
                 <x-dropdown.navi-item href="#" text="PDF" icon="la la-file-pdf-o" />
             </x-dropdown.dropdown-button>
-            <x-button.button href="#" text="Add New" >
+            <x-button.button href="/tickets/create" text="Add New" >
                 <x-slot name="icon"><x-icons.flatten /></x-slot>
             </x-button.button>
         </div>
@@ -25,14 +25,14 @@
 
     <div class="card-body">
         <!--begin: Datatable-->
-        <table class="table table-bordered table-hover table-checkable mt-10" id="kt_datatable">
+        <table class="table table-bordered table-hover table-checkable mt-10" id="tickets_table">
             <thead>
                 <tr>
                     <th colspan="2">Ticket Information</th>
                     <th colspan="3">Ticket Details</th>
                     <th colspan="2">User Information</th>
                     <th colspan="3">Status</th>
-                    <th colspan="2">Timestamps</th>
+                    <th rowspan="2" class="align-middle">View</th>
                 </tr>
                 <tr>
                     <th>ID</th>
@@ -45,8 +45,6 @@
                     <th>Priority</th>
                     <th>Severity</th>
                     <th>Status</th>
-                    <th>Resolved At</th>
-                    <th>Created At</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,12 +60,26 @@
                         <td>{{ $ticket->priority->name }}</td>
                         <td>{{ $ticket->severity->name }}</td>
                         <td>{{ $ticket->status->name }}</td>
-                        <td>{{ $ticket->resolved_at }}</td>
-                        <td>{{ $ticket->created_at }}</td>
-                        <td nowrap="nowrap"></td>
+                        <td>
+                            <a href="{{ route('tickets.show', $ticket->id) }}" class="btn btn-sm btn-light-primary font-weight-bolder" title="View Details">
+                                View
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+        @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#tickets_table').DataTable({
+                    responsive: true,
+                    ordering: true,
+                    // distinct styling for the pagination
+                    pagingType: 'full_numbers' 
+                });
+            });
+        </script>
+        @endpush
     </div>
 </div>

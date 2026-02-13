@@ -46,6 +46,13 @@ Route::middleware(['auth'])->group(function () {
         $apps = App::all();
         return view('tickets.create-ticket', compact('users', 'apps'));
     })->name('tickets.create');
+
+    // -- Show Ticket --
+    Route::get('/tickets/{ticket}', function(Ticket $ticket){
+        $ticket->load(['app', 'requester', 'tester', 'priority', 'severity', 'status']);
+
+        return view('tickets.show', compact('ticket'));
+    })->name('tickets.show');
 });
 
 Route::get('/', function () {
