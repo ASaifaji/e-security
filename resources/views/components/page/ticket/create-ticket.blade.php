@@ -13,32 +13,40 @@
             </x-slot>
             <x-slot name="body">
                 <!--begin::Form-->
-                <form class="form" id="kt_form">
+                <form class="form" id="kt_form" method="POST" action="{{ route('tickets.store') }}">
+                    @csrf
+                    <input type="hidden" name="submit_action" id="submit_action" value="">
                     <div class="row">
                         <div class="col-xl-2"></div>
                         <div class="col-xl-8">
+
                             <x-form.form-section text="Ticket Info:">
-                                <x-form.text-input label="Subject" required={{ true }}/>
-                                <x-form.text-input label="Description" />
-                                <x-form.text-input label="Vulnerabilities Detail" sublabel="Can be Emptied" />
+                                <x-form.text-input name="subject" label="Subject" required={{ true }}/>
+                                <x-form.text-input name="description" label="Description" />
+                                <x-form.text-input name="vulnerability_details" label="Vulnerabilities Detail" sublabel="Can be Emptied" />
                             </x-form.form-section>
+
                             <div class="separator separator-dashed my-10"></div>
+
                             <x-form.form-section text="App Details:">
-                                <x-form.select-picker id="app_type" label="Type">
+                                <x-form.select-picker id="app_type" name="app_type" label="Type">
                                     <option value="1">Existing</option>
                                     <option value="2" selected>New</option>
                                 </x-form.select-picker>
-                                <div id="row_app_name"><x-form.text-input label="App Name" required={{ true }} /></div>
+
+                                <div id="row_app_name"><x-form.text-input name="new_app_name" label="App Name" required={{ true }} /></div>
+                                
                                 <div id="row_pic">
-                                    <x-form.select-picker label="PIC" search="true" required={{ true }} >
+                                    <x-form.select-picker name="new_app_pic" label="PIC" search="true" required={{ true }} >
                                         <option disabled selected>Select</option>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </x-form.select-picker>
                                 </div>
+                                
                                 <div id="row_app">
-                                    <x-form.select-picker id="row_app" label="App" search="true" required={{ true }} >
+                                    <x-form.select-picker id="row_app" name="existing_app_id" label="App" search="true" required={{ true }} >
                                         <option disabled selected>Select</option>
                                         @foreach ($apps as $app)
                                             <option value="{{ $app->id }}">{{ $app->name }}</option>
@@ -73,21 +81,23 @@
                                 </script>
                                 @endpush
                             </x-form.form-section>
+
                             <div class="separator separator-dashed my-10"></div>
+
                             <x-form.form-section text="Ticket Status:" >
-                                <x-form.select-picker label="Priority" >
+                                <x-form.select-picker name="priority_id" label="Priority" >
                                     <option value="1">Critical</option>
                                     <option value="2">High</option>
                                     <option value="3" selected="selected">Medium</option>
                                     <option value="4">Low</option>
                                 </x-form.select-picker>
-                                <x-form.select-picker label="Severity" >
+                                <x-form.select-picker name="severity_id" label="Severity" >
                                     <option value="1">Critical</option>
                                     <option value="2">Major</option>
                                     <option value="3" selected="selected">Moderate</option>
                                     <option value="4">Low</option>
                                 </x-form.select-picker>
-                                <x-form.select-picker label="Status" >
+                                <x-form.select-picker name="status_id" label="Status" >
                                     <option value="1" selected="selected">Open</option>
                                     <option value="2">In Progress</option>
                                     <option value="3">Pending</option>

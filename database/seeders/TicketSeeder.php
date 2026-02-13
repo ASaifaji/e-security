@@ -17,7 +17,7 @@ class TicketSeeder extends Seeder
         //
 
         Ticket::create([
-            'ticket_number' => 'TCKT-001',
+            'ticket_number' => 'TCKT-202602-001',
             'subject' => 'Sample Ticket 1',
             'description' => 'This is a sample ticket description.',
             'vulnerability_details' => null,
@@ -33,7 +33,7 @@ class TicketSeeder extends Seeder
         ]);
 
         Ticket::create([
-            'ticket_number' => 'TCKT-002',
+            'ticket_number' => 'TCKT-202602-002',
             'subject' => 'Sample Ticket 2',
             'description' => 'This is a sample ticket description 2.',
             'vulnerability_details' => null,

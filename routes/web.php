@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TicketController;
 use App\Models\App;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,7 @@ Route::get('/test', function () {
     return view('dashboard0');
 });
 
+// View
 Route::middleware(['auth'])->group(function () {
     //
     
@@ -55,8 +57,9 @@ Route::middleware(['auth'])->group(function () {
     })->name('tickets.show');
 });
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// API
+Route::middleware(['auth'])->group(function(){
+    Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
+});
 
 require __DIR__.'/auth.php';
