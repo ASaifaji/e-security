@@ -32,7 +32,6 @@
                     <th>App Name</th>
                     <th>Type</th>
                     <th>PIC</th>
-                    <th>View</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,14 +40,13 @@
                         <td>{{ $app->id }}</td>
                         <td>{{ $app->name }}</td>
                         <td>{{ $app->type }}</td>
-                        <td>{{ $app->users->name }}</td>
                         <td>
-                            {{-- <a href="{{ route('apps.show', $app->id) }}" class="btn btn-sm btn-light-primary font-weight-bolder" title="View Details">
-                                View
-                            </a> --}}
-                            <a href="#" class="btn btn-sm btn-light-primary font-weight-bolder" title="View Details">
-                                View
-                            </a>
+                            <div class="btn btn-icon btn-clean d-inline-flex btn-lg px-2" id="kt_quick_user_toggle" style="width: auto; white-space: nowrap;">
+                                <span class="symbol symbol-35 symbol-light-success" style="margin-right: 4px;">
+                                    <span class="symbol-label font-size-h5 font-weight-bold">{{ substr($app->users->name, 0, 1) }}</span>
+                                </span>
+                                <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ $app->users->name }}</span>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
