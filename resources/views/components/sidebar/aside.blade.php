@@ -6,7 +6,7 @@
     <div class="brand flex-column-auto" id="kt_brand">
         <!--begin::Logo-->
         <a href="{{ url('/') }}" class="brand-logo">
-            <img alt="Logo" src="{{ $logo }}" />
+            <img alt="Logo" width="100" height="20" src="{{ $logo }}" />
         </a>
         <!--end::Logo-->
         <!--begin::Toggle-->

@@ -18,7 +18,7 @@
         <x-theme.global-theme />
         <x-theme.layout-theme />
 
-        <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ asset('media/logos/logo-icon-light.png') }}" />
         @if ($scroll == false)
             <style>
                 body {
@@ -40,7 +40,7 @@
     </head>
     <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
-        <x-header-mobile logo="{{ asset('media/logos/logo-light.png') }}" />
+        <x-header-mobile logo="{{ asset('media/logos/logo-side-light.png') }}" />
 
         <!--begin::Main-->
         <div class="d-flex flex-column flex-root">
@@ -48,7 +48,7 @@
             <!--begin::Page-->
             <div class="d-flex flex-row flex-column-fluid page">
                 
-                <x-side-bar logo="{{ asset('media/logos/logo-light.png') }}" />
+                <x-side-bar logo="{{ asset('media/logos/logo-side-light.png') }}" />
                 
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
