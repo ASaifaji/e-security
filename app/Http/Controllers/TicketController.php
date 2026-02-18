@@ -82,4 +82,10 @@ class TicketController extends Controller
             return redirect()->route('tickets.index')->with('success', 'Ticket created successfully.');
         }
     }
+
+    public function markAsResolved(Ticket $ticket)
+    {
+        $ticket->update(['resolved_at' => now(), 'status_id' => 4]); // Assuming 4 = Resolved
+        return back()->with('success', 'Ticket marked as resolved.');
+    }
 }

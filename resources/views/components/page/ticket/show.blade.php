@@ -181,8 +181,23 @@
 
                             </div>
                         </div>
+                        @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                            @if(!$ticket->resolved_at)
+                                <form action="{{ route('tickets.resolve', $ticket->id) }}" method="POST" style="display: inline-block;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to mark this ticket as resolved?')">
+                                        <i class="la la-check"></i> Mark as Resolved
+                                    </button>
+                                </form>
+                            @else
+                                <button class="btn btn-light-success disabled" disabled>
+                                    <i class="la la-check-double"></i> Already Resolved
+                                </button>
+                            @endif
+                        @endif
                     </div>
-                    </div>
+                    
+                </div>
             </div>
         </div>
     </div>

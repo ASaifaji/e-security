@@ -72,6 +72,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function(){
     Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
     Route::post('/ticket/{ticket}/reply', [TicketChatController::class, 'store'])->name('tickets.reply.store');
+    Route::post('/tickets/{ticket}/resolve', [TicketController::class, 'markAsResolved'])->name('tickets.resolve');
 });
 
 require __DIR__.'/auth.php';
