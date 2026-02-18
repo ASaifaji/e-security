@@ -1,5 +1,11 @@
 @props(['ticket'])
 
+<x-subheader.breadcrumb text="Ticket Details">
+    <x-subheader.breadcrumb-item href="{{ route('dashboard') }}" text="Dashboard" />
+    <x-subheader.breadcrumb-item href="{{ route('tickets.index') }}" text="Tickets" />
+    <x-subheader.breadcrumb-item href="{{ route('tickets.show', $ticket->id) }}" text="{{ $ticket->ticket_number }}" />
+</x-subheader.breadcrumb>
+
 <div class="d-flex flex-column-fluid">
     <div class="container">        
         <div class="card card-custom">

@@ -1,6 +1,9 @@
 @props(['apps'])
 
-<x-subheader.ticket-list />
+<x-subheader.breadcrumb text="Apps List">
+    <x-subheader.breadcrumb-item href="{{ route('dashboard') }}" text="Dashboard" />
+    <x-subheader.breadcrumb-item href="{{ route('apps.index') }}" text="Apps" />
+</x-subheader.breadcrumb>
 
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">

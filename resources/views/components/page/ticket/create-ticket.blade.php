@@ -1,6 +1,10 @@
 @props(['users', 'apps'])
 
-<x-subheader.create-ticket />
+<x-subheader.breadcrumb text="Create Ticket">
+    <x-subheader.breadcrumb-item href="{{ route('dashboard') }}" text="Dashboard" />
+    <x-subheader.breadcrumb-item href="{{ route('tickets.index') }}" text="Tickets" />
+    <x-subheader.breadcrumb-item href="{{ route('tickets.create') }}" text="Create" />
+</x-subheader.breadcrumb>
 
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">

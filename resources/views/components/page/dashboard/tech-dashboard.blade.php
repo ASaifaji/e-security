@@ -1,4 +1,6 @@
-<x-subheader.dashboard />
+<x-subheader.breadcrumb text="Dashboard">
+    <x-subheader.breadcrumb-item href="{{ route('dashboard') }}" text="Dashboard" />
+</x-subheader.breadcrumb>
 
 <!--begin::Entry-->
 <div class="d-flex flex-column-fluid">
