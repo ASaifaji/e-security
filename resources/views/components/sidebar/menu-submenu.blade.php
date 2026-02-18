@@ -1,6 +1,6 @@
 @props(['text', 'icon' => null, 'active' => false, 'icon'])
 
-<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+<li class="menu-item menu-item-submenu {{ $active ? 'menu-item-active menu-item-open' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
     <a href="javascript:;" class="menu-link menu-toggle">
         <span class="svg-icon menu-icon">
             {{ $icon }}
