@@ -47,10 +47,21 @@
                                 </div>
                             </div>
                         @endif
+
+                        
+                        <!--begin::Messages-->
+                        <div class="mb-3" id="kt_inbox_view">
+                            @foreach ($ticket->chats as $chat)
+                                <x-inbox.message :message="$chat"/>
+                            @endforeach
+                        </div>
+                        <!--end:Messages-->
+                        
+                        <x-inbox.reply :ticket="$ticket" />
                     </div>
 
                     <div class="col-xl-4">
-                        <div class="card card-custom bg-light-secondary card-stretch gutter-b">
+                        <div class="card card-custom bg-light-secondary gutter-b">
                             <div class="card-header border-0 pt-5">
                                 <h3 class="card-title font-weight-bolder">Summary</h3>
                             </div>

@@ -57,5 +57,10 @@ class Ticket extends Model
         return $this->hasMany(TicketActivity::class);
     }
 
+    public function chats()
+    {
+        return $this->hasMany(TicketChat::class);
+    }
+
 
 }

@@ -18,13 +18,13 @@ class AppSeeder extends Seeder
         App::create([
             'name' => 'Test Application',
             'type' => 'New',
-            'user_id' => 1,
+            'user_id' => 4,
         ]);
 
         App::create([
             'name' => 'Test Application 2',
             'type' => 'Existing',
-            'user_id' => 1,
+            'user_id' => 3,
         ]);
     }
 }

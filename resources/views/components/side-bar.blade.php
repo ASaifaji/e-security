@@ -11,9 +11,17 @@
 
     <x-sidebar.menu-section text="Applications"/>
     <x-sidebar.menu-submenu text="Tickets">
+        <x-slot name="icon">
+            <x-icons.ticket />
+        </x-slot>
         <x-sidebar.menu-item href="{{ url('/tickets') }}" text="All Tickets" :active="request()->routeIs('tickets')" />
         <x-sidebar.menu-item href="{{ url('/tickets/create') }}" text="Create Ticket" :active="request()->routeIs('tickets/create')" />
     </x-sidebar.menu-submenu>
+    <x-sidebar.menu-item href="{{ url('/apps') }}" text="Apps" :active="request()->routeIs('apps')">
+        <x-slot name="icon">
+            <x-icons.layout-4-blocks />
+        </x-slot>
+    </x-sidebar.menu-item>
 
     <x-sidebar.menu-section text="Settings"/>
     <x-sidebar.menu-item href="{{ url('/profile') }}" text="Profile" :active="request()->routeIs('profile')">

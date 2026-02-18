@@ -27,6 +27,12 @@
                     overflow-y: hidden; /* Hanya mematikan scroll vertikal */
                 }
             </style>
+        @else
+            <style>
+                body {
+                    overflow: auto; /* Aktifkan scroll */
+                }
+            </style>
         @endif
         <script>
             window.GOOGLE_CALENDAR_API_KEY = "{{ config('services.google.api_key') }}";

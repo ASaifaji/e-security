@@ -15,13 +15,12 @@ class CreateTicketAttachmentsTable extends Migration
     {
         Schema::create('ticket_attachments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ticket_id')->constrained('tickets')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users'); // Siapa yang upload?
+            $table->foreignId('chat_id')->constrained('ticket_chats')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             
             $table->string('type'); // jpg, pdf, png
             $table->string('path'); // lokasi file di storage
-            $table->string('description')->nullable(); // nama file asli
-            $table->boolean('is_internal')->default(false);
+            $table->string('filename'); // nama file asli
             
             $table->timestamps();
         });

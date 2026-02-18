@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TicketChatController;
 use App\Http\Controllers\TicketController;
 use App\Models\App;
 use Illuminate\Support\Facades\Route;
@@ -57,15 +58,20 @@ Route::middleware(['auth'])->group(function () {
     })->name('tickets.show');
 
     // -- Show App --
-    Route::get('apps', function(){
+    Route::get('/apps', function(){
         $apps = App::with('users')->get();
         return view('apps.index', compact('apps'));
     })->name('apps.index');
+
+    // -- Attachement --
+    
+    Route::get('/tickets/{ticket}/attachments/{attachment}', [TicketChatController::class, 'download'])->name('tickets.attachments.download');
 });
 
 // API
 Route::middleware(['auth'])->group(function(){
     Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
+    Route::post('/ticket/{ticket}/reply', [TicketChatController::class, 'store'])->name('tickets.reply.store');
 });
 
 require __DIR__.'/auth.php';
