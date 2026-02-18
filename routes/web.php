@@ -55,6 +55,12 @@ Route::middleware(['auth'])->group(function () {
 
         return view('tickets.show', compact('ticket'));
     })->name('tickets.show');
+
+    // -- Show App --
+    Route::get('apps', function(){
+        $apps = App::with('users')->get();
+        return view('apps.index', compact('apps'));
+    })->name('apps.index');
 });
 
 // API
