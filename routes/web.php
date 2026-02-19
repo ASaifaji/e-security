@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Models\Ticket;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,8 +65,13 @@ Route::middleware(['auth'])->group(function () {
     })->name('apps.index');
 
     // -- Attachement --
-    
     Route::get('/tickets/{ticket}/attachments/{attachment}', [TicketChatController::class, 'download'])->name('tickets.attachments.download');
+
+    // -- User Profile --
+    Route::get('/profile', function(){
+        $user = Auth::user();
+        return view('profile.index', compact('user'));
+    })->name('profile.index');
 });
 
 // API
