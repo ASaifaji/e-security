@@ -63,6 +63,8 @@
                     </div>
                     <!--end::Content-->
 
+                    <x-footer />
+
                 </div>
                 <!--end::Wrapper-->
 
