@@ -7,14 +7,43 @@
             <span class="text-muted font-weight-bold font-size-sm mt-1">Change your account password</span>
         </div>
         <div class="card-toolbar">
-            <button type="reset" class="btn btn-success mr-2">Save Changes</button>
-            <button type="reset" class="btn btn-secondary">Cancel</button>
+            <button type="submit" form="change_password_form" class="btn btn-success mr-2">Save Changes</button>
+            <button type="reset" form="change_password_form" class="btn btn-secondary">Cancel</button>
         </div>
     </div>
     <!--end::Header-->
     <!--begin::Form-->
-    <form class="form">
+    <form id="change_password_form" class="form" method="POST" action="{{ route('profile.update.password') }}">
+        @csrf
+        @method('PUT')
+
         <div class="card-body">
+
+            @if(session('success'))
+                <div class="alert alert-custom alert-light-success fade show mb-10" role="alert">
+                    <div class="alert-icon"><i class="flaticon2-check-mark"></i></div>
+                    <div class="alert-text">{{ session('success') }}</div>
+                    <div class="alert-close">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true"><i class="ki ki-close"></i></span>
+                        </button>
+                    </div>
+                </div>
+            @endif
+
+            @if($errors->any())
+                <div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
+                    <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                    <div class="alert-text">
+                        <ul class="mb-0">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+
             <!--begin::Alert-->
             <div class="alert alert-custom alert-light-danger fade show mb-10" role="alert">
                 <div class="alert-icon">
@@ -45,20 +74,20 @@
             <div class="form-group row">
                 <label class="col-xl-3 col-lg-3 col-form-label text-alert">Current Password</label>
                 <div class="col-lg-9 col-xl-6">
-                    <input type="password" class="form-control form-control-lg form-control-solid mb-2" value="" placeholder="Current password" />
-                    <a href="#" class="text-sm font-weight-bold">Forgot password ?</a>
+                    <input type="password" name="current_password" class="form-control form-control-lg form-control-solid mb-2" placeholder="Current password" required />
+                    <a href="{{ route('password.request') }}" class="text-sm font-weight-bold">Forgot Password?</a>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-xl-3 col-lg-3 col-form-label text-alert">New Password</label>
                 <div class="col-lg-9 col-xl-6">
-                    <input type="password" class="form-control form-control-lg form-control-solid" value="" placeholder="New password" />
+                    <input type="password" name="password" class="form-control form-control-lg form-control-solid" placeholder="New password" required />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-xl-3 col-lg-3 col-form-label text-alert">Verify Password</label>
                 <div class="col-lg-9 col-xl-6">
-                    <input type="password" class="form-control form-control-lg form-control-solid" value="" placeholder="Verify password" />
+                    <input type="password" name="password_confirmation" class="form-control form-control-lg form-control-solid" placeholder="Verify password" required />
                 </div>
             </div>
         </div>
