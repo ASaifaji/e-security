@@ -17,7 +17,8 @@ class UserSeeder extends Seeder
     {
         //
         User::create([
-            'name' => 'Super Admin',
+            'first_name' => 'Super',
+            'last_name' => 'Admin',
             'email' => 'admin@helpdesk.com',
             'password' => Hash::make('abcd1234'),
             'role_id' => 1,
@@ -26,7 +27,8 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'test teknisi',
+            'first_name' => 'Test',
+            'last_name' => 'Teknisi',
             'email' => 'tech@helpdesk.com',
             'password' => Hash::make('abcd1234'),
             'role_id' => 2,
@@ -35,7 +37,8 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'test user1',
+            'first_name' => 'Test',
+            'last_name' => 'User1',
             'email' => 'user1@helpdesk.com',
             'password' => Hash::make('abcd1234'),
             'role_id' => 3,
@@ -44,7 +47,8 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'user2 test',
+            'first_name' => 'Test',
+            'last_name' => 'User2',
             'email' => 'user2@helpdesk.com',
             'password' => Hash::make('abcd1234'),
             'role_id' => 3,

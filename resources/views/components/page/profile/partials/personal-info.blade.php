@@ -1,3 +1,5 @@
+@props(['user'])
+
 <!--begin::Card-->
 <div class="card card-custom card-stretch">
     <!--begin::Header-->
@@ -45,19 +47,19 @@
             <div class="form-group row">
                 <label class="col-xl-3 col-lg-3 col-form-label text-right">First Name</label>
                 <div class="col-lg-9 col-xl-6">
-                    <input class="form-control form-control-lg form-control-solid" type="text" value="Nick" />
+                    <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->first_name }}" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-xl-3 col-lg-3 col-form-label text-right">Last Name</label>
                 <div class="col-lg-9 col-xl-6">
-                    <input class="form-control form-control-lg form-control-solid" type="text" value="Bold" />
+                    <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->last_name }}" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-xl-3 col-lg-3 col-form-label text-right">Company Name</label>
                 <div class="col-lg-9 col-xl-6">
-                    <input class="form-control form-control-lg form-control-solid" type="text" value="Loop Inc." />
+                    <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->department->name }}" />
                     <span class="form-text text-muted">If you want your invoices addressed to a company. Leave blank to use your full name.</span>
                 </div>
             </div>
@@ -90,7 +92,7 @@
                                 <i class="la la-at"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control form-control-lg form-control-solid" value="nick.bold@loop.com" placeholder="Email" />
+                        <input type="text" class="form-control form-control-lg form-control-solid" value="{{ $user->email }}" placeholder="Email" />
                     </div>
                 </div>
             </div>

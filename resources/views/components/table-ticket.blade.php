@@ -55,8 +55,8 @@
                         <td>{{ $ticket->subject }}</td>
                         <td>{{ $ticket->description }}</td>
                         <td>{{ $ticket->app->name }}</td>
-                        <td>{{ $ticket->requester->name }}</td>
-                        <td>{{ $ticket->tester->name ?? 'Unassigned'}}</td>
+                        <td>{{ $ticket->requester->name() }}</td>
+                        <td>{{ $ticket->tester->name() ?? 'Unassigned'}}</td>
                         <td>{{ $ticket->priority->name }}</td>
                         <td>{{ $ticket->severity->name }}</td>
                         <td>{{ $ticket->status->name }}</td>

@@ -22,7 +22,7 @@
         <div class="container">
             <!--begin::Profile-->
             <div class="d-flex flex-row">
-                <x-sidebar.profile-aside :tab="$tab"/>
+                <x-sidebar.profile-aside :user="$user" :tab="$tab"/>
 
                 <!--begin::Content-->
                 <div class="flex-row-fluid ml-lg-8">
@@ -31,7 +31,7 @@
                             <x-page.profile.partials.profile-overview />
                         </x-tab.panel>
                         <x-tab.panel id="personal_info_tab" :active="$tab === 'personal_info'">
-                            <x-page.profile.partials.personal-info />
+                            <x-page.profile.partials.personal-info :user="$user" />
                         </x-tab.panel>
                         <x-tab.panel id="account_info_tab" :active="$tab === 'account_info'">
                             <x-page.profile.partials.account-info />

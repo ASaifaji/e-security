@@ -1,4 +1,4 @@
-@props(['tab'])
+@props(['tab', 'user'])
 
 <!--begin::Aside-->
 <div class="flex-row-auto offcanvas-mobile w-250px w-xxl-350px" id="kt_profile_aside">
@@ -14,8 +14,8 @@
                     <i class="symbol-badge bg-success"></i>
                 </div>
                 <div>
-                    <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">{{ Auth::user()->name }}</a>
-                    <div class="text-muted">{{ Auth::user()->department->name }}</div>
+                    <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">{{ $user->name() }}</a>
+                    <div class="text-muted">{{ $user->department->name }}</div>
                 </div>
             </div>
             <!--end::User-->
@@ -23,7 +23,7 @@
             <div class="py-9">
                 <div class="d-flex align-items-center justify-content-between mb-2">
                     <span class="font-weight-bold mr-2">Email:</span>
-                    <a href="#" class="text-muted text-hover-primary">{{ Auth::user()->email }}</a>
+                    <a href="#" class="text-muted text-hover-primary">{{ $user->email }}</a>
                 </div>
             </div>
             <!--end::Contact-->
