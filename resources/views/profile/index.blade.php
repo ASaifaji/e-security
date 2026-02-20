@@ -39,9 +39,6 @@
                         <x-tab.panel id="change_pwd_tab" :active="$tab === 'change_pwd'">
                             <x-page.profile.partials.change-password />
                         </x-tab.panel>
-                        <x-tab.panel id="email_settings_tab" :active="$tab === 'email_settings'">
-                            <x-page.profile.partials.email-settings />
-                        </x-tab.panel>
                     </x-tab.tab>
                 </div>
             </div>
