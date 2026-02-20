@@ -44,7 +44,7 @@
                                     <x-form.select-picker name="new_app_pic" label="PIC" search="true" required={{ true }} >
                                         <option disabled selected>Select</option>
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            <option value="{{ $user->id }}">{{ $user->name() }}</option>
                                         @endforeach
                                     </x-form.select-picker>
                                 </div>
