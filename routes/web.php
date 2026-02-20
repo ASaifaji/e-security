@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketChatController;
 use App\Http\Controllers\TicketController;
 use App\Models\App;
@@ -68,10 +69,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tickets/{ticket}/attachments/{attachment}', [TicketChatController::class, 'download'])->name('tickets.attachments.download');
 
     // -- User Profile --
-    Route::get('/profile/{tab?}', function($tab = 'profile'){
-        $user = Auth::user();
-        return view('profile.index', compact('user', 'tab'));
-    })->name('profile.index');
+    Route::get('/profile/{tab?}', [ProfileController::class, 'index'])->name('profile.index');
 });
 
 // API
