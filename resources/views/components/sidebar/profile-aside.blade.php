@@ -1,3 +1,5 @@
+@props(['tab'])
+
 <!--begin::Aside-->
 <div class="flex-row-auto offcanvas-mobile w-250px w-xxl-350px" id="kt_profile_aside">
     <!--begin::Profile Card-->
@@ -28,27 +30,27 @@
 
             <x-nav.navi>
 
-                <x-nav.navi-item href="#" text="Profile Overview">
+                <x-nav.navi-item :active="$tab == 'profile'" href="{{ route('profile.index', 'profile') }}" role="tab" text="Profile Overview">
                     <x-slot name="icon">
                         <x-icons.layers />
                     </x-slot>
                 </x-nav.navi-item>
-                <x-nav.navi-item href="#" text="Personal Information">
+                <x-nav.navi-item :active="$tab == 'personal_info'" href="{{ route('profile.index', 'personal_info') }}" role="tab" text="Personal Information">
                     <x-slot name="icon">
                         <x-icons.user />
                     </x-slot>
                 </x-nav.navi-item>
-                <x-nav.navi-item href="#" text="Account Information">
+                <x-nav.navi-item :active="$tab == 'account_info'" href="{{ route('profile.index', 'account_info') }}" role="tab" text="Account Information">
                     <x-slot name="icon">
                         <x-icons.compiling />
                     </x-slot>
                 </x-nav.navi-item>
-                <x-nav.navi-item href="#" text="Change Password">
+                <x-nav.navi-item :active="$tab == 'change_pwd'" href="{{ route('profile.index', 'change_pwd') }}" role="tab" text="Change Password">
                     <x-slot name="icon">
                         <x-icons.shield-user />
                     </x-slot>
                 </x-nav.navi-item>
-                <x-nav.navi-item href="#" text="Email Settings">
+                <x-nav.navi-item :active="$tab == 'email_settings'" href="{{ route('profile.index', 'email_settings') }}" role="tab" text="Email Settings">
                     <x-slot name="icon">
                         <x-icons.mail-opened />
                     </x-slot>

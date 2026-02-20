@@ -68,9 +68,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tickets/{ticket}/attachments/{attachment}', [TicketChatController::class, 'download'])->name('tickets.attachments.download');
 
     // -- User Profile --
-    Route::get('/profile', function(){
+    Route::get('/profile/{tab?}', function($tab = 'profile'){
         $user = Auth::user();
-        return view('profile.index', compact('user'));
+        return view('profile.index', compact('user', 'tab'));
     })->name('profile.index');
 });
 
