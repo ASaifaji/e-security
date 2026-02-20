@@ -57,10 +57,9 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-xl-3 col-lg-3 col-form-label text-right">Company Name</label>
+                <label class="col-xl-3 col-lg-3 col-form-label text-right">Department Name</label>
                 <div class="col-lg-9 col-xl-6">
                     <input class="form-control form-control-lg form-control-solid" type="text" value="{{ $user->department->name }}" />
-                    <span class="form-text text-muted">If you want your invoices addressed to a company. Leave blank to use your full name.</span>
                 </div>
             </div>
             <div class="row">
@@ -80,7 +79,7 @@
                         </div>
                         <input type="text" class="form-control form-control-lg form-control-solid" value="+35278953712" placeholder="Phone" />
                     </div>
-                    <span class="form-text text-muted">We'll never share your email with anyone else.</span>
+                    <span class="form-text text-muted">We'll never share your contact information with anyone else.</span>
                 </div>
             </div>
             <div class="form-group row">
@@ -93,17 +92,6 @@
                             </span>
                         </div>
                         <input type="text" class="form-control form-control-lg form-control-solid" value="{{ $user->email }}" placeholder="Email" />
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-xl-3 col-lg-3 col-form-label text-right">Company Site</label>
-                <div class="col-lg-9 col-xl-6">
-                    <div class="input-group input-group-lg input-group-solid">
-                        <input type="text" class="form-control form-control-lg form-control-solid" placeholder="Username" value="loop" />
-                        <div class="input-group-append">
-                            <span class="input-group-text">.com</span>
-                        </div>
                     </div>
                 </div>
             </div>
