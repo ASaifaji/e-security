@@ -54,11 +54,6 @@
                         <x-icons.shield-user />
                     </x-slot>
                 </x-nav.navi-item>
-                <x-nav.navi-item :active="$tab == 'email_settings'" href="{{ route('profile.index', 'email_settings') }}" role="tab" text="Email Settings">
-                    <x-slot name="icon">
-                        <x-icons.mail-opened />
-                    </x-slot>
-                </x-nav.navi-item>
 
             </x-nav.navi>
         </div>
