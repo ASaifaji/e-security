@@ -10,7 +10,11 @@
             <!--begin::User-->
             <div class="d-flex align-items-center">
                 <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
-                    <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
+                    @if ($user->avatar == null)
+                        <span class="symbol-label">{{ substr($user->first_name, 0, 1) }}{{ substr($user->last_name, 0, 1) }}</span>
+                    @else
+                        <div class="symbol-label" style="background-image:url('{{ asset('storage/' . $user->avatar) }}')"></div>
+                    @endif
                     <i class="symbol-badge bg-success"></i>
                 </div>
                 <div>

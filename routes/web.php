@@ -77,6 +77,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
     Route::post('/ticket/{ticket}/reply', [TicketChatController::class, 'store'])->name('tickets.reply.store');
     Route::post('/tickets/{ticket}/resolve', [TicketController::class, 'markAsResolved'])->name('tickets.resolve');
+    Route::put('/profile/personal-info', [ProfileController::class, 'updatePersonalInfo'])->name('profile.update.personal');
 });
 
 require __DIR__.'/auth.php';
