@@ -1,5 +1,7 @@
 <x-app-layout>
 
+    <x-slot name="scroll">{{ true }}</x-slot>
+
     <x-slot name="page_vendor_style">
         <x-theme.page-vendor-style href="{{ asset('plugins/custom/datatables/datatables.bundle.css') }}" />
     </x-slot>
