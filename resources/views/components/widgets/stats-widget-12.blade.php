@@ -3,14 +3,17 @@
     <!--begin::Body-->
     <div class="card-body p-0">
         <div class="d-flex align-items-center justify-content-between card-spacer flex-grow-1">
-            <span class="symbol symbol-50 symbol-light-primary mr-2">
+            <span class="symbol symbol-50 symbol-light-info mr-2">
                 <span class="symbol-label">
-                    <span class="svg-icon svg-icon-xl svg-icon-primary">
-                        <!--begin::Svg Icon-->
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#3699FF">
-                            <path d="M551-523q5-8 7-17.5t2-19.5q0-33-23.5-56.5T480-640q-10 0-19.5 2t-17.5 7l108 108Zm203 205-60-62q12-32 19-66.5t7-69.5v-189l-240-90-146 55-62-62 208-78 320 120v244q0 51-11.5 101T754-318Zm38 262L662-186q-38 39-84.5 65.5T480-80q-139-35-229.5-159.5T160-516v-172L56-792l56-56 736 736-56 56ZM430-418Zm57-170Zm-7 424q35-11 67-31t59-47L488-360h-68l10-58-190-190v92q0 121 68 220t172 132Z"/>
-                        </svg>
-                        <!--end::Svg Icon-->
+                    <span class="svg-icon svg-icon-xl svg-icon-info">
+                        <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Chart-pie.svg-->
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"/>
+                                <path d="M4.00246329,12.2004927 L13,14 L13,4.06189375 C16.9463116,4.55399184 20,7.92038235 20,12 C20,16.418278 16.418278,20 12,20 C7.64874861,20 4.10886412,16.5261253 4.00246329,12.2004927 Z" fill="#000000" opacity="0.3"/>
+                                <path d="M3.0603968,10.0120794 C3.54712466,6.05992157 6.91622084,3 11,3 L11,11.6 L3.0603968,10.0120794 Z" fill="#000000"/>
+                            </g>
+                        </svg><!--end::Svg Icon-->
                     </span>
                 </span>
             </span>
@@ -19,7 +22,7 @@
                 <span class="text-muted font-weight-bold mt-2">Vulnerabilities</span>
             </div>
         </div>
-        <div id="kt_stats_widget_12_chart" class="card-rounded-bottom" data-color="primary" style="height: 150px"></div>
+        <div id="kt_stats_widget_12_chart" class="card-rounded-bottom" data-color="info" style="height: 150px"></div>
     </div>
     <!--end::Body-->
 </div>
