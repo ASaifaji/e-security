@@ -28,7 +28,7 @@ class TicketController extends Controller
             // Create New App
             $app = App::create([
                 'name' => $request->new_app_name,
-                'type' => null,
+                'type' => 'New',
                 'user_id' => $request->new_app_pic,
             ]);
             $appId = $app->id;
