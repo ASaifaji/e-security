@@ -27,7 +27,7 @@ class TicketSeeder extends Seeder
             'priority_id' => 1,
             'severity_id' => 2,
             'status_id' => 4,
-            'resolved_at' => null,
+            'resolved_at' => now(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
