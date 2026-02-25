@@ -77,8 +77,8 @@ var KTApexChartsDemo = function () {
 		chart.render();
 	}
 
-	var _demo2 = function () {
-		const apexChart = "#chart_2";
+	var _openticket = function () {
+		const apexChart = "#chart_open_ticket";
 		
 		var chartData = window.dynamicTicketData || [];
 		var chartDate = window.dynamicTicketDates || [];
@@ -1070,7 +1070,7 @@ var KTApexChartsDemo = function () {
 		// public functions
 		init: function () {
 			_demo1();
-			_demo2();
+			_openticket();
 			_demo3();
 			_demo4();
 			_demo5();

@@ -5,9 +5,9 @@
     <!--begin::Body-->
     <div class="card-body p-0">
         <div class="d-flex align-items-center justify-content-between card-spacer flex-grow-1">
-            <span class="symbol symbol-50 symbol-light-success mr-2">
+            <span class="symbol symbol-50 symbol-light-primary mr-2">
                 <span class="symbol-label">
-                    <span class="svg-icon svg-icon-xl svg-icon-success">
+                    <span class="svg-icon svg-icon-xl svg-icon-primary">
                         {{ $icons }}
                     </span>
                 </span>
@@ -17,8 +17,7 @@
                 <span class="text-muted font-weight-bold mt-2">Ticket Status</span>
             </div>
         </div>
-        <div id="chart_2" style="height: 150px"></div>
-        {{-- <div id="kt_stats_widget_11_chart" class="card-rounded-bottom" data-color="success" style="height: 150px"></div> --}}
+        <div id="chart_open_ticket" style="height: 150px"></div>
     </div>
     <!--end::Body-->
 </div>
