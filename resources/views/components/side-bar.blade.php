@@ -22,6 +22,11 @@
             <x-icons.layout-4-blocks />
         </x-slot>
     </x-sidebar.menu-item>
+    <x-sidebar.menu-item href="{{ url('/schedules') }}" text="Schedule" :active="request()->routeIs('schedules.index')">
+        <x-slot name="icon">
+            <x-icons.calendar-clock />
+        </x-slot>
+    </x-sidebar.menu-item>
 
     <x-sidebar.menu-section text="Settings"/>
     <x-sidebar.menu-item href="{{ url('/profile') }}" text="Profile" :active="request()->routeIs('profile')">

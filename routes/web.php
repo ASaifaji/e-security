@@ -69,6 +69,11 @@ Route::middleware(['auth'])->group(function () {
 
     // -- User Profile --
     Route::get('/profile/{tab?}', [ProfileController::class, 'index'])->name('profile.index');
+
+    // -- Schedule --
+    Route::get('/schedules', function(){
+        return view('schedules.index');
+    })->name('schedules.index');
 });
 
 // API
