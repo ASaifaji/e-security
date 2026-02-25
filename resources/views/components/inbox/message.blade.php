@@ -3,12 +3,12 @@
 <div class="cursor-pointer shadow-xs toggle-off" data-inbox="message">
     <div class="d-flex align-items-center card-spacer-x py-6">
         <span class="symbol symbol-50 mr-4">
-            <span class="symbol-label font-size-h5 font-weight-bold bg-light-primary text-primary">{{ substr($message->user->name, 0, 1) }}</span>
+            <span class="symbol-label font-size-h5 font-weight-bold bg-light-primary text-primary">{{ substr($message->user->name(), 0, 1) }}</span>
             {{-- <span class="symbol-label" style="background-image: url('assets/media/users/100_13.jpg')"></span> --}}
         </span>
         <div class="d-flex flex-column flex-grow-1 flex-wrap mr-2">
             <div class="d-flex">
-                <a href="#" class="font-size-lg font-weight-bolder text-dark-75 text-hover-primary mr-2">{{ $message->user->name }}</a>
+                <a href="#" class="font-size-lg font-weight-bolder text-dark-75 text-hover-primary mr-2">{{ $message->user->name() }}</a>
                 <div class="font-weight-bold text-muted">
                 <span class="label label-success label-dot mr-2"></span>{{ $message->created_at->diffForHumans() }}</div>
             </div>
@@ -20,7 +20,7 @@
                         <table>
                             <tr>
                                 <td class="text-muted min-w-75px py-2">From</td>
-                                <td>{{ $message->user->name }}</td>
+                                <td>{{ $message->user->name() }}</td>
                             </tr>
                             <tr>
                                 <td class="text-muted py-2">Date:</td>

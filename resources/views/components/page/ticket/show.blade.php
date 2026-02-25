@@ -145,10 +145,10 @@
                                     <div class="d-flex align-items-center">
                                         <div class="symbol symbol-35 symbol-light-success mr-2">
                                             <span class="symbol-label font-size-h6 font-weight-bold">
-                                                {{ substr($ticket->requester->name, 0, 1) }}
+                                                {{ substr($ticket->requester->name(), 0, 1) }}
                                             </span>
                                         </div>
-                                        <span class="text-dark font-weight-bold">{{ $ticket->requester->name }}</span>
+                                        <span class="text-dark font-weight-bold">{{ $ticket->requester->name() }}</span>
                                     </div>
                                 </div>
 
@@ -158,10 +158,10 @@
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-35 symbol-light-info mr-2">
                                                 <span class="symbol-label font-size-h6 font-weight-bold">
-                                                    {{ substr($ticket->tester->name, 0, 1) }}
+                                                    {{ substr($ticket->tester->name(), 0, 1) }}
                                                 </span>
                                             </div>
-                                            <span class="text-dark font-weight-bold">{{ $ticket->tester->name }}</span>
+                                            <span class="text-dark font-weight-bold">{{ $ticket->tester->name() }}</span>
                                         </div>
                                     @else
                                         <span class="text-muted">Unassigned</span>
