@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketChatController;
 use App\Http\Controllers\TicketController;
@@ -35,9 +36,7 @@ Route::middleware(['auth'])->group(function () {
     //
     
     // -- Dashboard --
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/', [DashboardController::class, 'techDashboard'])->name('dashboard');
 
     // -- Ticket List --
     Route::get('/tickets', function () {

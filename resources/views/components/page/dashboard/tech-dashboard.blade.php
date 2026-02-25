@@ -1,3 +1,5 @@
+@props(['openTicketCount'])
+
 <x-subheader.breadcrumb text="Dashboard">
     <x-subheader.breadcrumb-item href="{{ route('dashboard') }}" text="Dashboard" />
 </x-subheader.breadcrumb>
@@ -16,7 +18,9 @@
                 <x-widgets.list-widget-9 />
             </div>
             <div class="col-lg-6 col-xxl-4">
-                <x-widgets.stats-widget-11 />
+                <x-widgets.stats-widget-11 :openTicketCount="$openTicketCount" >
+                    <x-slot name="icons"><x-icons.dashboard-ticket /></x-slot>
+                </x-widgets.stats-widget-11>
                 <x-widgets.stats-widget-12 />
             </div>
         </div>
