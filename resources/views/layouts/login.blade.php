@@ -1,3 +1,5 @@
+@props(['page_vendor_style' => null, 'page_vendor_script' => null, 'scroll' => false])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -12,9 +14,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/pages/login/login.css') }}">
-        <!--begin::Page Custom Styles(used by this page)-->
-		<link href="{{ asset('css/pages/login/login.css') }}" rel="stylesheet" type="text/css" />
-		<!--end::Page Custom Styles-->
+        {{ $page_vendor_style }}
 		<!--begin::Global Theme Styles(used by all pages)-->
 		<link href="{{ asset('plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -26,7 +26,7 @@
 		<link href="{{ asset('css/themes/layout/brand/dark.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('css/themes/layout/aside/dark.css') }}" rel="stylesheet" type="text/css" />
 		<!--end::Layout Themes-->
-		<link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
+        <link rel="shortcut icon" href="{{ asset('media/logos/logo-icon-light.png') }}" />
 
         {{-- <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script> --}}

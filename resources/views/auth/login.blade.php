@@ -1,4 +1,11 @@
 <x-login-layout>
+
+	<x-slot name="page_vendor_style">
+		<!--begin::Page Custom Styles(used by this page)-->
+		<link href="{{ asset('css/pages/login/login.css') }}" rel="stylesheet" type="text/css" />
+		<!--end::Page Custom Styles-->
+	</x-slot>
+
 	<div class="d-flex flex-column flex-root">
 		<!--begin::Login-->
 		<div class="login login-3 login-signin-on d-flex flex-row-fluid" id="kt_login">
@@ -7,14 +14,14 @@
 					<!--begin::Login Header-->
 					<div class="d-flex flex-center mb-15">
 						<a href="#">
-							<img src="{{ asset('media/logos/logo-letter-13.png') }}" class="max-h-75px" alt="" />
+							<img src="{{ asset('media/logos/logo-icon-light.png') }}" class="max-h-75px" alt="" />
 						</a>
 					</div>
 					<!--end::Login Header-->
 					<!--begin::Login Sign in form-->
 					<div class="login-signin">
 						<div class="mb-20">
-							<h3 class="opacity-40 font-weight-normal">Sign In To Admin</h3>
+							<h3 class="opacity-40 font-weight-normal">Sign In To Account</h3>
 							<p class="opacity-40">Enter your details to login to your account:</p>
 						</div>
 						<!-- Session Status -->
