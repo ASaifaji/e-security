@@ -29,20 +29,20 @@ var KTCalendarExternalEvents = function() {
         new Draggable(containerEl, {
             itemSelector: '.fc-draggable-handle',
             eventData: function(eventEl) {
-                // Cek apakah item digenerate dari form (memiliki data-bg-color)
                 if (eventEl.hasAttribute('data-bg-color')) {
-                    var customColor = eventEl.getAttribute('data-bg-color');
                     return {
                         title: eventEl.getAttribute('data-title'),
-                        backgroundColor: customColor,
-                        borderColor: customColor,
-                        textColor: '#ffffff', 
-                        description: 'Jadwal baru ditambahkan',
-                        isCustomForm: true
+                        backgroundColor: eventEl.getAttribute('data-bg-color'),
+                        borderColor: eventEl.getAttribute('data-bg-color'),
+                        textColor: '#ffffff',
+                        isCustomForm: true,
+                        eventType: eventEl.getAttribute('data-type'),
+                        
+                        // Ambil ID dari atribut data
+                        appId: eventEl.getAttribute('data-app-id'),
+                        picId: eventEl.getAttribute('data-pic-id')
                     };
                 }
-                
-                // Fallback untuk item statis bawaan template
                 return $(eventEl).data('event');
             }
         });
@@ -77,22 +77,155 @@ var KTCalendarExternalEvents = function() {
             editable: true,
             eventLimit: true, // allow "more" link when too many events
             navLinks: true,
-            events: [
-                {
-                    title: 'Company Trip',
-                    start: YM + '-02',
-                    description: 'Lorem ipsum dolor sit tempor incid',
-                    end: YM + '-03',
-                    className: "fc-event-primary"
-                },
-                {
-                    title: 'ICT Expo 2017 - Product Release',
-                    start: YM + '-03',
-                    description: 'Lorem ipsum dolor sit tempor inci',
-                    end: YM + '-05',
-                    className: "fc-event-light fc-event-solid-primary"
-                },
-            ],
+            events: '/schedules/events',
+            
+            eventReceive: function(info) {
+                $.ajaxSetup({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                });
+
+                var startMoment = moment(info.event.start);
+                var startDate = startMoment.format('YYYY-MM-DD HH:mm:ss');
+                
+                var endDate;
+                if (info.event.end) {
+                    endDate = moment(info.event.end).subtract(1, 'seconds').format('YYYY-MM-DD HH:mm:ss');
+                } else {
+                    endDate = startMoment.clone().endOf('day').format('YYYY-MM-DD HH:mm:ss');
+                }
+
+                var postData = {
+                    title: info.event.title,
+                    start_date: startDate,
+                    end_date: endDate,
+                    bg_color: info.event.backgroundColor,
+                    event_type: info.event.extendedProps.eventType || 'Lainnya',
+                    app_id: info.event.extendedProps.appId || null, 
+                    pic_id: info.event.extendedProps.picId || null  
+                };
+
+                $.ajax({
+                    url: '/schedules/store',
+                    type: 'POST',
+                    data: postData,
+                    success: function(response) {
+                        toastr.success(response.message);
+                        
+                        info.event.remove(); 
+                        
+                        calendar.addEvent({
+                            id: response.data.id,
+                            title: response.data.title,
+                            start: response.data.start_date,
+                            end: response.data.end_date,
+
+                            allDay: true,
+
+                            backgroundColor: response.data.bg_color,
+                            borderColor: response.data.bg_color,
+                            textColor: '#ffffff',
+                            
+                            editable: true,
+                            startEditable: true,
+                            durationEditable: true,
+
+                            extendedProps: {
+                                isCustomForm: true,
+                                eventType: response.data.event_type,
+                                appId: response.data.app_id,
+                                picId: response.data.pic_id
+                            }
+                        });
+                    },
+                    error: function(xhr) {
+                        console.error('Error saat menyimpan jadwal awal:', xhr.responseText);
+                        toastr.error('Terjadi kesalahan saat menyimpan jadwal.');
+                        info.event.remove();
+                    }
+                });
+            },
+            
+            eventDrop: function(info) {
+                if (!info.event.id) {
+                    toastr.warning('Jadwal ini belum tersimpan sempurna di database atau merupakan jadwal statis.');
+                    info.revert();
+                    return;
+                }
+
+                $.ajaxSetup({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                });
+
+                var startMoment = moment(info.event.start);
+                var startDate = startMoment.format('YYYY-MM-DD HH:mm:ss');
+                
+                var endDate;
+                if (info.event.end) {
+                    endDate = moment(info.event.end).subtract(1, 'seconds').format('YYYY-MM-DD HH:mm:ss');
+                } else {
+                    endDate = startMoment.clone().endOf('day').format('YYYY-MM-DD HH:mm:ss');
+                }
+
+                $.ajax({
+                    url: '/schedules/update/' + info.event.id, 
+                    type: 'POST', // 2. UBAH KE POST
+                    data: {
+                        _method: 'PUT', // 3. TAMBAHKAN SPOOFING LARAVEL
+                        start_date: startDate,
+                        end_date: endDate
+                    },
+                    success: function(response) {
+                        toastr.info('Jadwal berhasil digeser.');
+                    },
+                    error: function(xhr) {
+                        // 4. Tampilkan pesan error asli di console (tekan F12 di browser)
+                        console.error('Error pindah jadwal:', xhr.responseText);
+                        toastr.error('Gagal memindahkan jadwal.');
+                        info.revert(); 
+                    }
+                });
+            },
+
+            eventResize: function(info) {
+                if (!info.event.id) {
+                    toastr.warning('Jadwal ini belum tersimpan sempurna di database atau merupakan jadwal statis.');
+                    info.revert();
+                    return;
+                }
+
+                $.ajaxSetup({
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                });
+
+                var startMoment = moment(info.event.start);
+                var startDate = startMoment.format('YYYY-MM-DD HH:mm:ss');
+                
+                var endDate;
+                if (info.event.end) {
+                    endDate = moment(info.event.end).subtract(1, 'seconds').format('YYYY-MM-DD HH:mm:ss');
+                } else {
+                    endDate = startMoment.clone().endOf('day').format('YYYY-MM-DD HH:mm:ss');
+                }
+
+                $.ajax({
+                    url: '/schedules/update/' + info.event.id,
+                    type: 'POST', // 2. UBAH KE POST
+                    data: {
+                        _method: 'PUT', // 3. TAMBAHKAN SPOOFING LARAVEL
+                        start_date: startDate,
+                        end_date: endDate
+                    },
+                    success: function(response) {
+                        toastr.info('Durasi jadwal berhasil diperbarui.');
+                    },
+                    error: function(xhr) {
+                        // 4. Tampilkan pesan error asli di console (tekan F12 di browser)
+                        console.error('Error ubah durasi:', xhr.responseText);
+                        toastr.error('Gagal memperbarui durasi jadwal.');
+                        info.revert(); 
+                    }
+                });
+            },
 
             drop: function(arg) {
                 // is the "remove after drop" checkbox checked?

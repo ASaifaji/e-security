@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\TicketChatController;
 use App\Http\Controllers\TicketController;
 use App\Models\App;
@@ -72,7 +73,9 @@ Route::middleware(['auth'])->group(function () {
 
     // -- Schedule --
     Route::get('/schedules', function(){
-        return view('schedules.index');
+        $apps = App::all();
+        $users = User::all();
+        return view('schedules.index', compact('apps', 'users'));
     })->name('schedules.index');
 });
 
@@ -83,6 +86,9 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/tickets/{ticket}/resolve', [TicketController::class, 'markAsResolved'])->name('tickets.resolve');
     Route::put('/profile/personal-info', [ProfileController::class, 'updatePersonalInfo'])->name('profile.update.personal');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update.password');
+    Route::post('/schedules/store', [ScheduleController::class, 'store'])->name('schedules.store');
+    Route::put('/schedules/update/{id}', [ScheduleController::class, 'update'])->name('schedules.update');
+    Route::get('/schedules/events', [ScheduleController::class, 'getEvents'])->name('schedules.events');
 });
 
 require __DIR__.'/auth.php';

@@ -1,3 +1,5 @@
+@props(['apps', 'users'])
+
 <x-subheader.breadcrumb text="Schhedule">
     <x-subheader.breadcrumb-item href="{{ route('dashboard') }}" text="Dashboard" />
     <x-subheader.breadcrumb-item href="{{ route('schedules.index') }}" text="Schedules" />
@@ -23,8 +25,9 @@
                                 <label class="font-weight-bold">Jenis Event <span class="text-danger">*</span></label>
                                 <select class="form-control" id="input-event-type">
                                     <option value="">-- Pilih Jenis --</option>
-                                    <option value="Deploy" data-target-color="fc-event-primary">Deploy</option>
-                                    <option value="Testing" data-target-color="fc-event-warning">Testing</option>
+                                    <option value="Deploy">Deploy</option>
+                                    <option value="Testing">Testing</option>
+                                    <option value="Laporan">Laporan</option>
                                 </select>
                             </div>
 
@@ -32,9 +35,9 @@
                                 <label class="font-weight-bold">Aplikasi (Apps) <span class="text-danger">*</span></label>
                                 <select class="form-control select2" id="input-app" style="width: 100%;">
                                     <option value="">-- Cari Aplikasi --</option>
-                                    <option value="E-Security">E-Security</option>
-                                    <option value="HRIS">HRIS</option>
-                                    <option value="ERP System">ERP System</option>
+                                    @foreach ($apps as $app)
+                                        <option value="{{ $app->id }}">{{ $app->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -42,9 +45,9 @@
                                 <label class="font-weight-bold">PIC / User <span class="text-danger">*</span></label>
                                 <select class="form-control select2" id="input-pic" style="width: 100%;">
                                     <option value="">-- Cari PIC --</option>
-                                    <option value="John Doe">John Doe</option>
-                                    <option value="Jane Smith">Jane Smith</option>
-                                    <option value="Super Admin">Super Admin</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name() }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -113,37 +116,46 @@ document.addEventListener('DOMContentLoaded', function() {
     btnCreate.addEventListener('click', function() {
         const eventTypeSelect = document.getElementById('input-event-type');
         const eventType = eventTypeSelect.value;
-        const appName = $('#input-app').val();
-        const picName = $('#input-pic').val();
+        
+        // Ambil ID (Value)
+        const appId = $('#input-app').val();
+        const picId = $('#input-pic').val();
 
-        if (!eventType || !appName || !picName) {
+        // Ambil Nama/Label (Teks) untuk tampilan Judul Event
+        const appName = $('#input-app option:selected').text();
+        const picName = $('#input-pic option:selected').text();
+
+        if (!eventType || !appId || !picId) {
             alert('Mohon lengkapi Jenis Event, Aplikasi, dan PIC terlebih dahulu.');
             return;
         }
 
+        // Judul menggunakan Nama (Teks)
         const eventTitle = `[${eventType}] ${appName} - ${picName}`;
         let targetBgColor = '';
 
-        // Tentukan warna HEX berdasarkan Jenis Event
         switch(eventType) {
             case 'Deploy':
-                targetBgColor = '#fd7e14'; // Kode warna Orange dari :root
+                targetBgColor = '#fd7e14'; 
                 break;
             case 'Testing':
-                targetBgColor = '#ffc107'; // Kode warna Yellow dari :root
+                targetBgColor = '#ffc107'; 
                 break;
             default:
-                targetBgColor = '#3699FF'; // Default Primary Blue
+                targetBgColor = '#3699FF'; 
         }
 
-        // Generate Item: Simpan warna HEX ke dalam data-bg-color
+        // Sisipkan appId dan picId ke dalam atribut data HTML
         const draggableItemHTML = `
             <div class="btn btn-block text-left font-weight-bold fc-draggable-handle cursor-move d-flex align-items-center" 
-                 style="background-color: ${targetBgColor}; border: 1px solid ${targetBgColor}; color: #ffffff; text-shadow: 0px 1px 2px rgba(0,0,0,0.2);"
-                 data-title="${eventTitle}"
-                 data-bg-color="${targetBgColor}">
-                 <i class="flaticon2-drag mr-3" style="color: #ffffff;"></i> 
-                 <span class="event-text-label">${eventTitle}</span>
+                style="background-color: ${targetBgColor}; border: 1px solid ${targetBgColor}; color: #ffffff; text-shadow: 0px 1px 2px rgba(0,0,0,0.3);"
+                data-title="${eventTitle}"
+                data-bg-color="${targetBgColor}"
+                data-type="${eventType}" 
+                data-app-id="${appId}" 
+                data-pic-id="${picId}">
+                <i class="flaticon2-drag mr-3" style="color: #ffffff;"></i> 
+                <span class="event-text-label">${eventTitle}</span>
             </div>
         `;
 
