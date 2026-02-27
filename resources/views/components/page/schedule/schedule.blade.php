@@ -18,22 +18,53 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div id="kt_calendar_external_events" class="fc-unthemed">
-                            <div class="btn btn-block text-left font-weight-bold btn-light-primary fc-draggable-handle mb-5 cursor-move" data-color="fc-event-primary">Meeting</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-success fc-draggable-handle mb-5 cursor-move" data-color="fc-event-primary">Conference Call</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-danger fc-draggable-handle mb-5 cursor-move" data-color="fc-event-success">Dinner</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-info fc-draggable-handle mb-5 cursor-move" data-color="fc-event-warning">Product Launch</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-warning fc-draggable-handle cursor-move" data-color="fc-event-danger">Reporting</div>
-                            <div class="separator separator-dashed my-10"></div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-success fc-draggable-handle cursor-move" data-color="fc-event-success">Project Update</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-primary fc-draggable-handle cursor-move" data-color="fc-event-info">Staff Meeting</div>
-                            <div class="btn btn-block text-left font-weight-bold btn-light-danger fc-draggable-handle cursor-move" data-color="fc-event-dark">Lunch</div>
-                            <div class="separator separator-dashed my-10"></div>
-                            <div>
-                                <label class="checkbox checkbox-primary">
-                                <input type="checkbox" id="kt_calendar_external_events_remove" />Remove after drop
-                                <span></span></label>
+                        <div id="event-creation-form">
+                            <div class="form-group mb-4">
+                                <label class="font-weight-bold">Jenis Event <span class="text-danger">*</span></label>
+                                <select class="form-control" id="input-event-type">
+                                    <option value="">-- Pilih Jenis --</option>
+                                    <option value="Deploy" data-target-color="fc-event-primary">Deploy</option>
+                                    <option value="Testing" data-target-color="fc-event-warning">Testing</option>
+                                </select>
                             </div>
+
+                            <div class="form-group mb-4">
+                                <label class="font-weight-bold">Aplikasi (Apps) <span class="text-danger">*</span></label>
+                                <select class="form-control select2" id="input-app" style="width: 100%;">
+                                    <option value="">-- Cari Aplikasi --</option>
+                                    <option value="E-Security">E-Security</option>
+                                    <option value="HRIS">HRIS</option>
+                                    <option value="ERP System">ERP System</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-6">
+                                <label class="font-weight-bold">PIC / User <span class="text-danger">*</span></label>
+                                <select class="form-control select2" id="input-pic" style="width: 100%;">
+                                    <option value="">-- Cari PIC --</option>
+                                    <option value="John Doe">John Doe</option>
+                                    <option value="Jane Smith">Jane Smith</option>
+                                    <option value="Super Admin">Super Admin</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-8">
+                                <button type="button" class="btn btn-primary font-weight-bold" id="btn-create-event">
+                                    <i class="ki ki-plus icon-sm"></i> Create
+                                </button>
+                                <button type="button" class="btn btn-light-danger font-weight-bold" id="btn-clear-form">
+                                    <i class="ki ki-close icon-sm"></i> Clear
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="separator separator-dashed my-5"></div>
+
+                        <h4 class="card-label mb-3">Item Siap Dijadwalkan:</h4>
+                        <div id="kt_calendar_external_events" class="fc-unthemed">
+                            <div id="draggable-staging-area" style="min-height: 60px; border: 1px dashed #e4e6ef; padding: 10px; border-radius: 5px; display: flex; align-items: center; justify-content: center; background-color: #f3f6f9;">
+                                <span class="text-muted text-center" id="empty-state-text">Isi form di atas dan klik <b>Create</b> untuk memunculkan item.</span>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -61,3 +92,73 @@
         <!--end::Row-->
     </div>
 </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // 1. Inisialisasi Select2 untuk pencarian
+    if(jQuery().select2) {
+        $('#input-app, #input-pic').select2({
+            placeholder: "Ketik untuk mencari...",
+            allowClear: true
+        });
+    }
+
+    const btnCreate = document.getElementById('btn-create-event');
+    const btnClear = document.getElementById('btn-clear-form');
+    const stagingArea = document.getElementById('draggable-staging-area');
+
+    // 2. Logika Tombol "Create"
+    btnCreate.addEventListener('click', function() {
+        const eventTypeSelect = document.getElementById('input-event-type');
+        const eventType = eventTypeSelect.value;
+        const appName = $('#input-app').val();
+        const picName = $('#input-pic').val();
+
+        if (!eventType || !appName || !picName) {
+            alert('Mohon lengkapi Jenis Event, Aplikasi, dan PIC terlebih dahulu.');
+            return;
+        }
+
+        const eventTitle = `[${eventType}] ${appName} - ${picName}`;
+        let targetBgColor = '';
+
+        // Tentukan warna HEX berdasarkan Jenis Event
+        switch(eventType) {
+            case 'Deploy':
+                targetBgColor = '#fd7e14'; // Kode warna Orange dari :root
+                break;
+            case 'Testing':
+                targetBgColor = '#ffc107'; // Kode warna Yellow dari :root
+                break;
+            default:
+                targetBgColor = '#3699FF'; // Default Primary Blue
+        }
+
+        // Generate Item: Simpan warna HEX ke dalam data-bg-color
+        const draggableItemHTML = `
+            <div class="btn btn-block text-left font-weight-bold fc-draggable-handle cursor-move d-flex align-items-center" 
+                 style="background-color: ${targetBgColor}; border: 1px solid ${targetBgColor}; color: #ffffff; text-shadow: 0px 1px 2px rgba(0,0,0,0.2);"
+                 data-title="${eventTitle}"
+                 data-bg-color="${targetBgColor}">
+                 <i class="flaticon2-drag mr-3" style="color: #ffffff;"></i> 
+                 <span class="event-text-label">${eventTitle}</span>
+            </div>
+        `;
+
+        stagingArea.innerHTML = draggableItemHTML;
+        stagingArea.style.justifyContent = 'flex-start';
+    });
+
+    // 3. Logika Tombol "Clear / Cancel"
+    btnClear.addEventListener('click', function() {
+        $('#input-event-type').val('');
+        $('#input-app').val('').trigger('change');
+        $('#input-pic').val('').trigger('change');
+
+        stagingArea.innerHTML = '<span class="text-muted text-center" id="empty-state-text">Isi form di atas dan klik <b>Create</b> untuk memunculkan item.</span>';
+        stagingArea.style.justifyContent = 'center';
+    });
+});
+</script>
