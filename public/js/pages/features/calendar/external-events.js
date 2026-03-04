@@ -40,7 +40,8 @@ var KTCalendarExternalEvents = function() {
                         
                         // Ambil ID dari atribut data
                         appId: eventEl.getAttribute('data-app-id'),
-                        picId: eventEl.getAttribute('data-pic-id')
+                        picId: eventEl.getAttribute('data-pic-id'),
+                        ticketId: eventEl.getAttribute('data-ticket-id')
                     };
                 }
                 return $(eventEl).data('event');
@@ -101,7 +102,8 @@ var KTCalendarExternalEvents = function() {
                     bg_color: info.event.backgroundColor,
                     event_type: info.event.extendedProps.eventType || 'Lainnya',
                     app_id: info.event.extendedProps.appId || null, 
-                    pic_id: info.event.extendedProps.picId || null  
+                    pic_id: info.event.extendedProps.picId || null,
+                    ticket_id: info.event.extendedProps.ticketId || null,
                 };
 
                 $.ajax({
@@ -133,7 +135,8 @@ var KTCalendarExternalEvents = function() {
                                 isCustomForm: true,
                                 eventType: response.data.event_type,
                                 appId: response.data.app_id,
-                                picId: response.data.pic_id
+                                picId: response.data.pic_id,
+                                ticketId : response.data.ticket_id
                             }
                         });
                     },
@@ -168,9 +171,9 @@ var KTCalendarExternalEvents = function() {
 
                 $.ajax({
                     url: '/schedules/update/' + info.event.id, 
-                    type: 'POST', // 2. UBAH KE POST
+                    type: 'POST',
                     data: {
-                        _method: 'PUT', // 3. TAMBAHKAN SPOOFING LARAVEL
+                        _method: 'PUT',
                         start_date: startDate,
                         end_date: endDate
                     },
@@ -178,7 +181,7 @@ var KTCalendarExternalEvents = function() {
                         toastr.info('Jadwal berhasil digeser.');
                     },
                     error: function(xhr) {
-                        // 4. Tampilkan pesan error asli di console (tekan F12 di browser)
+                        // Tampilkan pesan error asli di console (tekan F12 di browser)
                         console.error('Error pindah jadwal:', xhr.responseText);
                         toastr.error('Gagal memindahkan jadwal.');
                         info.revert(); 
@@ -209,9 +212,9 @@ var KTCalendarExternalEvents = function() {
 
                 $.ajax({
                     url: '/schedules/update/' + info.event.id,
-                    type: 'POST', // 2. UBAH KE POST
+                    type: 'POST',
                     data: {
-                        _method: 'PUT', // 3. TAMBAHKAN SPOOFING LARAVEL
+                        _method: 'PUT',
                         start_date: startDate,
                         end_date: endDate
                     },
@@ -219,7 +222,7 @@ var KTCalendarExternalEvents = function() {
                         toastr.info('Durasi jadwal berhasil diperbarui.');
                     },
                     error: function(xhr) {
-                        // 4. Tampilkan pesan error asli di console (tekan F12 di browser)
+                        // Tampilkan pesan error asli di console (tekan F12 di browser)
                         console.error('Error ubah durasi:', xhr.responseText);
                         toastr.error('Gagal memperbarui durasi jadwal.');
                         info.revert(); 
@@ -238,11 +241,10 @@ var KTCalendarExternalEvents = function() {
             eventRender: function(info) {
                 var element = $(info.el);
 
-                if (info.event.extendedProps && info.event.extendedProps.isCustomForm) {
-                    // Paksa warna elemen dan class .fc-title di dalamnya jadi putih
-                    element.css('color', '#ffffff');
-                    element.find('.fc-title').css('color', '#ffffff');
-                    element.find('.fc-time').css('color', '#ffffff');
+                if (info.event.backgroundColor) {
+                    element.find('.fc-title').css('cssText', 'color: #ffffff !important;');
+                    element.find('.fc-time').css('cssText', 'color: #ffffff !important;');
+                    element.css('cssText', element.attr('style') + '; color: #ffffff !important;');
                 }
 
                 if (info.event.extendedProps && info.event.extendedProps.description) {

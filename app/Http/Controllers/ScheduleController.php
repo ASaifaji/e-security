@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -10,26 +11,45 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         // Validasi input
-        $request->validate([
+        $rules = [
             'title'      => 'required|string',
             'start_date' => 'required|date',
             'end_date'   => 'nullable|date|after_or_equal:start_date',
             'event_type' => 'required|string',
-            'app_id'     => 'required|integer',
-            'pic_id'     => 'required|integer',
             'bg_color'   => 'required|string',
-        ]);
+        ];
 
-        // Create data di tabel schedules
-        $schedule = Schedule::create([
+        if ($request->filled('ticket_id')){
+            $rules['ticket_id'] = 'required|exists:tickets,id';
+        } else {
+            $rules['app_id'] = 'required|exists:apps,id';
+            $rules['pic_id'] = 'required|exists:users,id';
+        }
+
+        $request->validate($rules);
+
+        $dataToSave = [
             'title'      => $request->title,
             'event_type' => $request->event_type,
-            'app_id'     => $request->app_id,
-            'pic_id'     => $request->pic_id,
             'bg_color'   => $request->bg_color,
             'start_date' => $request->start_date,
             'end_date'   => $request->end_date,
-        ]);
+            'ticket_id'  => $request->ticket_id ?? null,
+        ];
+
+        if ($request->filled('ticket_id')) {
+            $ticket = Ticket::find($request->ticket_id);
+            
+            $dataToSave['app_id'] = $ticket->app_id;
+            
+            $dataToSave['pic_id'] = $ticket->tester_id ?? $ticket->requester_id; 
+            
+        } else {
+            $dataToSave['app_id'] = $request->app_id;
+            $dataToSave['pic_id'] = $request->pic_id;
+        }
+
+        $schedule = Schedule::create($dataToSave);
 
         return response()->json([
             'status'  => 'success',
@@ -86,10 +106,10 @@ class ScheduleController extends Controller
                 
                 // Masukkan data tambahan ke extendedProps (opsional, jika Anda butuh)
                 'extendedProps'   => [
-                    'isCustomForm' => true,
                     'eventType'    => $schedule->event_type,
                     'appId'        => $schedule->app_id,
                     'picId'        => $schedule->pic_id,
+                    'ticketId'     => $schedule->ticket_id,
                 ]
             ];
         }

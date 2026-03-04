@@ -17,11 +17,15 @@ class CreateSchedulesTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('event_type'); // Deploy / Testing
-            $table->string('app_id');
-            $table->string('pic_id');
+            
             $table->string('bg_color');   // Menyimpan kode warna HEX
             $table->dateTime('start_date');
             $table->dateTime('end_date')->nullable();
+
+            $table->foreignId('app_id')->constrained('apps');
+            $table->foreignId('pic_id')->constrained('users');
+            $table->foreignId('ticket_id')->nullable()->constrained('tickets');
+
             $table->timestamps();
         });
     }

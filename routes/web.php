@@ -75,7 +75,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/schedules', function(){
         $apps = App::all();
         $users = User::all();
-        return view('schedules.index', compact('apps', 'users'));
+        $tickets = Ticket::all();
+        return view('schedules.index', compact('apps', 'users', 'tickets'));
     })->name('schedules.index');
 });
 

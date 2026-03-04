@@ -15,6 +15,6 @@
         <!--end::Page Scripts-->
     </x-slot>
 
-    <x-page.schedule.schedule :apps="$apps" :users="$users" />
+    <x-page.schedule.schedule :apps="$apps" :users="$users" :tickets="$tickets" />
 
 </x-app-layout>

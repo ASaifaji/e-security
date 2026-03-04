@@ -22,5 +22,9 @@ class TicketTypeSeeder extends Seeder
         TicketType::create([
             'name' => 'Test'
         ]);
+
+        TicketType::create([
+            'name' => 'Laporan'
+        ]);
     }
 }
