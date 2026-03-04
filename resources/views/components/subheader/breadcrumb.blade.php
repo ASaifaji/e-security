@@ -8,7 +8,7 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-2 mr-5">{{ $text }}</h5>
+                <h5 class="text-light font-weight-bold my-2 mr-5">{{ $text }}</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">

@@ -1,4 +1,4 @@
-@props(['openTicketCount'])
+@props(['openTicketCount', 'totalChatsThisWeek'])
 
 <x-subheader.breadcrumb text="Dashboard">
     <x-subheader.breadcrumb-item href="{{ route('dashboard') }}" text="Dashboard" />
@@ -21,7 +21,7 @@
                 <x-widgets.stats-widget-11 :openTicketCount="$openTicketCount" >
                     <x-slot name="icons"><x-icons.dashboard-ticket /></x-slot>
                 </x-widgets.stats-widget-11>
-                <x-widgets.stats-widget-12 />
+                <x-widgets.stats-widget-12 :totalChatsThisWeek="$totalChatsThisWeek" />
             </div>
         </div>
         <!--end::Row-->

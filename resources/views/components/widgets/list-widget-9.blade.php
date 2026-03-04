@@ -3,7 +3,7 @@
     <!--begin::Header-->
     <div class="card-header align-items-center border-0 mt-4">
         <h3 class="card-title align-items-start flex-column">
-            <span class="font-weight-bolder text-dark">Recent Activities</span>
+            <span class="font-weight-bolder text-light">Recent Activities</span>
             <span class="text-muted mt-3 font-weight-bold font-size-sm">890,344 Sales</span>
         </h3>
         <div class="card-toolbar">
@@ -50,7 +50,7 @@
                         <li class="navi-item">
                             <a href="#" class="navi-link">
                                 <span class="navi-text">
-                                    <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                    <span class="label label-xl label-inline label-light-light">Staff</span>
                                 </span>
                             </a>
                         </li>
@@ -72,7 +72,7 @@
             <!--begin::Item-->
             <div class="timeline-item align-items-start">
                 <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">08:42</div>
+                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">08:42</div>
                 <!--end::Label-->
                 <!--begin::Badge-->
                 <div class="timeline-badge">
@@ -80,14 +80,14 @@
                 </div>
                 <!--end::Badge-->
                 <!--begin::Text-->
-                <div class="timeline-content text-dark-50">Outlines of the recent activities that happened last weekend</div>
+                <div class="timeline-content text-light-50">Outlines of the recent activities that happened last weekend</div>
                 <!--end::Text-->
             </div>
             <!--end::Item-->
             <!--begin::Item-->
             <div class="timeline-item align-items-start">
                 <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">3 hr</div>
+                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">3 hr</div>
                 <!--end::Label-->
                 <!--begin::Badge-->
                 <div class="timeline-badge">
@@ -96,7 +96,7 @@
                 <!--end::Badge-->
                 <!--begin::Content-->
                 <div class="timeline-content d-flex">
-                    <span class="mr-4 font-weight-bolder text-dark-75">AEOL meeting with</span>
+                    <span class="mr-4 font-weight-bolder text-light-75">AEOL meeting with</span>
                     <!--begin::Section-->
                     <div class="d-flex align-items-start mt-n2">
                         <!--begin::Symbol-->
@@ -122,7 +122,7 @@
             <!--begin::Item-->
             <div class="timeline-item align-items-start">
                 <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">14:37</div>
+                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">14:37</div>
                 <!--end::Label-->
                 <!--begin::Badge-->
                 <div class="timeline-badge">
@@ -130,7 +130,7 @@
                 </div>
                 <!--end::Badge-->
                 <!--begin::Desc-->
-                <div class="timeline-content font-weight-bolder text-dark-75">Submit initial budget -
+                <div class="timeline-content font-weight-bolder text-light-75">Submit initial budget -
                 <a href="#" class="text-primary">USD 700</a>.</div>
                 <!--end::Desc-->
             </div>
@@ -138,7 +138,7 @@
             <!--begin::Item-->
             <div class="timeline-item align-items-start">
                 <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">16:50</div>
+                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">16:50</div>
                 <!--end::Label-->
                 <!--begin::Badge-->
                 <div class="timeline-badge">
@@ -146,14 +146,14 @@
                 </div>
                 <!--end::Badge-->
                 <!--begin::Text-->
-                <div class="timeline-content text-dark-50">Stakeholder meeting scheduling.</div>
+                <div class="timeline-content text-light-50">Stakeholder meeting scheduling.</div>
                 <!--end::Text-->
             </div>
             <!--end::Item-->
             <!--begin::Item-->
             <div class="timeline-item align-items-start">
                 <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">17:30</div>
+                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">17:30</div>
                 <!--end::Label-->
                 <!--begin::Badge-->
                 <div class="timeline-badge">
@@ -161,14 +161,14 @@
                 </div>
                 <!--end::Badge-->
                 <!--begin::Text-->
-                <div class="timeline-content text-dark-50">Project scoping &amp; estimations with stakeholders.</div>
+                <div class="timeline-content text-light-50">Project scoping &amp; estimations with stakeholders.</div>
                 <!--end::Text-->
             </div>
             <!--end::Item-->
             <!--begin::Item-->
             <div class="timeline-item align-items-start">
                 <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">21:03</div>
+                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">21:03</div>
                 <!--end::Label-->
                 <!--begin::Badge-->
                 <div class="timeline-badge">
@@ -176,7 +176,7 @@
                 </div>
                 <!--end::Badge-->
                 <!--begin::Desc-->
-                <div class="timeline-content font-weight-bolder text-dark-75">New order placed
+                <div class="timeline-content font-weight-bolder text-light-75">New order placed
                 <a href="#" class="text-primary">#XF-2356</a>.</div>
                 <!--end::Desc-->
             </div>
@@ -184,7 +184,7 @@
             <!--begin: Item-->
             <div class="timeline-item align-items-start">
                 <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">21:07</div>
+                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">21:07</div>
                 <!--end::Label-->
                 <!--begin::Badge-->
                 <div class="timeline-badge">
@@ -192,14 +192,14 @@
                 </div>
                 <!--end::Badge-->
                 <!--begin::Text-->
-                <div class="timeline-content text-dark-50">Company BBQ to celebrate the last quater achievements and goals.</div>
+                <div class="timeline-content text-light-50">Company BBQ to celebrate the last quater achievements and goals.</div>
                 <!--end::Text-->
             </div>
             <!--end: Item-->
             <!--begin::Item-->
             <div class="timeline-item align-items-start">
                 <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-dark-75 font-size-lg text-right pr-3">20:30</div>
+                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">20:30</div>
                 <!--end::Label-->
                 <!--begin::Badge-->
                 <div class="timeline-badge">
@@ -207,7 +207,7 @@
                 </div>
                 <!--end::Badge-->
                 <!--begin::Text-->
-                <div class="timeline-content text-dark-50">Marketing campaign planning with customer.</div>
+                <div class="timeline-content text-light-50">Marketing campaign planning with customer.</div>
                 <!--end::Text-->
             </div>
             <!--end::Item-->

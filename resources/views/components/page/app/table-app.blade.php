@@ -1,12 +1,12 @@
 @props(['apps'])
 
 <!--begin::Card-->
-<div class="card card-custom">
+<div class="card card-custom card-dark-theme">
     
     <div class="card-header flex-wrap border-0 pt-6 pb-0">
         <div class="card-title">
-            <h3 class="card-label">Complex Header
-            <span class="d-block text-muted pt-2 font-size-sm">advance header options</span></h3>
+            <h3 class="card-label text-white-85">Complex Header
+            <span class="d-block text-muted-slate pt-2 font-size-sm">advance header options</span></h3>
         </div>
         <div class="card-toolbar">
             <x-dropdown.dropdown-button text="Export">
@@ -25,7 +25,7 @@
 
     <div class="card-body">
         <!--begin: Datatable-->
-        <table class="table table-bordered table-hover table-checkable mt-10" id="apps_table">
+        <table class="table table-dark-custom table-hover table-checkable mt-10" id="apps_table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -41,12 +41,18 @@
                         <td>{{ $app->name }}</td>
                         <td>{{ $app->type }}</td>
                         <td>
-                            <div class="btn btn-icon btn-clean d-inline-flex btn-lg px-2" id="kt_quick_user_toggle" style="width: auto; white-space: nowrap;">
-                                <span class="symbol symbol-35 symbol-light-success" style="margin-right: 4px;">
-                                    <span class="symbol-label font-size-h5 font-weight-bold">{{ substr($app->users->first_name, 0, 1) }}{{ substr($app->users->last_name, 0, 1) }}</span>
+                            <a href="javascript:void(0);" class="d-inline-flex align-items-center pic-assign-btn p-2 rounded" title="Click to Assign or Change PIC" data-app-id="{{ $app->id }}">
+                                <span class="symbol symbol-35 symbol-dark-avatar mr-3">
+                                    @if ($app->users->avatar)
+                                        <div class="symbol-label" style="background-image:url('{{ asset('storage/' . $app->users->avatar) }}')"></div>
+                                    @else
+                                        <span class="symbol-label font-size-h6 font-weight-bold">
+                                            {{ strtoupper(substr($app->users->first_name ?? 'U', 0, 1)) }}{{ strtoupper(substr($app->users->last_name ?? 'N', 0, 1)) }}
+                                        </span>
+                                    @endif
                                 </span>
-                                <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ $app->users->name() }}</span>
-                            </div>
+                                <span class="pic-text text-white-85 font-weight-bolder font-size-base">{{ $app->users->name() }}</span>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

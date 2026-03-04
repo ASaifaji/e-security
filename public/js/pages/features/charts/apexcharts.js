@@ -1,11 +1,11 @@
 "use strict";
 
 // Shared Colors Definition
-const primary = '#6993FF';
-const success = '#1BC5BD';
-const info = '#8950FC';
-const warning = '#FFA800';
-const danger = '#F64E60';
+const primary = '#38BDF8';
+const success = '#34D399';
+const info    = '#818CF8';
+const warning = '#FBBF24';
+const danger  = '#FB7185';
 
 // Class definition
 function generateBubbleData(baseval, count, yrange) {
@@ -89,33 +89,138 @@ var KTApexChartsDemo = function () {
 				data: chartData
 			}],
 			chart: {
-				height: 150,
 				type: 'area',
-				toolbar: {
-					show: false
+				height: 150,
+				toolbar: { show: false },
+				zoom: { enabled: false },
+				sparkline: { enabled: true }
+			},
+			plotOptions: {},
+			legend: { show: false },
+			dataLabels: { enabled: false },
+			fill: {
+				type: 'gradient',
+				gradient: {
+					shadeIntensity: 1,
+					opacityFrom: 0.4,
+					opacityTo: 0,
+					stops: [0, 80, 100]
 				}
 			},
-			dataLabels: {
-				enabled: false
-			},
 			stroke: {
-				curve: 'smooth'
+				curve: 'smooth',
+				show: true,
+				width: 3,
+				colors: [primary]
+			},
+			grid: {
+				borderColor: '#2D3748',
+				strokeDashArray: 4,
+				yaxis: {
+					lines: { show: true }
+				}
 			},
 			xaxis: {
-				type: 'datetime',
-				categories: chartDate
+				categories: chartDate,
+				crosshairs: { show: false },
+				tooltip: { enabled: true }
+			},
+			yaxis: {
+				min: 0
 			},
 			tooltip: {
-				x: {
-					format: 'dd/MM/yy HH:mm'
+				theme: 'dark',
+				style: {
+					fontSize: '12px',
 				},
+				y: {
+					formatter: function (val) {
+						return val + " Open Tickets"
+					}
+				}
 			},
-			colors: [primary]
+			colors: [primary],
+			markers: {
+				colors: [primary],
+				strokeColor: ['#161F30'],
+				strokeWidth: 3
+			}
 		};
 
 		var chart = new ApexCharts(document.querySelector(apexChart), options);
 		chart.render();
 	}
+
+	var _initChatWidgetChart = function () {
+		const element = document.getElementById('chart_chat_ticket');
+		
+		if (!element) {
+			return;
+		}
+
+		var chartData = window.dynamicChatData || [0, 0, 0, 0, 0, 0, 0];
+		var chartDates = window.dynamicChatDates || ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'];
+
+		var options = {
+			series: [{
+				name: 'Chat Sessions',
+				data: chartData
+			}],
+			chart: {
+				type: 'area',
+				height: 150,
+				toolbar: { show: false },
+				zoom: { enabled: false },
+				sparkline: { enabled: true }
+			},
+			plotOptions: {},
+			legend: { show: false },
+			dataLabels: { enabled: false },
+			fill: {
+				type: 'gradient',
+				gradient: {
+					shadeIntensity: 1,
+					opacityFrom: 0.4,
+					opacityTo: 0,
+					stops: [0, 80, 100]
+				}
+			},
+			stroke: {
+				curve: 'smooth',
+				show: true,
+				width: 3,
+				colors: ['#818CF8']
+			},
+			xaxis: {
+				categories: chartDates,
+				crosshairs: { show: false },
+				tooltip: { enabled: true }
+			},
+			yaxis: {
+				min: 0
+			},
+			tooltip: {
+				theme: 'dark',
+				style: {
+					fontSize: '12px',
+				},
+				y: {
+					formatter: function (val) {
+						return val + " Messages"
+					}
+				}
+			},
+			colors: ['#818CF8'],
+			markers: {
+				colors: ['#818CF8'],
+				strokeColor: ['#161F30'],
+				strokeWidth: 3
+			}
+		};
+
+		var chart = new ApexCharts(element, options);
+		chart.render();
+	};
 
 	var _demo3 = function () {
 		const apexChart = "#chart_3";
@@ -1071,6 +1176,7 @@ var KTApexChartsDemo = function () {
 		init: function () {
 			_demo1();
 			_openticket();
+			_initChatWidgetChart();
 			_demo3();
 			_demo4();
 			_demo5();

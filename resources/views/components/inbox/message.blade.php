@@ -1,48 +1,48 @@
 @props(['message'])
 
-<div class="cursor-pointer shadow-xs toggle-off" data-inbox="message">
+<div class="cursor-pointer shadow-none toggle-off" data-inbox="message">
     <div class="d-flex align-items-center card-spacer-x py-6">
-        <span class="symbol symbol-50 mr-4">
-            <span class="symbol-label font-size-h5 font-weight-bold bg-light-primary text-primary">{{ substr($message->user->name(), 0, 1) }}</span>
+        <span class="symbol symbol-50 mr-4 symbol-dark-avatar">
+            <span class="symbol-label font-size-h5 font-weight-bold text-primary">{{ substr($message->user->name(), 0, 1) }}</span>
             {{-- <span class="symbol-label" style="background-image: url('assets/media/users/100_13.jpg')"></span> --}}
         </span>
         <div class="d-flex flex-column flex-grow-1 flex-wrap mr-2">
             <div class="d-flex">
-                <a href="#" class="font-size-lg font-weight-bolder text-dark-75 text-hover-primary mr-2">{{ $message->user->name() }}</a>
-                <div class="font-weight-bold text-muted">
+                <a href="#" class="font-size-lg font-weight-bolder text-white-85 text-hover-primary mr-2">{{ $message->user->name() }}</a>
+                <div class="font-weight-bold text-muted-slate">
                 <span class="label label-success label-dot mr-2"></span>{{ $message->created_at->diffForHumans() }}</div>
             </div>
             <div class="d-flex flex-column">
                 <div class="toggle-off-item">
-                    <span class="font-weight-bold text-muted cursor-pointer" data-toggle="dropdown">to me
-                    <i class="flaticon2-down icon-xs ml-1 text-dark-50"></i></span>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left p-5">
+                    <span class="font-weight-bold text-muted-slate cursor-pointer" data-toggle="dropdown">to me
+                    <i class="flaticon2-down icon-xs ml-1 text-muted-slate"></i></span>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left p-5 dropdown-menu-dark-theme">
                         <table>
                             <tr>
-                                <td class="text-muted min-w-75px py-2">From</td>
-                                <td>{{ $message->user->name() }}</td>
+                                <td class="text-muted-slate min-w-75px py-2">From</td>
+                                <td class="text-white-85">{{ $message->user->name() }}</td>
                             </tr>
                             <tr>
-                                <td class="text-muted py-2">Date:</td>
-                                <td>{{ $message->created_at->format('M d, Y, h:i A') }}</td>
+                                <td class="text-muted-slate py-2">Date:</td>
+                                <td class="text-white-85">{{ $message->created_at->format('M d, Y, h:i A') }}</td>
                             </tr>
                         </table>
                     </div>
                 </div>
-                <div class="text-muted font-weight-bold toggle-on-item" data-inbox="toggle">{{ Str::limit(strip_tags($message->message), 80) }}</div>
+                <div class="text-muted-slate font-weight-bold toggle-on-item" data-inbox="toggle">{{ Str::limit(strip_tags($message->message), 80) }}</div>
             </div>
         </div>
         <div class="d-flex align-items-center">
-            <div class="font-weight-bold text-muted mr-2">{{ $message->created_at->format('M d, h:i A') }}</div>
+            <div class="font-weight-bold text-muted-slate mr-2">{{ $message->created_at->format('M d, h:i A') }}</div>
         </div>
     </div>
-    <div class="card-spacer-x py-3 toggle-off-item">
-        <div class="text-dark-75 font-size-lg">
+    <div class="card-spacer-x py-3 toggle-off-item" style="background-color: #1B2538; border: 1px solid #2D3748;">
+        <div class="text-white-85 font-size-lg">
             {!! clean($message->message) !!}
         </div>
         @if($message->ticketAttachment)
-            <div class="separator separator-dashed my-5"></div>
-            <div class="d-flex align-items-center bg-light-primary rounded p-5">
+            <div class="separator separator-dashed my-5" style="border-bottom-color: #2D3748;"></div>
+            <div class="d-flex align-items-center bg-light-primary rounded p-5" style="background-color: rgba(56, 189, 248, 0.05); border: 1px dashed rgba(56, 189, 248, 0.3);">
                 <span class="svg-icon svg-icon-3x svg-icon-primary mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -53,15 +53,15 @@
                 </span>
                 
                 <div class="d-flex flex-column flex-grow-1 mr-2">
-                    <span class="font-weight-bold text-dark-75 font-size-lg mb-1">
+                    <span class="font-weight-bold text-white-85 font-size-lg mb-1">
                         {{ $message->ticketAttachment->filename }}
                     </span>
-                    <span class="text-muted font-weight-bold">
+                    <span class="text-muted-slate font-weight-bold">
                         Attached File
                     </span>
                 </div>
 
-                <a href="{{ route('tickets.attachments.download', [$message->ticket_id, $message->ticketAttachment->id]) }}" class="btn btn-sm btn-primary font-weight-bolder py-2 px-5">
+                <a href="{{ route('tickets.attachments.download', [$message->ticket_id, $message->ticketAttachment->id]) }}" class="btn btn-sm btn-dark-outline font-weight-bolder py-2 px-5">
                     Download
                 </a>
             </div>

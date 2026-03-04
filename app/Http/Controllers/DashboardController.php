@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use App\Models\TicketChat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -26,6 +27,22 @@ class DashboardController extends Controller
         }
 
         $openTicketCount = Ticket::where('status_id', 1)->count();
-        return view('dashboard', compact('openTicketCount', 'dates', 'openTickets'));
+
+        $chatDates = [];
+        $chatData = [];
+        $totalChatsThisWeek = 0;
+
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i);
+            
+            $chatDates[] = $date->translatedFormat('D');
+
+            $dailyCount = TicketChat::whereDate('created_at', $date->toDateString())->count();
+
+            $chatData[] = $dailyCount;
+            $totalChatsThisWeek += $dailyCount;
+        }
+
+        return view('dashboard', compact('openTicketCount', 'dates', 'openTickets', 'chatDates', 'chatData', 'totalChatsThisWeek'));
     }
 }

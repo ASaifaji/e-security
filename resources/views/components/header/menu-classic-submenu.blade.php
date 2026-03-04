@@ -8,7 +8,7 @@
         <span class="menu-text">{{ $text }}</span>
         <i class="menu-arrow"></i>
     </a>
-    <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+    <div class="menu-submenu menu-submenu-classic menu-submenu-right" style="background-color: #121926; border: 1px solid #334155">
         <ul class="menu-subnav">
             {{ $slot }}
         </ul>

@@ -5,7 +5,7 @@
         <span class="menu-text">{{ $text }}</span>
         <i class="menu-arrow"></i>
     </a>
-    <div class="menu-submenu menu-submenu-fixed menu-submenu-left" style="width:{{ $width }}">
+    <div class="menu-submenu menu-submenu-fixed menu-submenu-left" style="width:{{ $width }}; background-color: #121926; border: 1px solid #334155">
         <div class="menu-subnav">
             <ul class="menu-content">
                 {{ $slot }}

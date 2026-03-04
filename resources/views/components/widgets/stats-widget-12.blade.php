@@ -1,9 +1,11 @@
+@props(['totalChatsThisWeek'])
+
 <!--begin::Stats Widget 12-->
-<div class="card card-custom card-stretch card-stretch-half gutter-b">
+<div class="card card-custom card-open-ticket-dark card-stretch card-stretch-half gutter-b">
     <!--begin::Body-->
     <div class="card-body p-0">
         <div class="d-flex align-items-center justify-content-between card-spacer flex-grow-1">
-            <span class="symbol symbol-50 symbol-light-info mr-2">
+            <span class="symbol symbol-50 symbol-dark-detail mr-2">
                 <span class="symbol-label">
                     <span class="svg-icon svg-icon-xl svg-icon-info">
                         <!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Chart-pie.svg-->
@@ -18,11 +20,11 @@
                 </span>
             </span>
             <div class="d-flex flex-column text-right">
-                <span class="text-dark-75 font-weight-bolder font-size-h3">+6,5K XSS Case</span>
-                <span class="text-muted font-weight-bold mt-2">Vulnerabilities</span>
+                <span class="text-white-85 font-weight-bolder font-size-h3">{{ $totalChatsThisWeek }} Chats</span>
+                <span class="text-muted-slate font-weight-bold mt-2">Weekly Chat Count</span>
             </div>
         </div>
-        <div id="kt_stats_widget_12_chart" class="card-rounded-bottom" data-color="info" style="height: 150px"></div>
+        <div id="chart_chat_ticket" class="chart-dark-bg card-rounded-bottom" style="height: 150px"></div>
     </div>
     <!--end::Body-->
 </div>

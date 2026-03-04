@@ -13,6 +13,8 @@
         <script>
             window.dynamicTicketData = @json($openTickets ?? []);
             window.dynamicTicketDates = @json($dates ?? []);
+            window.dynamicChatData = @json($chatData ?? []);
+            window.dynamicChatDates = @json($chatDates ?? []);
         </script>
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="{{ asset('js/pages/widgets.js') }}"></script>
@@ -21,7 +23,7 @@
     </x-slot>
 
     @if (Auth::user()->id == 1 || Auth::user()->id == 2)
-        <x-page.dashboard.tech-dashboard :openTicketCount="$openTicketCount" />
+        <x-page.dashboard.tech-dashboard :openTicketCount="$openTicketCount" :totalChatsThisWeek="$totalChatsThisWeek" />
     @else
         <x-page.dashboard.user-dashboard />
     @endif
