@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             PrioritySeeder::class,
             SeveritySeeder::class,
             AppSeeder::class,
+            TicketTypeSeeder::class,
             TicketSeeder::class,
             TicketChatSeeder::class,
         ]);

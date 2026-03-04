@@ -13,6 +13,7 @@ class Ticket extends Model
         'ticket_number',
         'subject',
         'description',
+        'type_id',
         'vulnerability_details',
         'app_id',
         'requester_id',
@@ -60,6 +61,11 @@ class Ticket extends Model
     public function chats()
     {
         return $this->hasMany(TicketChat::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(TicketType::class, 'type_id');
     }
 
 
