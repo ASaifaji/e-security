@@ -73,6 +73,10 @@
                             </div>
                             <div class="card-body pt-2">
                                 <div class="d-flex align-items-center justify-content-between mb-5">
+                                    <span class="font-weight-bold text-muted mr-2">Type:</span>
+                                    <span class="font-weight-bolder text-dark">{{ $ticket->type->name }}</span>
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mb-5">
                                     <span class="font-weight-bold text-muted mr-2">Status:</span>
                                     @php
                                         $statusName = strtolower($ticket->status->name);

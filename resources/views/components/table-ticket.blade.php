@@ -29,7 +29,7 @@
             <thead>
                 <tr>
                     <th colspan="2">Ticket Information</th>
-                    <th colspan="3">Ticket Details</th>
+                    <th colspan="4">Ticket Details</th>
                     <th colspan="2">User Information</th>
                     <th colspan="3">Status</th>
                     <th rowspan="2" class="align-middle">View</th>
@@ -39,6 +39,7 @@
                     <th>Ticket Number</th>
                     <th>Subject</th>
                     <th>Description</th>
+                    <th>Type</th>
                     <th>App</th>
                     <th>Requester</th>
                     <th>Tester</th>
@@ -54,6 +55,7 @@
                         <td>{{ $ticket->ticket_number }}</td>
                         <td>{{ $ticket->subject }}</td>
                         <td>{{ $ticket->description }}</td>
+                        <td>{{ $ticket->type->name }}</td>
                         <td>{{ $ticket->app->name }}</td>
                         <td>{{ $ticket->requester->name() }}</td>
                         <td>{{ $ticket->tester ? $ticket->tester->name() : 'Unassigned' }}</td>

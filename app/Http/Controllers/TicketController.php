@@ -15,6 +15,7 @@ class TicketController extends Controller
         $request->validate([
             'subject' => 'required|string|max:255',
             'description' => 'required|string',
+            'ticket_type' => 'required|in:1,2',
             'app_type' => 'required|in:1,2', // 1=Existing, 2=New
             'existing_app_id' => 'required_if:app_type,1|nullable|exists:apps,id',
             'new_app_name' => 'required_if:app_type,2|nullable|string|max:255',
@@ -57,6 +58,7 @@ class TicketController extends Controller
             'ticket_number' => $ticketNumber,
             'subject' => $request->subject,
             'description' => $request->description,
+            'type_id' => $request->ticket_type,
             'vulnerability_details' => $request->vulnerability_details,
             'app_id' => $appId,
             'requester_id' => Auth::id(), // Currently logged in user
