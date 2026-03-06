@@ -16,13 +16,13 @@
                     <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
                         <x-icons.ticket-02 />
                     </span>
-                    <a href="#" class="text-primary-light font-weight-bold font-size-h6">Open Tickets</a>
+                    <a href="{{ route('tickets.index', ['status' => 'Open']) }}" class="text-primary-light font-weight-bold font-size-h6">Open Tickets</a>
                 </div>
                 <div class="col status-box-dark px-6 py-8 rounded-xl mb-7">
                     <span class="svg-icon svg-icon-3x svg-icon-danger d-block my-2">
                         <x-icons.warning-1-circle />
                     </span>
-                    <a href="#" class="text-danger-light font-weight-bold font-size-h6 mt-2">High Priority Tickets</a>
+                    <a href="{{ route('tickets.index', ['priority' => 'High,Critical']) }}" class="text-danger-light font-weight-bold font-size-h6 mt-2">High Priority Tickets</a>
                 </div>
             </div>
             <!--end::Row-->
@@ -32,13 +32,13 @@
                     <span class="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                         <x-icons.clipboard-pending />
                     </span>
-                    <a href="#" class="text-warning-light font-weight-bold font-size-h6 mt-2">Pending Tickets</a>
+                    <a href="{{ route('tickets.index', ['status' => 'Pending']) }}" class="text-warning-light font-weight-bold font-size-h6 mt-2">Pending Tickets</a>
                 </div>
                 <div class="col status-box-dark px-6 py-8 rounded-xl">
                     <span class="svg-icon svg-icon-3x svg-icon-success d-block my-2">
                         <x-icons.clipboard-check />
                     </span>
-                    <a href="#" class="text-success-light font-weight-bold font-size-h6 mt-2">Resolved today</a>
+                    <a href="{{ route('tickets.index', ['status' => 'Resolved']) }}" class="text-success-light font-weight-bold font-size-h6 mt-2">Resolved Ticket Today</a>
                 </div>
             </div>
             <!--end::Row-->

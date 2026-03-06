@@ -24,6 +24,42 @@
     </div>
 
     <div class="card-body">
+        <div class="row mb-8 pb-4 border-bottom border-dark">
+            <div class="col-md-3 mb-4">
+                <label class="text-white-85">Type</label>
+                <select class="form-control select2-filter datatable-filter" data-column="3" multiple="multiple" data-placeholder="Select Ticket Types">
+                    <option value="Deploy">Deploy</option>
+                    <option value="Test">Test</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-4">
+                <label class="text-white-85">Priority</label>
+                <select class="form-control select2-filter datatable-filter" data-column="7" multiple="multiple" data-placeholder="Select Ticket Priorities">
+                    <option value="Critical">Critical</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-4">
+                <label class="text-white-85">Severity</label>
+                <select class="form-control select2-filter datatable-filter" data-column="8" multiple="multiple" data-placeholder="Select Ticket Severities">
+                    <option value="Critical">Critical</option>
+                    <option value="Major">Major</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-4">
+                <label class="text-white-85">Status</label>
+                <select class="form-control select2-filter datatable-filter" data-column="9" multiple="multiple" data-placeholder="Select Ticket Statuses">
+                    <option value="Open">Open</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Closed">Closed</option>
+                </select>
+            </div>
+        </div>
         <!--begin: Datatable-->
         <table class="table table-dark-custom table-hover table-checkable mt-10" id="tickets_table">
             <thead>
@@ -49,7 +85,7 @@
             </thead>
             <tbody>
                 @foreach($tickets as $ticket)
-                    <tr>
+                    <tr data-date="{{ $ticket->created_at ? $ticket->created_at->format('Y-m-d') : '' }}">
                         <td>{{ $ticket->id }}</td>
                         <td>{{ $ticket->ticket_number }}</td>
                         <td>{{ $ticket->subject }}</td>
@@ -161,19 +197,104 @@
                 @endforeach
             </tbody>
         </table>
+        <style>
+            body .select2-container--default .select2-results__option {
+                position: relative;
+                padding-left: 32px !important;
+            }
+
+            body .select2-container--default .select2-results__option::before {
+                content: "";
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 16px;
+                height: 16px;
+                border: 2px solid #b5b5c3 !important; 
+                border-radius: 3px;
+                background-color: transparent !important;
+            }
+
+            body .select2-container--default .select2-results__option[aria-selected=true]::before {
+                background-color: #3699ff !important;
+                border-color: #3699ff !important;
+                content: "✓"; 
+                color: white !important;
+                font-size: 12px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 16px;
+            }
+
+            body .select2-container--default .select2-results__option[aria-selected=true] {
+                background-color: transparent !important; 
+            }
+        </style>
+
         @push('scripts')
         <script>
             $(document).ready(function() {
-                $('#tickets_table').DataTable({
+
+                let table = $('#tickets_table').DataTable({
                     responsive: true,
                     ordering: true,
-                    // distinct styling for the pagination
                     pagingType: 'full_numbers',
                     language: {
                         search: "Search Ticket:",
                         lengthMenu: "Show _MENU_ entries"
                     }
                 });
+
+                $('.select2-filter').select2({
+                    width: '100%',
+                    closeOnSelect: false
+                });
+
+                function applyAllFilters() {
+                    $('.datatable-filter').each(function() {
+                        let colIndex = $(this).data('column');
+                        let selectedValues = $(this).val(); 
+                        
+                        if (selectedValues && selectedValues.length > 0) {
+                            let regexStr = selectedValues.map(val => $.fn.dataTable.util.escapeRegex(val)).join('|');
+                            table.column(colIndex).search('^\\s*(' + regexStr + ')\\s*$', true, false);
+                        } else {
+                            table.column(colIndex).search('', true, false);
+                        }
+                    });
+                    
+                    table.draw();
+                }
+
+                $('.datatable-filter').on('change', function(e) {
+                    if (e.namespace !== 'select2') {
+                        applyAllFilters();
+                    }
+                });
+
+                const urlParams = new URLSearchParams(window.location.search);
+                let hasUrlFilters = false;
+
+                $('.datatable-filter').each(function() {
+                    let colIndex = $(this).data('column');
+                    let paramMap = { 3: 'type', 7: 'priority', 8: 'severity', 9: 'status' };
+                    let paramName = paramMap[colIndex];
+
+                    if (paramName && urlParams.has(paramName)) {
+                        let values = urlParams.get(paramName).split(',').map(item => item.trim());
+                        
+                        $(this).val(values).trigger('change.select2');
+                        hasUrlFilters = true;
+                    }
+                });
+                
+                if (hasUrlFilters) {
+                    applyAllFilters();
+                }
+
             });
         </script>
         @endpush
