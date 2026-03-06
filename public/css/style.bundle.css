@@ -60790,11 +60790,6 @@ body {
 
 
 /* table */
-.card-dark-theme {
-    background-color: #161F30 !important;
-    border: none !important;
-    box-shadow: 0 4px 20px 0 rgba(0,0,0,0.2) !important;
-}
 
 .table-dark-custom {
     color: #E2E8F0 !important;
@@ -61239,4 +61234,33 @@ body {
     background-color: #38BDF8 !important;
     border-color: #38BDF8 !important;
     color: #0F172A !important;
+}
+
+
+/* card */
+.card-dark-theme {
+    background-color: #161F30 !important;
+    border: none !important;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,0.2) !important;
+}
+
+.card-dark-theme .navi .navi-item .navi-link {
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+.card-dark-theme .navi .navi-item .navi-link:hover {
+    background-color: #1B2538 !important;
+}
+.card-dark-theme .navi .navi-item .navi-link.active {
+    background-color: rgba(56, 189, 248, 0.1) !important;
+    color: #38BDF8 !important;
+}
+.card-dark-theme .navi .navi-item .navi-link .navi-text {
+    color: #E2E8F0;
+}
+.card-dark-theme .navi .navi-item .navi-link.active .navi-text {
+    color: #38BDF8 !important;
+}
+.card-dark-theme .navi .navi-item .navi-link.active .svg-icon svg g [fill] {
+    fill: #38BDF8 !important;
 }

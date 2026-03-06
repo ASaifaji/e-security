@@ -1,3 +1,7 @@
+@php
+    $user = Auth::user()
+@endphp
+
 <!-- begin::User Panel-->
 <div id="kt_quick_user" class="offcanvas offcanvas-right p-10 dark-user-panel">
     <!--begin::Header-->
@@ -14,12 +18,16 @@
         <!--begin::Header-->
         <div class="d-flex align-items-center mt-5">
             <div class="symbol symbol-100 mr-5">
-                <div class="symbol-label" style="background-image:url('{{ asset('media/users/300_21.jpg') }}')"></div>
+                @if ($user->avatar == null)
+                    <span class="symbol-label font-weight-bold font-size-h3 text-white-85 bg-primary">{{ substr($user->first_name, 0, 1) }}{{ substr($user->last_name, 0, 1) }}</span>
+                @else
+                    <div class="symbol-label" style="background-image:url('{{ asset('storage/' . $user->avatar) }}')"></div>
+                @endif
                 <i class="symbol-badge bg-success" style="border-color: #161F30;"></i>
             </div>
             <div class="d-flex flex-column">
-                <a href="#" class="font-weight-bold font-size-h5 text-white-85 text-hover-primary">{{ Auth::user()->name() }}</a>
-                <div class="text-muted-slate mt-1">{{ Auth::user()->department->name }}</div>
+                <a href="#" class="font-weight-bold font-size-h5 text-white-85 text-hover-primary">{{ $user->name() }}</a>
+                <div class="text-muted-slate mt-1">{{ $user->department->name }}</div>
                 <div class="navi mt-2">
                     <a href="#" class="navi-item">
                         <span class="navi-link p-0 pb-2">
@@ -36,7 +44,7 @@
                                     <!--end::Svg Icon-->
                                 </span>
                             </span>
-                            <span class="navi-text text-muted-slate text-hover-primary">{{ Auth::user()->email }}</span>
+                            <span class="navi-text text-muted-slate text-hover-primary">{{ $user->email }}</span>
                         </span>
                     </a>
                     <a  href="{{ route('logout') }}" 

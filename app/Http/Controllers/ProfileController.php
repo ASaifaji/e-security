@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
     //
-    public function index($tab = 'profile')
+    public function index($tab = 'personal_info')
     {
         $user = Auth::user();
         return view('profile.index', compact('user', 'tab'));

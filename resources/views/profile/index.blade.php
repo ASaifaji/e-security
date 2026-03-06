@@ -27,14 +27,8 @@
                 <!--begin::Content-->
                 <div class="flex-row-fluid ml-lg-8">
                     <x-tab.tab>
-                        <x-tab.panel id="profile_tab" :active="$tab === 'profile'">
-                            <x-page.profile.partials.profile-overview />
-                        </x-tab.panel>
                         <x-tab.panel id="personal_info_tab" :active="$tab === 'personal_info'">
                             <x-page.profile.partials.personal-info :user="$user" />
-                        </x-tab.panel>
-                        <x-tab.panel id="account_info_tab" :active="$tab === 'account_info'">
-                            <x-page.profile.partials.account-info />
                         </x-tab.panel>
                         <x-tab.panel id="change_pwd_tab" :active="$tab === 'change_pwd'">
                             <x-page.profile.partials.change-password />
