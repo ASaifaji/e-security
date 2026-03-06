@@ -147,6 +147,13 @@ var KTCalendarExternalEvents = function() {
                     }
                 });
             },
+
+            eventDataTransform: function(eventData) {
+                if (eventData.end && eventData.allDay) {
+                    eventData.end = moment(eventData.end).add(1, 'seconds').format('YYYY-MM-DD');
+                }
+                return eventData;
+            },
             
             eventDrop: function(info) {
                 if (!info.event.id) {

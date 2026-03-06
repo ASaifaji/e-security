@@ -20,7 +20,7 @@
                         <i class="la la-arrow-left"></i> Back
                     </a>
                     <a href="#" class="btn btn-security-primary font-weight-bolder">
-                        <i class="la la-edit"></i> Edit Ticket
+                        <i class="la la-edit text-white"></i> Edit Ticket
                     </a>
                 </div>
             </div>

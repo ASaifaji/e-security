@@ -1,7 +1,7 @@
 @props(['ticket'])
 
 <div class="card-spacer mb-3" id="kt_inbox_reply">
-    <div class="card card-custom shadow-sm">
+    <div class="card card-custom shadow-none" style="background-color: transparent;">
         <div class="card-body p-0">
             <form id="kt_inbox_reply_form" action="{{ route('tickets.reply.store', $ticket) }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -9,20 +9,20 @@
                 
                 <div class="d-block p-5">
                     <div class="form-group">
-                         <div id="ticket_reply_editor" class="border-0" style="height: 200px"></div>
+                         <div id="ticket_reply_editor" class="quill-dark-theme" style="height: 200px"></div>
                     </div>
 
-                    <div class="d-flex align-items-center justify-content-between mt-5 border-top pt-5">
+                    <div class="d-flex align-items-center justify-content-between p-4" style="background-color: #1B2538; border: 1px solid #2D3748; border-top: none; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;">
                         <div class="d-flex align-items-center">
-                            <label class="btn btn-clean btn-icon btn-sm mr-2 mb-0" data-toggle="tooltip" title="Attach file">
-                                <i class="flaticon2-clip-symbol"></i>
+                            <label class="btn btn-icon btn-sm mr-2 mb-0 btn-dark-outline" data-toggle="tooltip" title="Attach file">
+                                <i class="flaticon2-clip-symbol text-muted-slate"></i>
                                 <input type="file" id="attachment_input" name="attachment" style="position: absolute; opacity: 0; width: 0; height: 0;">
                             </label>
-                            <span id="file-name-display" class="text-muted font-size-sm">No file chosen</span>
+                            <span id="file-name-display" class="text-muted-slate font-size-sm">No file chosen</span>
                         </div>
                     </div>
 
-                    <div id="attachment-preview-container" class="mt-3 p-3 bg-light rounded d-none">
+                    <div id="attachment-preview-container" class="mt-3 p-3 bg-light rounded d-none" style="background-color: #1B2538; border: 1px dashed #334155;">
                         <div class="d-flex align-items-center">
                             <img id="attachment-preview-img" src="" style="max-height: 80px; max-width: 80px; border-radius: 4px; display: none;" class="mr-3 border">
                             
@@ -33,15 +33,15 @@
                             </div>
 
                             <div class="d-flex flex-column">
-                                <span id="preview-filename" class="font-weight-bold text-dark-75"></span>
+                                <span id="preview-filename" class="font-weight-bold text-white-85"></span>
                                 <a href="javascript:;" id="remove-attachment" class="text-danger font-size-sm font-weight-bold">Remove</a>
                             </div>
                         </div>
                     </div>
-                    </div>
-                <div class="d-flex align-items-center justify-content-between py-5 pl-8 pr-5 bg-light-light rounded-bottom">
+                </div>
+                <div class="d-flex align-items-center justify-content-between py-5 pl-8 pr-5 rounded-bottom" style="background-color: #1B2538; border: 1px solid #2D3748; border-top: none;">
                     <div class="d-flex align-items-center mr-3">
-                        <button type="submit" class="btn btn-primary font-weight-bold px-6">Send Reply</button>
+                        <button type="submit" class="btn btn-security-primary font-weight-bold px-6">Send Reply</button>
                     </div>
                 </div>
             </form>

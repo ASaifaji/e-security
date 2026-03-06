@@ -13,30 +13,30 @@
         <div class="row">
             <div class="col-lg-3">
                 <!--begin::Card-->
-                <div class="card card-custom card-stretch">
-                    <div class="card-header card-header-tabs-line nav-tabs-line-3x">
+                <div class="card card-custom card-stretch card-dark-theme border-0">
+                    <div class="card-header card-header-tabs-line nav-tabs-line-3x border-bottom-0">
                         <!--begin::Toolbar-->
                         <div class="card-toolbar">
-                            <ul class="nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-3x">
+                            <ul class="nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-3x custom-dark-tabs">
                                 <!--begin::Item-->
                                 <li class="nav-item mr-3">
                                     <a class="nav-link active" data-toggle="tab" href="#tab_custom_event">
-                                        <span class="nav-text font-size-lg">Custom</span>
+                                        <span class="nav-text font-size-lg text-white-85">Custom</span>
                                     </a>
                                 </li>
                                 <!--end::Item-->
                                 <!--begin::Item-->
                                 <li class="nav-item mr-3">
                                     <a class="nav-link" data-toggle="tab" href="#tab_ticket_event">
-                                        <span class="nav-text font-size-lg">Ticket</span>
+                                        <span class="nav-text font-size-lg text-white-85">Ticket</span>
                                     </a>
                                 </li>
                                 <!--end::Item-->
                             </ul>
                         </div>
                         <!--end::Toolbar-->
-                        <div class="card-title">
-                            <h3 class="card-label">External Events</h3>
+                        <div class="card-title d-none d-md-flex">
+                            <h3 class="card-label text-white-85">Schedule Events</h3>
                         </div>
                     </div>
                     <div class="card-body">
@@ -45,8 +45,8 @@
                             <div class="tab-pane fade show active" id="tab_custom_event" role="tabpanel">
                                 <div id="event-creation-form">
                                     <div class="form-group mb-4">
-                                        <label class="font-weight-bold">Jenis Event <span class="text-danger">*</span></label>
-                                        <select class="form-control" id="input-event-type">
+                                        <label class="font-weight-bold text-white-85">Jenis Event <span class="text-danger">*</span></label>
+                                        <select class="form-control input-dark-custom" id="input-event-type">
                                             <option value="">-- Pilih Jenis --</option>
                                             <option value="Deploy">Deploy</option>
                                             <option value="Test">Test</option>
@@ -54,8 +54,8 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">Aplikasi (Apps) <span class="text-danger">*</span></label>
+                                    <div class="form-group mb-4 custom-select2-dark">
+                                        <label class="font-weight-bold text-white-85">Aplikasi (Apps) <span class="text-danger">*</span></label>
                                         <select class="form-control select2" id="input-app" style="width: 100%;">
                                             <option value="">-- Cari Aplikasi --</option>
                                             @foreach ($apps as $app)
@@ -64,8 +64,8 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group mb-6">
-                                        <label class="font-weight-bold">PIC / User <span class="text-danger">*</span></label>
+                                    <div class="form-group mb-6 custom-select2-dark">
+                                        <label class="font-weight-bold text-white-85">PIC / User <span class="text-danger">*</span></label>
                                         <select class="form-control select2" id="input-pic" style="width: 100%;">
                                             <option value="">-- Cari PIC --</option>
                                             @foreach ($users as $user)
@@ -74,11 +74,11 @@
                                         </select>
                                     </div>
 
-                                    <div class="d-flex justify-content-between mb-8">
-                                        <button type="button" class="btn btn-primary font-weight-bold" id="btn-create-custom-event">
-                                            <i class="ki ki-plus icon-sm"></i> Create
+                                    <div class="d-flex justify-content-between mb-8 border-top pt-5" style="border-color: #2D3748 !important;">
+                                        <button type="button" class="btn btn-security-primary font-weight-bold" id="btn-create-custom-event">
+                                            <i class="ki ki-plus text-white icon-sm"></i> Create
                                         </button>
-                                        <button type="button" class="btn btn-light-danger font-weight-bold" id="btn-clear-custom">
+                                        <button type="button" class="btn btn-dark-outline text-danger border-danger font-weight-bold" id="btn-clear-custom">
                                             <i class="ki ki-close icon-sm"></i> Clear
                                         </button>
                                     </div>
@@ -87,8 +87,8 @@
 
                             <div class="tab-pane fade" id="tab_ticket_event" role="tabpanel">
                                 <div id="ticket-creation-form">
-                                    <div class="form-group mb-6">
-                                        <label class="font-weight-bold">Pilih Ticket <span class="text-danger">*</span></label>
+                                    <div class="form-group mb-6 custom-select2-dark">
+                                        <label class="font-weight-bold text-white-85">Pilih Ticket <span class="text-danger">*</span></label>
                                         <select class="form-control select2" id="input-ticket-id" style="width: 100%;">
                                             <option value="">-- Cari Ticket --</option>
                                             @isset($tickets)
@@ -97,13 +97,13 @@
                                                 @endforeach
                                             @endisset
                                         </select>
-                                        <span class="form-text text-muted">Ketik untuk mencari berdasarkan nomor atau judul tiket.</span>
+                                        <span class="form-text text-muted-slate">Ketik untuk mencari berdasarkan nomor atau judul tiket.</span>
                                     </div>
-                                    <div class="d-flex justify-content-between mb-8">
-                                        <button type="button" class="btn btn-primary font-weight-bold" id="btn-create-ticket-event">
-                                            <i class="ki ki-plus icon-sm"></i> Create
+                                    <div class="d-flex justify-content-between mb-8 border-top pt-5" style="border-color: #2D3748 !important;">
+                                        <button type="button" class="btn btn-security-primary font-weight-bold" id="btn-create-ticket-event">
+                                            <i class="ki ki-plus text-white icon-sm"></i> Create
                                         </button>
-                                        <button type="button" class="btn btn-light-danger font-weight-bold" id="btn-clear-ticket">
+                                        <button type="button" class="btn btn-dark-outline text-danger border-danger font-weight-bold" id="btn-clear-ticket">
                                             <i class="ki ki-close icon-sm"></i> Clear
                                         </button>
                                     </div>
@@ -111,12 +111,12 @@
                                 </div>
                             </div>
 
-                            <div class="separator separator-dashed my-5"></div>
+                            <div class="separator separator-dashed my-5" style="border-bottom-color: #2D3748;"></div>
 
-                            <h4 class="card-label mb-3">Item Siap Dijadwalkan:</h4>
+                            <h4 class="card-label mb-3 text-white-85">Item Siap Dijadwalkan:</h4>
                             <div id="kt_calendar_external_events" class="fc-unthemed">
-                                <div id="draggable-staging-area" style="min-height: 60px; border: 1px dashed #e4e6ef; padding: 10px; border-radius: 5px; display: flex; align-items: center; justify-content: center; background-color: #f3f6f9;">
-                                    <span class="text-muted text-center" id="empty-state-text">Isi form di atas dan klik <b>Create</b> untuk memunculkan item.</span>
+                                <div id="draggable-staging-area" style="min-height: 60px; border: 1px dashed #334155; padding: 10px; border-radius: 5px; display: flex; align-items: center; justify-content: center; background-color: #121926;">
+                                    <span class="text-muted-slate text-center" id="empty-state-text">Isi form di atas dan klik <b>Create</b> untuk memunculkan item.</span>
                                 </div>
                             </div>
 
@@ -127,14 +127,14 @@
             </div>
             <div class="col-lg-9">
                 <!--begin::Card-->
-                <div class="card card-custom card-stretch">
-                    <div class="card-header">
+                <div class="card card-custom card-stretch card-dark-theme border-0">
+                    <div class="card-header border-bottom-0">
                         <div class="card-title">
-                            <h3 class="card-label">Basic Calendar</h3>
+                            <h3 class="card-label text-white-85">Basic Calendar</h3>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div id="kt_calendar"></div>
+                        <div id="kt_calendar" class="calendar-dark-theme"></div>
                     </div>
                 </div>
                 <!--end::Card-->
@@ -214,15 +214,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Sisipkan appId dan picId ke dalam atribut data HTML
         const draggableItemHTML = `
-            <div class="btn btn-block text-left font-weight-bold fc-draggable-handle cursor-move d-flex align-items-center" 
-                style="background-color: ${targetBgColor}; border: 1px solid ${targetBgColor}; color: #ffffff; text-shadow: 0px 1px 2px rgba(0,0,0,0.3);"
+            <div class="fc-draggable-handle cursor-move d-flex align-items-center mb-2 p-3 rounded" 
+                style="background-color: ${targetBgColor}20; border: 1px solid ${targetBgColor}; color: #ffffff; text-shadow: 0px 1px 2px rgba(0,0,0,0.3);"
                 data-title="${eventTitle}"
                 data-bg-color="${targetBgColor}"
                 data-type="${eventType}"
                 data-app-id="${appId}" 
                 data-pic-id="${picId}">
-                <i class="flaticon2-drag mr-3" style="color: #ffffff;"></i> 
-                <span class="event-text-label">${eventTitle}</span>
+                <i class="flaticon2-drag mr-3" style="color: ${targetBgColor};"></i> 
+                <span class="font-weight-bold" style="font-size: 0.95rem;">${eventTitle}</span>
             </div>
         `;
 
@@ -259,14 +259,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const draggableItemHTML = `
-            <div class="btn btn-block text-left font-weight-bold fc-draggable-handle cursor-move d-flex align-items-center" 
-                style="background-color: ${targetBgColor}; border: 1px solid ${targetBgColor}; color: #ffffff; text-shadow: 0px 1px 2px rgba(0,0,0,0.3);"
+            <div class="fc-draggable-handle cursor-move d-flex align-items-center mb-2 p-3 rounded" 
+                style="background-color: ${targetBgColor}20; border: 1px solid ${targetBgColor}; color: #ffffff; text-shadow: 0px 1px 2px rgba(0,0,0,0.3);"
                 data-title="${eventTitle}"
                 data-bg-color="${targetBgColor}"
                 data-type="${ticketTypeName}"
                 data-ticket-id="${ticketId}">
-                <i class="flaticon2-drag mr-3" style="color: #ffffff;"></i> 
-                <span class="event-text-label">${eventTitle} <small>(${ticketTypeName})</small></span>
+                <i class="flaticon2-drag mr-3" style="color: ${targetBgColor};"></i> 
+                <span class="font-weight-bold" style="font-size: 0.95rem;">${eventTitle} <small>(${ticketTypeName})</small></span>
             </div>
         `;
 
