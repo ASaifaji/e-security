@@ -5,7 +5,7 @@
         <!--begin::Copyright-->
         <div class="text-dark order-2 order-md-1">
             <span class="text-muted font-weight-bold mr-2">2026©</span>
-            <a href="http://keenthemes.com/metronic" target="_blank" class="text-dark-75 text-hover-primary">ASaifaji</a>
+            <a href="https://github.com/ASaifaji" target="_blank" class="text-dark-75 text-hover-primary">ASaifaji</a>
         </div>
         <!--end::Copyright-->
         <!--begin::Nav-->
