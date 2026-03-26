@@ -30,6 +30,7 @@
                 <select class="form-control select2-filter datatable-filter" data-column="3" multiple="multiple" data-placeholder="Select Ticket Types">
                     <option value="Deploy">Deploy</option>
                     <option value="Test">Test</option>
+                    <option value="Laporan">Laporan</option>
                 </select>
             </div>
             <div class="col-md-3 mb-4">
@@ -55,6 +56,7 @@
                 <select class="form-control select2-filter datatable-filter" data-column="9" multiple="multiple" data-placeholder="Select Ticket Statuses">
                     <option value="Open">Open</option>
                     <option value="In Progress">In Progress</option>
+                    <option value="Pending">Pending</option>
                     <option value="Resolved">Resolved</option>
                     <option value="Closed">Closed</option>
                 </select>
