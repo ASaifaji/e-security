@@ -30,6 +30,7 @@
                                 <x-form.select-picker id="ticket_type" name="ticket_type" label="Type">
                                     <option value="1">Deploy</option>
                                     <option value="2" selected>Test</option>
+                                    <option value="3">Laporan</option>
                                 </x-form.select-picker>
                                 <x-form.text-input name="vulnerability_details" label="Vulnerabilities Detail" sublabel="Can be Emptied" />
                             </x-form.form-section>

@@ -15,14 +15,14 @@ class TicketController extends Controller
         $request->validate([
             'subject' => 'required|string|max:255',
             'description' => 'required|string',
-            'ticket_type' => 'required|in:1,2',
+            'ticket_type' => 'required|in:1,2,3',
             'app_type' => 'required|in:1,2', // 1=Existing, 2=New
             'existing_app_id' => 'required_if:app_type,1|nullable|exists:apps,id',
             'new_app_name' => 'required_if:app_type,2|nullable|string|max:255',
             'new_app_pic' => 'required_if:app_type,2|nullable|exists:users,id',
-            'priority_id' => 'required',
-            'severity_id' => 'required',
-            'status_id' => 'required',
+            'priority_id' => 'required|in:1,2,3,4',
+            'severity_id' => 'required|in:1,2,3,4',
+            'status_id' => 'required|in:1,2,3,4,5',
         ]);
 
         if ($request->app_type == '2') {
