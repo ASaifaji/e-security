@@ -1,4 +1,4 @@
-@props(['activities'])
+@props(['activities', 'useronly' => false])
 
 <!--begin::List Widget 9-->
 <div class="card card-custom card-stretch gutter-b">
@@ -71,25 +71,52 @@
     <!--begin::Body-->
     <div class="card-body pt-4">
         <div class="timeline timeline-5 mt-3">
-            @forelse ($activities as $activity)
-                <div class="timeline-item align-items-start">
-                    <div class="timeline-label font-weight-bolder text-white-85 font-size-lg text-right pr-3" style="width: 65px;">
-                        {{ $activity->created_at->diffForHumans(null, true, true) }} </div>
-                    
-                    <div class="timeline-badge">
-                        <i class="fa fa-genderless text-{{ $activity->type }} icon-xl"></i>
+            @if ($useronly)
+                @forelse ($activities as $activity)
+                    @if ($activity->user->name() != Auth::user()->name())
+                        @continue
+                    @else
+                        <div class="timeline-item align-items-start">
+                            <div class="timeline-label font-weight-bolder text-white-85 font-size-lg text-right pr-3" style="width: 65px;">
+                                {{ $activity->created_at->diffForHumans(null, true, true) }} </div>
+                            
+                            <div class="timeline-badge">
+                                <i class="fa fa-genderless text-{{ $activity->type }} icon-xl"></i>
+                            </div>
+                            
+                            <div class="font-weight-normal font-size-lg timeline-content text-muted-slate pl-3">
+                                <span class="text-white-85 font-weight-bold">{{ $activity->user->name() }}</span> 
+                                {!! $activity->description !!}
+                            </div>
+                        </div>
+                    @endif
+                @empty
+                    <div class="text-center text-muted-slate py-5">
+                        No recent activities found.
                     </div>
-                    
-                    <div class="font-weight-normal font-size-lg timeline-content text-muted-slate pl-3">
-                        <span class="text-white-85 font-weight-bold">{{ $activity->user->name() }}</span> 
-                        {!! $activity->description !!}
+                @endforelse
+            @else
+                @forelse ($activities as $activity)
+                    <div class="timeline-item align-items-start">
+                        <div class="timeline-label font-weight-bolder text-white-85 font-size-lg text-right pr-3" style="width: 65px;">
+                            {{ $activity->created_at->diffForHumans(null, true, true) }} </div>
+                        
+                        <div class="timeline-badge">
+                            <i class="fa fa-genderless text-{{ $activity->type }} icon-xl"></i>
+                        </div>
+                        
+                        <div class="font-weight-normal font-size-lg timeline-content text-muted-slate pl-3">
+                            <span class="text-white-85 font-weight-bold">{{ $activity->user->name() }}</span> 
+                            {!! $activity->description !!}
+                        </div>
                     </div>
-                </div>
-            @empty
-                <div class="text-center text-muted-slate py-5">
-                    No recent activities found.
-                </div>
-            @endforelse
+                @empty
+                    <div class="text-center text-muted-slate py-5">
+                        No recent activities found.
+                    </div>
+                @endforelse
+            @endif
+            
             
         </div>
         <!--end: Items-->
