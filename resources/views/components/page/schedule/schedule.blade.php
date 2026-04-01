@@ -119,6 +119,7 @@
                                     <span class="text-muted-slate text-center" id="empty-state-text">Isi form di atas dan klik <b>Create</b> untuk memunculkan item.</span>
                                 </div>
                             </div>
+                            <span class="form-text text-muted-slate">drag n drop ke kalender untuk membuat jadwal, hover ke ujung kotak event dan resize untuk mengubah durasi, dan klik pada event untuk menghapusnya.</span>
 
                         </div>
                     </div>

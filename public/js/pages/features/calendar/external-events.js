@@ -245,6 +245,35 @@ var KTCalendarExternalEvents = function() {
                 }
             },
 
+            eventClick: function(info) {
+                // Jika event tidak memiliki ID (belum tersimpan di DB), batalkan
+                if (!info.event.id) {
+                    toastr.warning('Jadwal ini belum tersimpan sempurna di database.');
+                    return;
+                }
+
+                // Tampilkan konfirmasi penghapusan
+                if (confirm("Apakah Anda yakin ingin menghapus jadwal: '" + info.event.title + "'?")) {
+                    
+                    $.ajaxSetup({
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+                    });
+
+                    $.ajax({
+                        url: '/schedules/destroy/' + info.event.id,
+                        type: 'DELETE',
+                        success: function(response) {
+                            toastr.success(response.message || 'Jadwal berhasil dihapus.');
+                            info.event.remove(); // Hapus event dari tampilan kalender secara langsung
+                        },
+                        error: function(xhr) {
+                            console.error('Error hapus jadwal:', xhr.responseText);
+                            toastr.error('Gagal menghapus jadwal.');
+                        }
+                    });
+                }
+            },
+
             eventRender: function(info) {
                 var element = $(info.el);
 
