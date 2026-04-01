@@ -1,10 +1,12 @@
+@props(['activities'])
+
 <!--begin::List Widget 9-->
 <div class="card card-custom card-stretch gutter-b">
     <!--begin::Header-->
     <div class="card-header align-items-center border-0 mt-4">
         <h3 class="card-title align-items-start flex-column">
             <span class="font-weight-bolder text-light">Recent Activities</span>
-            <span class="text-muted mt-3 font-weight-bold font-size-sm">890,344 Sales</span>
+            <span class="text-muted mt-3 font-weight-bold font-size-sm">System and User logs</span>
         </h3>
         <div class="card-toolbar">
             <div class="dropdown dropdown-inline">
@@ -69,148 +71,26 @@
     <!--begin::Body-->
     <div class="card-body pt-4">
         <div class="timeline timeline-5 mt-3">
-            <!--begin::Item-->
-            <div class="timeline-item align-items-start">
-                <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">08:42</div>
-                <!--end::Label-->
-                <!--begin::Badge-->
-                <div class="timeline-badge">
-                    <i class="fa fa-genderless text-success icon-xxl"></i>
-                </div>
-                <!--end::Badge-->
-                <!--begin::Text-->
-                <div class="timeline-content text-light-50">Outlines of the recent activities that happened last weekend</div>
-                <!--end::Text-->
-            </div>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <div class="timeline-item align-items-start">
-                <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">3 hr</div>
-                <!--end::Label-->
-                <!--begin::Badge-->
-                <div class="timeline-badge">
-                    <i class="fa fa-genderless text-danger icon-xxl"></i>
-                </div>
-                <!--end::Badge-->
-                <!--begin::Content-->
-                <div class="timeline-content d-flex">
-                    <span class="mr-4 font-weight-bolder text-light-75">AEOL meeting with</span>
-                    <!--begin::Section-->
-                    <div class="d-flex align-items-start mt-n2">
-                        <!--begin::Symbol-->
-                        <a href="#" class="symbol symbol-35 symbol-light-success mr-2">
-                            <span class="symbol-label">
-                                <img src="assets/media/svg/avatars/004-boy-1.svg" class="h-75 align-self-end" alt="" />
-                            </span>
-                        </a>
-                        <!--end::Symbol-->
-                        <!--begin::Symbol-->
-                        <a href="#" class="symbol symbol-35 symbol-light-success">
-                            <span class="symbol-label">
-                                <img src="assets/media/svg/avatars/002-girl.svg" class="h-75 align-self-end" alt="" />
-                            </span>
-                        </a>
-                        <!--end::Symbol-->
+            @forelse ($activities as $activity)
+                <div class="timeline-item align-items-start">
+                    <div class="timeline-label font-weight-bolder text-white-85 font-size-lg text-right pr-3" style="width: 65px;">
+                        {{ $activity->created_at->diffForHumans(null, true, true) }} </div>
+                    
+                    <div class="timeline-badge">
+                        <i class="fa fa-genderless text-{{ $activity->type }} icon-xl"></i>
                     </div>
-                    <!--end::Section-->
+                    
+                    <div class="font-weight-normal font-size-lg timeline-content text-muted-slate pl-3">
+                        <span class="text-white-85 font-weight-bold">{{ $activity->user->name() }}</span> 
+                        {!! $activity->description !!}
+                    </div>
                 </div>
-                <!--end::Content-->
-            </div>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <div class="timeline-item align-items-start">
-                <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">14:37</div>
-                <!--end::Label-->
-                <!--begin::Badge-->
-                <div class="timeline-badge">
-                    <i class="fa fa-genderless text-info icon-xxl"></i>
+            @empty
+                <div class="text-center text-muted-slate py-5">
+                    No recent activities found.
                 </div>
-                <!--end::Badge-->
-                <!--begin::Desc-->
-                <div class="timeline-content font-weight-bolder text-light-75">Submit initial budget -
-                <a href="#" class="text-primary">USD 700</a>.</div>
-                <!--end::Desc-->
-            </div>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <div class="timeline-item align-items-start">
-                <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">16:50</div>
-                <!--end::Label-->
-                <!--begin::Badge-->
-                <div class="timeline-badge">
-                    <i class="fa fa-genderless text-danger icon-xxl"></i>
-                </div>
-                <!--end::Badge-->
-                <!--begin::Text-->
-                <div class="timeline-content text-light-50">Stakeholder meeting scheduling.</div>
-                <!--end::Text-->
-            </div>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <div class="timeline-item align-items-start">
-                <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">17:30</div>
-                <!--end::Label-->
-                <!--begin::Badge-->
-                <div class="timeline-badge">
-                    <i class="fa fa-genderless text-success icon-xxl"></i>
-                </div>
-                <!--end::Badge-->
-                <!--begin::Text-->
-                <div class="timeline-content text-light-50">Project scoping &amp; estimations with stakeholders.</div>
-                <!--end::Text-->
-            </div>
-            <!--end::Item-->
-            <!--begin::Item-->
-            <div class="timeline-item align-items-start">
-                <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">21:03</div>
-                <!--end::Label-->
-                <!--begin::Badge-->
-                <div class="timeline-badge">
-                    <i class="fa fa-genderless text-warning icon-xxl"></i>
-                </div>
-                <!--end::Badge-->
-                <!--begin::Desc-->
-                <div class="timeline-content font-weight-bolder text-light-75">New order placed
-                <a href="#" class="text-primary">#XF-2356</a>.</div>
-                <!--end::Desc-->
-            </div>
-            <!--end::Item-->
-            <!--begin: Item-->
-            <div class="timeline-item align-items-start">
-                <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">21:07</div>
-                <!--end::Label-->
-                <!--begin::Badge-->
-                <div class="timeline-badge">
-                    <i class="fa fa-genderless text-danger icon-xxl"></i>
-                </div>
-                <!--end::Badge-->
-                <!--begin::Text-->
-                <div class="timeline-content text-light-50">Company BBQ to celebrate the last quater achievements and goals.</div>
-                <!--end::Text-->
-            </div>
-            <!--end: Item-->
-            <!--begin::Item-->
-            <div class="timeline-item align-items-start">
-                <!--begin::Label-->
-                <div class="timeline-label font-weight-bolder text-light-75 font-size-lg text-right pr-3">20:30</div>
-                <!--end::Label-->
-                <!--begin::Badge-->
-                <div class="timeline-badge">
-                    <i class="fa fa-genderless text-info icon-xxl"></i>
-                </div>
-                <!--end::Badge-->
-                <!--begin::Text-->
-                <div class="timeline-content text-light-50">Marketing campaign planning with customer.</div>
-                <!--end::Text-->
-            </div>
-            <!--end::Item-->
+            @endforelse
+            
         </div>
         <!--end: Items-->
     </div>

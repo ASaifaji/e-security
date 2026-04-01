@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Ticket;
 use App\Models\TicketChat;
 use Illuminate\Http\Request;
@@ -12,6 +13,8 @@ class DashboardController extends Controller
     //
     public function techDashboard()
     {
+        $activities = Activity::with('user')->latest()->take(6)->get();
+
         $dates = [];
         $openTickets = [];
 
@@ -43,6 +46,6 @@ class DashboardController extends Controller
             $totalChatsThisWeek += $dailyCount;
         }
 
-        return view('dashboard', compact('openTicketCount', 'dates', 'openTickets', 'chatDates', 'chatData', 'totalChatsThisWeek'));
+        return view('dashboard', compact('openTicketCount', 'dates', 'openTickets', 'chatDates', 'chatData', 'totalChatsThisWeek', 'activities'));
     }
 }

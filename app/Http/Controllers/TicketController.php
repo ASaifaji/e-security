@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Models\App;
@@ -68,6 +69,9 @@ class TicketController extends Controller
             'status_id' => $request->status_id,
         ]);
 
+        $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
+        Activity::log("Created new ticket {$link}", 'success');
+
         // Check the hidden input value
         $action = $request->input('submit_action');
 
@@ -88,12 +92,16 @@ class TicketController extends Controller
     public function markAsResolved(Ticket $ticket)
     {
         $ticket->update(['resolved_at' => now(), 'status_id' => 4]); // Assuming 4 = Resolved
+        $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
+        Activity::log("Marked ticket {$link} as resolved", 'success');
         return back()->with('success', 'Ticket marked as resolved.');
     }
 
     public function close(Ticket $ticket)
     {
         $ticket->update(['status_id' => 5]);
+        $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
+        Activity::log("Closed ticket {$link}", 'danger');
         return back()->with('success', 'Ticket has been closed');
     }
 
@@ -103,6 +111,9 @@ class TicketController extends Controller
             'tester_id' => 'required|exists:users,id'
         ]);
         $ticket->update(['tester_id' => $request->tester_id]);
-        return back()->with('success', 'Ticket has been closed');
+        $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
+        $user = $ticket->tester;
+        Activity::log("Assigned {$user->name()} to ticket {$link}", 'info');
+        return back()->with('success', 'Tester assigned to ticket.');
     }
 }

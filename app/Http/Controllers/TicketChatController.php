@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Ticket;
 use App\Models\TicketChat;
 use App\Models\TicketAttachment;
@@ -43,6 +44,10 @@ class TicketChatController extends Controller
                 'filename' => $file->getClientOriginalName(),
             ]);
         }
+
+        // Inside store()
+        $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
+        Activity::log("Replied to ticket {$link}", 'info');
 
         return back()->with('success', 'Reply posted with attachment!');
     }
