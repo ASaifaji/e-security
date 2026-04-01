@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Schedule;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -51,6 +52,8 @@ class ScheduleController extends Controller
 
         $schedule = Schedule::create($dataToSave);
 
+        Activity::log("Scheduled a new {$schedule->event_type} event: {$schedule->title}", 'warning');
+
         return response()->json([
             'status'  => 'success',
             'message' => 'Jadwal berhasil disimpan!',
@@ -70,6 +73,8 @@ class ScheduleController extends Controller
             'start_date' => $request->start_date,
             'end_date'   => $request->end_date,
         ]);
+
+        Activity::log("Updated schedule for: {$schedule->title}", 'warning');
 
         return response()->json([
             'status'  => 'success',
@@ -123,6 +128,8 @@ class ScheduleController extends Controller
         $schedule = Schedule::findOrFail($id);
         
         $schedule->delete();
+
+        Activity::log("Removed a scheduled {$schedule->event_type} event: {$schedule->title}", 'danger');
 
         return response()->json([
             'status' => 'success',

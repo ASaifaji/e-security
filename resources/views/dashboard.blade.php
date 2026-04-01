@@ -23,9 +23,9 @@
     </x-slot>
 
     @if (Auth::user()->id == 1 || Auth::user()->id == 2)
-        <x-page.dashboard.tech-dashboard :openTicketCount="$openTicketCount" :totalChatsThisWeek="$totalChatsThisWeek" />
+        <x-page.dashboard.tech-dashboard :openTicketCount="$openTicketCount" :totalChatsThisWeek="$totalChatsThisWeek" :activities="$activities" />
     @else
-        <x-page.dashboard.user-dashboard />
+        <x-page.dashboard.user-dashboard :openTicketCount="$openTicketCount" :totalChatsThisWeek="$totalChatsThisWeek" :activities="$activities" />
     @endif
 
 </x-app-layout>
