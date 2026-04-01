@@ -116,4 +116,17 @@ class ScheduleController extends Controller
 
         return response()->json($events);
     }
+
+    public function destroy($id)
+    {
+
+        $schedule = Schedule::findOrFail($id);
+        
+        $schedule->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Event deleted successfully.'
+        ]);
+    }
 }

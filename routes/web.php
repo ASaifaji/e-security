@@ -93,6 +93,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/schedules/events', [ScheduleController::class, 'getEvents'])->name('schedules.events');
     Route::post('/tickets/{ticket}/close', [TicketController::class, 'close'])->name('tickets.close');
     Route::post('/tickets/{ticket}/assign-tester', [TicketController::class, 'assignTester'])->name('tickets.assign-tester');
+    Route::delete('/schedules/destroy/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
 });
 
 require __DIR__.'/auth.php';
