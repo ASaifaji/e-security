@@ -1,4 +1,4 @@
-@props(['ticket'])
+@props(['ticket', 'users'])
 
 <x-subheader.breadcrumb text="Ticket Details">
     <x-subheader.breadcrumb-item href="{{ route('dashboard') }}" text="Dashboard" />
@@ -63,7 +63,16 @@
                         </div>
                         <!--end:Messages-->
                         
-                        <x-inbox.reply :ticket="$ticket" />
+                        @if ($ticket->status_id != 5)
+                            <x-inbox.reply :ticket="$ticket" />
+                        @else
+                            <div class="d-flex align-items-center justify-content-center p-5 rounded mt-5" style="background-color: rgba(100, 116, 139, 0.1); border: 1px dashed #334155;">
+                                <i class="la la-lock mr-2" style="color: #64748B; font-size: 1.5rem;"></i>
+                                <span style="color: #64748B;" class="font-weight-bolder font-size-lg">
+                                    This ticket is closed. The conversation has been locked.
+                                </span>
+                            </div>
+                        @endif
                     </div>
 
                     <div class="col-xl-4">
@@ -176,7 +185,20 @@
                                             <span class="text-white font-weight-bold">{{ $ticket->tester->name() }}</span>
                                         </div>
                                     @else
-                                        <span class="text-white">Unassigned</span>
+                                        <form action="{{ route('tickets.assign-tester', $ticket->id) }}" method="POST" class="d-flex align-items-center m-0 tester-asign-form">
+                                            @csrf
+                                            <div style="width: 140px; height: 36px;">
+                                                <x-form.select-picker name="tester_id" search="true" required={{ true }} >
+                                                    <option disabled selected>Select</option>
+                                                    @foreach ($users as $user)
+                                                        <option value="{{ $user->id }}">{{ $user->name() }}</option>
+                                                    @endforeach
+                                                </x-form.select-picker>
+                                            </div>
+                                            <button type="submit" class="btn btn-sm font-weight-bolder ml-2" style="background-color: #3B82F6; color: white;">
+                                                Assign
+                                            </button>
+                                        </form>
                                     @endif
                                 </div>
 
@@ -193,7 +215,7 @@
 
                             </div>
                         </div>
-                        @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                        @if ((Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->id == $ticket->tester_id) && $ticket->status_id != 5)
                             @if(!$ticket->resolved_at)
                                 <form action="{{ route('tickets.resolve', $ticket->id) }}" method="POST" style="display: inline-block;">
                                     @csrf
@@ -207,6 +229,20 @@
                                 </button>
                             @endif
                         @endif
+                        @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                            @if ($ticket->status_id != 5)
+                                <form action="{{ route('tickets.close', $ticket->id) }}" method="POST" class="w-100">
+                                    @csrf
+                                    <button type="submit" class="btn font-weight-bolder w-100" style="background-color: rgba(239, 68, 68, 0.15); color: #EF4444; border: 1px solid rgba(239, 68, 68, 0.3);" onclick="return confirm('Are you sure you want to close this ticket?')">
+                                        <i class="la la-times-circle text-danger"></i> Close Ticket
+                                    </button>
+                                </form>
+                            @else
+                                <button class="btn font-weight-bolder disabled w-100" style="background-color: rgba(100, 116, 139, 0.1); color: #64748B; border: 1px dashed #334155;" disabled>
+                                    <i class="la la-times-circle text-muted-slate"></i> Ticket Closed
+                                </button>
+                            @endif
+                        @endif
                     </div>
                     
                 </div>
@@ -214,3 +250,22 @@
         </div>
     </div>
 </div>
+
+@push('styles')
+<style>
+    /* Strip the grid formatting just for the assignment dropdown */
+    .tester-assign-form .form-group {
+        margin-bottom: 0 !important;
+    }
+    .tester-assign-form .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    .tester-assign-form .col-9 {
+        flex: 0 0 100% !important; /* Force 100% width instead of 75% */
+        max-width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+</style>
+@endpush

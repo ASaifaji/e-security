@@ -90,4 +90,19 @@ class TicketController extends Controller
         $ticket->update(['resolved_at' => now(), 'status_id' => 4]); // Assuming 4 = Resolved
         return back()->with('success', 'Ticket marked as resolved.');
     }
+
+    public function close(Ticket $ticket)
+    {
+        $ticket->update(['status_id' => 5]);
+        return back()->with('success', 'Ticket has been closed');
+    }
+
+    public function assignTester(Request $request, Ticket $ticket)
+    {
+        $request->validate([
+            'tester_id' => 'required|exists:users,id'
+        ]);
+        $ticket->update(['tester_id' => $request->tester_id]);
+        return back()->with('success', 'Ticket has been closed');
+    }
 }

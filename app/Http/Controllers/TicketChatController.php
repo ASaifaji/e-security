@@ -13,6 +13,10 @@ class TicketChatController extends Controller
 {
     public function store(Request $request, Ticket $ticket)
     {
+        if ($ticket->status_id == 5) {
+            return back()->withErrors(['message' => 'Cannot reply to a closed ticket.']);
+        }
+        
         $request->validate([
             'message'    => 'required|string',
             'attachment' => 'nullable|file|max:10240', // Max 10MB

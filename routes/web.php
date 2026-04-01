@@ -55,8 +55,9 @@ Route::middleware(['auth'])->group(function () {
     // -- Show Ticket --
     Route::get('/tickets/{ticket}', function(Ticket $ticket){
         $ticket->load(['app', 'requester', 'tester', 'priority', 'severity', 'status']);
+        $users = User::all();
 
-        return view('tickets.show', compact('ticket'));
+        return view('tickets.show', compact('ticket', 'users'));
     })->name('tickets.show');
 
     // -- Show App --
@@ -90,6 +91,8 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/schedules/store', [ScheduleController::class, 'store'])->name('schedules.store');
     Route::put('/schedules/update/{id}', [ScheduleController::class, 'update'])->name('schedules.update');
     Route::get('/schedules/events', [ScheduleController::class, 'getEvents'])->name('schedules.events');
+    Route::post('/tickets/{ticket}/close', [TicketController::class, 'close'])->name('tickets.close');
+    Route::post('/tickets/{ticket}/assign-tester', [TicketController::class, 'assignTester'])->name('tickets.assign-tester');
 });
 
 require __DIR__.'/auth.php';
