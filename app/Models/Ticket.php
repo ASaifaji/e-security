@@ -17,7 +17,7 @@ class Ticket extends Model
         'vulnerability_details',
         'app_id',
         'requester_id',
-        'tester_id',
+        'assigned_id',
         'priority_id',
         'severity_id',
         'status_id',
@@ -30,9 +30,9 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class, 'requester_id');
     }
-    public function tester()
+    public function assigned()
     {
-        return $this->belongsTo(User::class, 'tester_id');
+        return $this->belongsTo(User::class, 'assigned_id');
     }
 
     public function app(){

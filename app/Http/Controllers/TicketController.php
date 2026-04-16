@@ -63,7 +63,7 @@ class TicketController extends Controller
             'vulnerability_details' => $request->vulnerability_details,
             'app_id' => $appId,
             'requester_id' => Auth::id(), // Currently logged in user
-            'tester_id' => null, // Optional at start
+            'assigned_id' => null, // Optional at start
             'priority_id' => $request->priority_id,
             'severity_id' => $request->severity_id,
             'status_id' => $request->status_id,
@@ -89,6 +89,22 @@ class TicketController extends Controller
         }
     }
 
+    public function markAsPending(Ticket $ticket)
+    {
+        $ticket->update(['status_id' => 3]); // Assuming 3 = Pending
+        $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
+        Activity::log("Marked ticket {$link} as pending", 'warning');
+        return back()->with('success', 'Ticket marked as pending.');
+    }
+
+    public function markAsInProgress(Ticket $ticket)
+    {
+        $ticket->update(['status_id' => 2]); // Assuming 2 = In Progress
+        $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
+        Activity::log("Marked ticket {$link} as in progress", 'info');
+        return back()->with('success', 'Ticket marked as in progress.');
+    }
+
     public function markAsResolved(Ticket $ticket)
     {
         $ticket->update(['resolved_at' => now(), 'status_id' => 4]); // Assuming 4 = Resolved
@@ -105,15 +121,15 @@ class TicketController extends Controller
         return back()->with('success', 'Ticket has been closed');
     }
 
-    public function assignTester(Request $request, Ticket $ticket)
+    public function assignUser(Request $request, Ticket $ticket)
     {
         $request->validate([
-            'tester_id' => 'required|exists:users,id'
+            'assigned_id' => 'required|exists:users,id'
         ]);
-        $ticket->update(['tester_id' => $request->tester_id]);
+        $ticket->update(['assigned_id' => $request->assigned_id]);
         $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
-        $user = $ticket->tester;
+        $user = $ticket->assigned;
         Activity::log("Assigned {$user->name()} to ticket {$link}", 'info');
-        return back()->with('success', 'Tester assigned to ticket.');
+        return back()->with('success', 'assigned assigned to ticket.');
     }
 }
