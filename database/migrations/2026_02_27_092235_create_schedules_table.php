@@ -16,7 +16,6 @@ class CreateSchedulesTable extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('event_type'); // Deploy / Testing
             
             $table->string('bg_color');   // Menyimpan kode warna HEX
             $table->dateTime('start_date');

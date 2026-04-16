@@ -22,7 +22,7 @@ class CreateTicketsTable extends Migration
             
             // Foreign Keys Utama
             $table->foreignId('requester_id')->constrained('users'); // Pelapor
-            $table->foreignId('tester_id')->nullable()->constrained('users'); // Teknisi
+            $table->foreignId('assigned_id')->nullable()->constrained('users'); // Teknisi
             $table->foreignId('app_id')->constrained('apps');
             
             // Foreign Keys Klasifikasi

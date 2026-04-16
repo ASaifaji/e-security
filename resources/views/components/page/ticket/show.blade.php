@@ -19,9 +19,9 @@
                     <a href="{{ route('tickets.index') }}" class="btn btn-dark-outline font-weight-bolder mr-2">
                         <i class="la la-arrow-left"></i> Back
                     </a>
-                    <a href="#" class="btn btn-security-primary font-weight-bolder">
+                    {{-- <a href="#" class="btn btn-security-primary font-weight-bolder">
                         <i class="la la-edit text-white"></i> Edit Ticket
-                    </a>
+                    </a> --}}
                 </div>
             </div>
 
@@ -42,6 +42,13 @@
                             <h5 class="font-weight-bold mb-3 text-white-85">Description</h5>
                             <div class="font-size-lg p-5 rounded" style="background-color: #1B2538; color: #E2E8F0; border: 1px solid #2D3748;">
                                 {!! nl2br(e($ticket->description)) !!}
+                            </div>
+                        </div>
+
+                        <div class="mb-10">
+                            <h5 class="font-weight-bold mb-3 text-white-85">Vulnerability Details</h5>
+                            <div class="font-size-lg p-5 rounded" style="background-color: #1B2538; color: #E2E8F0; border: 1px solid #2D3748;">
+                                {!! nl2br(e($ticket->vulnerability_details)) !!}
                             </div>
                         </div>
 
@@ -81,10 +88,6 @@
                                 <h3 class="card-title font-weight-bolder text-white-85">Summary</h3>
                             </div>
                             <div class="card-body pt-2">
-                                <div class="d-flex align-items-center justify-content-between mb-5">
-                                    <span class="font-weight-bold text-muted-slate mr-2">Type:</span>
-                                    <span class="font-weight-bolder text-white">{{ $ticket->type->name }}</span>
-                                </div>
                                 <div class="d-flex align-items-center justify-content-between mb-5">
                                     <span class="font-weight-bold text-muted-slate mr-2">Status:</span>
                                     @php
@@ -170,25 +173,25 @@
                                 </div>
 
                                 <div class="d-flex align-items-center justify-content-between mb-5">
-                                    <span class="font-weight-bold text-muted mr-2">Tester:</span>
-                                    @if ($ticket->tester)
+                                    <span class="font-weight-bold text-muted mr-2">Assigned To:</span>
+                                    @if ($ticket->assigned)
                                         <div class="d-flex align-items-center">
                                             <span class="symbol symbol-35 symbol-dark-avatar mr-3">
-                                                @if ($ticket->tester->avatar)
-                                                    <div class="symbol-label" style="background-image:url('{{ asset('storage/' . $ticket->tester->avatar) }}')"></div>
+                                                @if ($ticket->assigned->avatar)
+                                                    <div class="symbol-label" style="background-image:url('{{ asset('storage/' . $ticket->assigned->avatar) }}')"></div>
                                                 @else
                                                     <span class="symbol-label font-size-h6 font-weight-bold">
-                                                        {{ substr($ticket->tester->name(), 0, 1) }}
+                                                        {{ substr($ticket->assigned->name(), 0, 1) }}
                                                     </span>
                                                 @endif
                                             </span>
-                                            <span class="text-white font-weight-bold">{{ $ticket->tester->name() }}</span>
+                                            <span class="text-white font-weight-bold">{{ $ticket->assigned->name() }}</span>
                                         </div>
                                     @else
-                                        <form action="{{ route('tickets.assign-tester', $ticket->id) }}" method="POST" class="d-flex align-items-center m-0 tester-asign-form">
+                                        <form action="{{ route('tickets.assign-user', $ticket->id) }}" method="POST" class="d-flex align-items-center m-0 assigned-user-form">
                                             @csrf
                                             <div style="width: 140px; height: 36px;">
-                                                <x-form.select-picker name="tester_id" search="true" required={{ true }} >
+                                                <x-form.select-picker name="assigned_id" search="true" required={{ true }} >
                                                     <option disabled selected>Select</option>
                                                     @foreach ($users as $user)
                                                         <option value="{{ $user->id }}">{{ $user->name() }}</option>
@@ -215,14 +218,37 @@
 
                             </div>
                         </div>
-                        @if ((Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->id == $ticket->tester_id) && $ticket->status_id != 5)
+                        @if ((Auth::user()->role_id == 1 || Auth::user()->id == $ticket->requester_id || Auth::user()->id == $ticket->assigned_id) && $ticket->status_id != 5)
                             @if(!$ticket->resolved_at)
-                                <form action="{{ route('tickets.resolve', $ticket->id) }}" method="POST" style="display: inline-block;">
-                                    @csrf
-                                    <button type="submit" class="btn font-weight-bolder" style="background-color: rgba(52, 211, 153, 0.15); color: #34D399; border: 1px solid rgba(52, 211, 153, 0.3);" onclick="return confirm('Are you sure you want to mark this ticket as resolved?')">
-                                        <i class="la la-check text-success"></i> Mark as Resolved
-                                    </button>
-                                </form>
+                                @if(Auth::user()->role_id == 1 || Auth::user()->id == $ticket->requester_id)
+                                    <form action="{{ route('tickets.resolve', $ticket->id) }}" method="POST" style="display: inline-block; margin-right: 10px;">
+                                        @csrf
+                                        <button type="submit" class="btn font-weight-bolder" style="background-color: rgba(52, 211, 153, 0.15); color: #34D399; border: 1px solid rgba(52, 211, 153, 0.3);" onclick="return confirm('Are you sure you want to mark this ticket as resolved?')">
+                                            <i class="la la-check text-success"></i> Resolve Ticket
+                                        </button>
+                                    </form>
+                                    @if ($ticket->status_id == 3)
+                                    <form action="{{ route('tickets.in-progress', $ticket->id) }}" method="POST" style="display: inline-block; margin-right: 10px;">
+                                        @csrf
+                                        <button type="submit" class="btn font-weight-bolder" style="background-color: rgba(255, 168, 0, 0.15); color: #FFA800; border: 1px solid rgba(255, 168, 0, 0.3);" onclick="return confirm('Are you sure you want to cancel the pending status for this ticket?')">
+                                            <i class="la la-times text-warning"></i> Cancel Pending
+                                        </button>
+                                    </form>
+                                    @endif
+                                @else
+                                    @if($ticket->status_id == 3)
+                                        <button class="btn font-weight-bolder disabled" style="background-color: rgba(255, 168, 0, 0.15); color: #FFA800; border: 1px solid rgba(255, 168, 0, 0.3);" disabled>
+                                            <i class="la la-clock text-warning"></i> Awaiting Approval
+                                        </button>
+                                    @else
+                                        <form action="{{ route('tickets.pending', $ticket->id) }}" method="POST" style="display: inline-block; margin-right: 10px;">
+                                            @csrf
+                                            <button type="submit" class="btn font-weight-bolder" style="background-color: rgba(52, 211, 153, 0.15); color: #34D399; border: 1px solid rgba(52, 211, 153, 0.3);" onclick="return confirm('Are you sure you want to resolve this ticket?')">
+                                                <i class="la la-check text-success"></i> Resolve Ticket
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endif
                             @else
                                 <button class="btn font-weight-bolder disabled" style="background-color: rgba(100, 116, 139, 0.1); color: #64748B; border: 1px dashed #334155;" disabled>
                                     <i class="la la-check-double text-muted-slate"></i> Already Resolved
@@ -254,14 +280,14 @@
 @push('styles')
 <style>
     /* Strip the grid formatting just for the assignment dropdown */
-    .tester-assign-form .form-group {
+    .assigned-user-form .form-group {
         margin-bottom: 0 !important;
     }
-    .tester-assign-form .row {
+    .assigned-user-form .row {
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
-    .tester-assign-form .col-9 {
+    .assigned-user-form .col-9 {
         flex: 0 0 100% !important; /* Force 100% width instead of 75% */
         max-width: 100% !important;
         padding-left: 0 !important;
