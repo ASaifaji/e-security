@@ -89,10 +89,6 @@
                             </div>
                             <div class="card-body pt-2">
                                 <div class="d-flex align-items-center justify-content-between mb-5">
-                                    <span class="font-weight-bold text-muted-slate mr-2">Type:</span>
-                                    <span class="font-weight-bolder text-white">{{ $ticket->type->name }}</span>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-5">
                                     <span class="font-weight-bold text-muted-slate mr-2">Status:</span>
                                     @php
                                         $statusName = strtolower($ticket->status->name);
@@ -225,7 +221,7 @@
                         @if ((Auth::user()->role_id == 1 || Auth::user()->id == $ticket->requester_id || Auth::user()->id == $ticket->assigned_id) && $ticket->status_id != 5)
                             @if(!$ticket->resolved_at)
                                 @if(Auth::user()->role_id == 1 || Auth::user()->id == $ticket->requester_id)
-                                    <form action="{{ route('tickets.pending', $ticket->id) }}" method="POST" style="display: inline-block; margin-right: 10px;">
+                                    <form action="{{ route('tickets.resolve', $ticket->id) }}" method="POST" style="display: inline-block; margin-right: 10px;">
                                         @csrf
                                         <button type="submit" class="btn font-weight-bolder" style="background-color: rgba(52, 211, 153, 0.15); color: #34D399; border: 1px solid rgba(52, 211, 153, 0.3);" onclick="return confirm('Are you sure you want to mark this ticket as resolved?')">
                                             <i class="la la-check text-success"></i> Resolve Ticket

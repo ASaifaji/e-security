@@ -13,7 +13,6 @@ class Ticket extends Model
         'ticket_number',
         'subject',
         'description',
-        'type_id',
         'vulnerability_details',
         'app_id',
         'requester_id',

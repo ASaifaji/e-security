@@ -8,19 +8,6 @@
             <h3 class="card-label text-white-85">Complex Header
             <span class="d-block text-muted-slate pt-2 font-size-sm">advance header options</span></h3>
         </div>
-        <div class="card-toolbar">
-            <x-dropdown.dropdown-button text="Export">
-                <x-slot name="icon"><x-icons.pen-and-ruler /></x-slot>
-                <x-dropdown.navi-item href="#" text="Print" icon="la la-print" />
-                <x-dropdown.navi-item href="#" text="Copy" icon="la la-copy" />
-                <x-dropdown.navi-item href="#" text="Excel" icon="la la-file-excel-o" />
-                <x-dropdown.navi-item href="#" text="CSV" icon="la la-file-text-o" />
-                <x-dropdown.navi-item href="#" text="PDF" icon="la la-file-pdf-o" />
-            </x-dropdown.dropdown-button>
-            <x-button.button href="/apps/create" text="Add New" >
-                <x-slot name="icon"><x-icons.flatten /></x-slot>
-            </x-button.button>
-        </div>
     </div>
 
     <div class="card-body">
@@ -30,7 +17,6 @@
                 <tr>
                     <th>ID</th>
                     <th>App Name</th>
-                    <th>Type</th>
                     <th>PIC</th>
                 </tr>
             </thead>
@@ -39,7 +25,6 @@
                     <tr>
                         <td>{{ $app->id }}</td>
                         <td>{{ $app->name }}</td>
-                        <td>{{ $app->type }}</td>
                         <td>
                             <a href="javascript:void(0);" class="d-inline-flex align-items-center pic-assign-btn p-2 rounded" title="Click to Assign or Change PIC" data-app-id="{{ $app->id }}">
                                 <span class="symbol symbol-35 symbol-dark-avatar mr-3">

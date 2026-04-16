@@ -18,16 +18,10 @@
                         <!--begin::Toolbar-->
                         <div class="card-toolbar">
                             <ul class="nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-3x custom-dark-tabs">
+                                
                                 <!--begin::Item-->
                                 <li class="nav-item mr-3">
-                                    <a class="nav-link active" data-toggle="tab" href="#tab_custom_event">
-                                        <span class="nav-text font-size-lg text-white-85">Custom</span>
-                                    </a>
-                                </li>
-                                <!--end::Item-->
-                                <!--begin::Item-->
-                                <li class="nav-item mr-3">
-                                    <a class="nav-link" data-toggle="tab" href="#tab_ticket_event">
+                                    <a class="nav-link active" data-toggle="tab" href="#tab_ticket_event">
                                         <span class="nav-text font-size-lg text-white-85">Ticket</span>
                                     </a>
                                 </li>
@@ -35,14 +29,15 @@
                             </ul>
                         </div>
                         <!--end::Toolbar-->
+                        
+                    </div>
+                    <div class="card-body">
                         <div class="card-title d-none d-md-flex">
                             <h3 class="card-label text-white-85">Schedule Events</h3>
                         </div>
-                    </div>
-                    <div class="card-body">
                         <div class="tab-content">
 
-                            <div class="tab-pane fade show active" id="tab_custom_event" role="tabpanel">
+                            <div class="tab-pane fade" id="tab_custom_event" role="tabpanel">
                                 <div id="event-creation-form">
                                     <div class="form-group mb-4">
                                         <label class="font-weight-bold text-white-85">Jenis Event <span class="text-danger">*</span></label>
@@ -85,7 +80,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="tab_ticket_event" role="tabpanel">
+                            <div class="tab-pane fade show active" id="tab_ticket_event" role="tabpanel">
                                 <div id="ticket-creation-form">
                                     <div class="form-group mb-6 custom-select2-dark">
                                         <label class="font-weight-bold text-white-85">Pilih Ticket <span class="text-danger">*</span></label>
@@ -93,7 +88,7 @@
                                             <option value="">-- Cari Ticket --</option>
                                             @isset($tickets)
                                                 @foreach ($tickets as $ticket)
-                                                    <option value="{{ $ticket->id }}" data-type-name="{{ $ticket->type->name ?? 'lainnya' }}">{{ $ticket->ticket_number }} - {{ $ticket->subject ?? '' }}</option>
+                                                    <option value="{{ $ticket->id }}" data-type-name="Test">{{ $ticket->ticket_number }} - {{ $ticket->subject ?? '' }}</option>
                                                 @endforeach
                                             @endisset
                                         </select>
@@ -201,16 +196,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         switch(eventType) {
             case 'Deploy':
-                targetBgColor = '#fd7e14'; 
+                targetBgColor = '#ffc107'; 
                 break;
             case 'Test':
                 targetBgColor = '#ffc107'; 
                 break;
             case 'Laporan':
-                targetBgColor = '#3699FF';
+                targetBgColor = '#ffc107';
                 break;
             default:
-                targetBgColor = '#88BDF2';
+                targetBgColor = '#ffc107';
         }
 
         // Sisipkan appId dan picId ke dalam atribut data HTML
@@ -219,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 style="background-color: ${targetBgColor}20; border: 1px solid ${targetBgColor}; color: #ffffff; text-shadow: 0px 1px 2px rgba(0,0,0,0.3);"
                 data-title="${eventTitle}"
                 data-bg-color="${targetBgColor}"
-                data-type="${eventType}"
+                data-type="Test"
                 data-app-id="${appId}" 
                 data-pic-id="${picId}">
                 <i class="flaticon2-drag mr-3" style="color: ${targetBgColor};"></i> 
@@ -247,16 +242,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
         switch(ticketTypeName) {
             case 'Deploy':
-                targetBgColor = '#fd7e14'; 
+                targetBgColor = '#ffc107'; 
                 break;
             case 'Test':
                 targetBgColor = '#ffc107'; 
                 break;
             case 'Laporan':
-                targetBgColor = '#3699FF';
+                targetBgColor = '#ffc107';
                 break;
             default:
-                targetBgColor = '#88BDF2';
+                targetBgColor = '#ffc107';
         }
 
         const draggableItemHTML = `
@@ -264,10 +259,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 style="background-color: ${targetBgColor}20; border: 1px solid ${targetBgColor}; color: #ffffff; text-shadow: 0px 1px 2px rgba(0,0,0,0.3);"
                 data-title="${eventTitle}"
                 data-bg-color="${targetBgColor}"
-                data-type="${ticketTypeName}"
+                data-type=Test
                 data-ticket-id="${ticketId}">
                 <i class="flaticon2-drag mr-3" style="color: ${targetBgColor};"></i> 
-                <span class="font-weight-bold" style="font-size: 0.95rem;">${eventTitle} <small>(${ticketTypeName})</small></span>
+                <span class="font-weight-bold" style="font-size: 0.95rem;">${eventTitle} <small>Test</small></span>
             </div>
         `;
 

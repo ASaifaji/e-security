@@ -17,25 +17,15 @@
                 <x-dropdown.navi-item href="#" text="CSV" icon="la la-file-text-o" />
                 <x-dropdown.navi-item href="#" text="PDF" icon="la la-file-pdf-o" />
             </x-dropdown.dropdown-button> --}}
-            @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
-                <x-button.button href="/tickets/create" text="Add New" >
-                    <x-slot name="icon"><x-icons.flatten /></x-slot>
-                </x-button.button>
-            @endif
+            <x-button.button href="/tickets/create" text="Add New" >
+                <x-slot name="icon"><x-icons.flatten /></x-slot>
+            </x-button.button>
         </div>
     </div>
 
     <div class="card-body">
         <div class="row mb-8 pb-4 border-bottom border-dark">
-            <div class="col-md-3 mb-4">
-                <label class="text-white-85">Type</label>
-                <select class="form-control select2-filter datatable-filter" data-column="3" multiple="multiple" data-placeholder="Select Ticket Types">
-                    <option value="Deploy">Deploy</option>
-                    <option value="Test">Test</option>
-                    <option value="Laporan">Laporan</option>
-                </select>
-            </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
                 <label class="text-white-85">Priority</label>
                 <select class="form-control select2-filter datatable-filter" data-column="7" multiple="multiple" data-placeholder="Select Ticket Priorities">
                     <option value="Critical">Critical</option>
@@ -44,7 +34,7 @@
                     <option value="Low">Low</option>
                 </select>
             </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
                 <label class="text-white-85">Severity</label>
                 <select class="form-control select2-filter datatable-filter" data-column="8" multiple="multiple" data-placeholder="Select Ticket Severities">
                     <option value="Critical">Critical</option>
@@ -53,7 +43,7 @@
                     <option value="Low">Low</option>
                 </select>
             </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4"> 
                 <label class="text-white-85">Status</label>
                 <select class="form-control select2-filter datatable-filter" data-column="9" multiple="multiple" data-placeholder="Select Ticket Statuses">
                     <option value="Open">Open</option>
@@ -69,7 +59,7 @@
             <thead>
                 <tr>
                     <th colspan="2">Ticket Information</th>
-                    <th colspan="3">Ticket Details</th>
+                    <th colspan="2">Ticket Details</th>
                     <th colspan="2">User Information</th>
                     <th colspan="3">Status</th>
                     <th rowspan="2" class="align-middle">View</th>
@@ -78,7 +68,6 @@
                     <th>ID</th>
                     <th>Ticket Number</th>
                     <th>Subject</th>
-                    <th>Type</th>
                     <th>App</th>
                     <th>Requester</th>
                     <th>Assigned</th>
@@ -93,7 +82,6 @@
                         <td>{{ $ticket->id }}</td>
                         <td>{{ $ticket->ticket_number }}</td>
                         <td>{{ $ticket->subject }}</td>
-                        <td>{{ $ticket->type->name }}</td>
                         <td>{{ $ticket->app->name }}</td>
                         <td>
                             <a href="javascript:void(0);" class="d-inline-flex align-items-center pic-assign-btn p-2 rounded" title="Click to Assign or Change PIC" data-ticket-id="{{ $ticket->id }}">
@@ -284,7 +272,7 @@
 
                 $('.datatable-filter').each(function() {
                     let colIndex = $(this).data('column');
-                    let paramMap = { 3: 'type', 7: 'priority', 8: 'severity', 9: 'status' };
+                    let paramMap = { 7: 'priority', 8: 'severity', 9: 'status' };
                     let paramName = paramMap[colIndex];
 
                     if (paramName && urlParams.has(paramName)) {

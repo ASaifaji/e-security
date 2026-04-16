@@ -12,14 +12,10 @@ class TicketController extends Controller
 {
     public function store(Request $request)
     {
-        if (auth::user()->role_id == 3) {
-            return back()->with('error', 'Unauthorized');
-        }
         // 1. Validation
         $request->validate([
             'subject' => 'required|string|max:255',
             'description' => 'required|string',
-            'ticket_type' => 'required|in:1,2,3',
             'app_type' => 'required|in:1,2', // 1=Existing, 2=New
             'existing_app_id' => 'required_if:app_type,1|nullable|exists:apps,id',
             'new_app_name' => 'required_if:app_type,2|nullable|string|max:255',
@@ -33,7 +29,7 @@ class TicketController extends Controller
             // Create New App
             $app = App::create([
                 'name' => $request->new_app_name,
-                'type' => 'New',
+                'type' => 'Existing',
                 'user_id' => $request->new_app_pic,
             ]);
             $appId = $app->id;
@@ -62,7 +58,6 @@ class TicketController extends Controller
             'ticket_number' => $ticketNumber,
             'subject' => $request->subject,
             'description' => $request->description,
-            'type_id' => $request->ticket_type,
             'vulnerability_details' => $request->vulnerability_details,
             'app_id' => $appId,
             'requester_id' => Auth::id(), // Currently logged in user
@@ -94,9 +89,6 @@ class TicketController extends Controller
 
     public function markAsPending(Ticket $ticket)
     {
-        if(auth::user()->role_id != 1 || auth::user()->id != $ticket->requester_id || auth::user()->id != $ticket->assigned_id) {
-            return back()->with('error', 'Unauthorized');
-        }
         $ticket->update(['status_id' => 3]); // Assuming 3 = Pending
         $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
         Activity::log("Marked ticket {$link} as pending", 'warning');
@@ -105,9 +97,6 @@ class TicketController extends Controller
 
     public function markAsInProgress(Ticket $ticket)
     {
-        if(auth::user()->role_id != 1 || auth::user()->id != $ticket->requester_id) {
-            return back()->with('error', 'Unauthorized');
-        }
         $ticket->update(['status_id' => 2]); // Assuming 2 = In Progress
         $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
         Activity::log("Marked ticket {$link} as in progress", 'info');
@@ -116,9 +105,6 @@ class TicketController extends Controller
 
     public function markAsResolved(Ticket $ticket)
     {
-        if(auth::user()->role_id != 1 || auth::user()->id != $ticket->requester_id) {
-            return back()->with('error', 'Unauthorized');
-        }
         $ticket->update(['resolved_at' => now(), 'status_id' => 4]); // Assuming 4 = Resolved
         $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
         Activity::log("Marked ticket {$link} as resolved", 'success');
@@ -127,9 +113,6 @@ class TicketController extends Controller
 
     public function close(Ticket $ticket)
     {
-        if(auth::user()->role_id != 1 || auth::user()->id != $ticket->requester_id){
-            return back()->with('error', 'Unauthorized');
-        }
         $ticket->update(['status_id' => 5]);
         $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
         Activity::log("Closed ticket {$link}", 'danger');
@@ -138,9 +121,6 @@ class TicketController extends Controller
 
     public function assignUser(Request $request, Ticket $ticket)
     {
-        if (auth::user()->role_id != 1 || auth::user()->id != $ticket->requester_id) {
-            return back()->with('error', 'Unauthorized');
-        }
         $request->validate([
             'assigned_id' => 'required|exists:users,id'
         ]);
