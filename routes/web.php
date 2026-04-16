@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
     // -- Show Ticket --
     Route::get('/tickets/{ticket}', function(Ticket $ticket){
-        $ticket->load(['app', 'requester', 'tester', 'priority', 'severity', 'status']);
+        $ticket->load(['app', 'requester', 'assigned', 'priority', 'severity', 'status']);
         $users = User::all();
 
         return view('tickets.show', compact('ticket', 'users'));
@@ -85,6 +85,8 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function(){
     Route::post('/tickets', [TicketController::class, 'store'])->name('tickets.store');
     Route::post('/ticket/{ticket}/reply', [TicketChatController::class, 'store'])->name('tickets.reply.store');
+    Route::post('/tickets/{ticket}/pending', [TicketController::class, 'markAsPending'])->name('tickets.pending');
+    Route::post('/tickets/{ticket}/in-progress', [TicketController::class, 'markAsInProgress'])->name('tickets.in-progress');
     Route::post('/tickets/{ticket}/resolve', [TicketController::class, 'markAsResolved'])->name('tickets.resolve');
     Route::put('/profile/personal-info', [ProfileController::class, 'updatePersonalInfo'])->name('profile.update.personal');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update.password');
@@ -92,7 +94,7 @@ Route::middleware(['auth'])->group(function(){
     Route::put('/schedules/update/{id}', [ScheduleController::class, 'update'])->name('schedules.update');
     Route::get('/schedules/events', [ScheduleController::class, 'getEvents'])->name('schedules.events');
     Route::post('/tickets/{ticket}/close', [TicketController::class, 'close'])->name('tickets.close');
-    Route::post('/tickets/{ticket}/assign-tester', [TicketController::class, 'assignTester'])->name('tickets.assign-tester');
+    Route::post('/tickets/{ticket}/assign-user', [TicketController::class, 'assignUser'])->name('tickets.assign-user');
     Route::delete('/schedules/destroy/{id}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
 });
 

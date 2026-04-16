@@ -16,14 +16,12 @@ class AppSeeder extends Seeder
     {
         //
         App::create([
-            'name' => 'Test Application',
-            'type' => 'New',
+            'name' => 'Web Application 1 (2025)',
             'user_id' => 4,
         ]);
 
         App::create([
-            'name' => 'Test Application 2',
-            'type' => 'Existing',
+            'name' => 'Web Application 2 (marketing)',
             'user_id' => 3,
         ]);
     }

@@ -9,14 +9,14 @@
             <span class="d-block text-muted-slate pt-2 font-size-sm">advance header options</span></h3>
         </div>
         <div class="card-toolbar">
-            <x-dropdown.dropdown-button text="Export">
+            {{-- <x-dropdown.dropdown-button text="Export">
                 <x-slot name="icon"><x-icons.pen-and-ruler /></x-slot>
                 <x-dropdown.navi-item href="#" text="Print" icon="la la-print" />
                 <x-dropdown.navi-item href="#" text="Copy" icon="la la-copy" />
                 <x-dropdown.navi-item href="#" text="Excel" icon="la la-file-excel-o" />
                 <x-dropdown.navi-item href="#" text="CSV" icon="la la-file-text-o" />
                 <x-dropdown.navi-item href="#" text="PDF" icon="la la-file-pdf-o" />
-            </x-dropdown.dropdown-button>
+            </x-dropdown.dropdown-button> --}}
             <x-button.button href="/tickets/create" text="Add New" >
                 <x-slot name="icon"><x-icons.flatten /></x-slot>
             </x-button.button>
@@ -25,15 +25,7 @@
 
     <div class="card-body">
         <div class="row mb-8 pb-4 border-bottom border-dark">
-            <div class="col-md-3 mb-4">
-                <label class="text-white-85">Type</label>
-                <select class="form-control select2-filter datatable-filter" data-column="3" multiple="multiple" data-placeholder="Select Ticket Types">
-                    <option value="Deploy">Deploy</option>
-                    <option value="Test">Test</option>
-                    <option value="Laporan">Laporan</option>
-                </select>
-            </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
                 <label class="text-white-85">Priority</label>
                 <select class="form-control select2-filter datatable-filter" data-column="7" multiple="multiple" data-placeholder="Select Ticket Priorities">
                     <option value="Critical">Critical</option>
@@ -42,7 +34,7 @@
                     <option value="Low">Low</option>
                 </select>
             </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
                 <label class="text-white-85">Severity</label>
                 <select class="form-control select2-filter datatable-filter" data-column="8" multiple="multiple" data-placeholder="Select Ticket Severities">
                     <option value="Critical">Critical</option>
@@ -51,7 +43,7 @@
                     <option value="Low">Low</option>
                 </select>
             </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4"> 
                 <label class="text-white-85">Status</label>
                 <select class="form-control select2-filter datatable-filter" data-column="9" multiple="multiple" data-placeholder="Select Ticket Statuses">
                     <option value="Open">Open</option>
@@ -67,7 +59,7 @@
             <thead>
                 <tr>
                     <th colspan="2">Ticket Information</th>
-                    <th colspan="3">Ticket Details</th>
+                    <th colspan="2">Ticket Details</th>
                     <th colspan="2">User Information</th>
                     <th colspan="3">Status</th>
                     <th rowspan="2" class="align-middle">View</th>
@@ -76,10 +68,9 @@
                     <th>ID</th>
                     <th>Ticket Number</th>
                     <th>Subject</th>
-                    <th>Type</th>
                     <th>App</th>
                     <th>Requester</th>
-                    <th>Tester</th>
+                    <th>Assigned</th>
                     <th>Priority</th>
                     <th>Severity</th>
                     <th>Status</th>
@@ -91,7 +82,6 @@
                         <td>{{ $ticket->id }}</td>
                         <td>{{ $ticket->ticket_number }}</td>
                         <td>{{ $ticket->subject }}</td>
-                        <td>{{ $ticket->type->name }}</td>
                         <td>{{ $ticket->app->name }}</td>
                         <td>
                             <a href="javascript:void(0);" class="d-inline-flex align-items-center pic-assign-btn p-2 rounded" title="Click to Assign or Change PIC" data-ticket-id="{{ $ticket->id }}">
@@ -116,17 +106,17 @@
                         </td>
                         <td>
                             <a href="javascript:void(0);" class="d-inline-flex align-items-center pic-assign-btn p-2 rounded" title="Click to Assign or Change PIC" data-ticket-id="{{ $ticket->id }}">
-                                @if($ticket->tester)
+                                @if($ticket->assigned)
                                     <span class="symbol symbol-35 symbol-dark-avatar mr-3">
-                                        @if ($ticket->tester->avatar)
-                                            <div class="symbol-label" style="background-image:url('{{ asset('storage/' . $ticket->tester->avatar) }}')"></div>
+                                        @if ($ticket->assigned->avatar)
+                                            <div class="symbol-label" style="background-image:url('{{ asset('storage/' . $ticket->assigned->avatar) }}')"></div>
                                         @else
                                             <span class="symbol-label font-size-h6 font-weight-bold">
-                                                {{ strtoupper(substr($ticket->tester->first_name ?? 'U', 0, 1)) }}{{ strtoupper(substr($ticket->tester->last_name ?? 'N', 0, 1)) }}
+                                                {{ strtoupper(substr($ticket->assigned->first_name ?? 'U', 0, 1)) }}{{ strtoupper(substr($ticket->assigned->last_name ?? 'N', 0, 1)) }}
                                             </span>
                                         @endif
                                     </span>
-                                    <span class="pic-text text-white-85 font-weight-bolder font-size-base">{{ $ticket->tester->name() }}</span>
+                                    <span class="pic-text text-white-85 font-weight-bolder font-size-base">{{ $ticket->assigned->name() }}</span>
                                 @else
                                     <span class="symbol symbol-35 symbol-dark-unassigned mr-3">
                                         <span class="symbol-label font-size-h5 font-weight-bold">?</span>
@@ -282,7 +272,7 @@
 
                 $('.datatable-filter').each(function() {
                     let colIndex = $(this).data('column');
-                    let paramMap = { 3: 'type', 7: 'priority', 8: 'severity', 9: 'status' };
+                    let paramMap = { 7: 'priority', 8: 'severity', 9: 'status' };
                     let paramName = paramMap[colIndex];
 
                     if (paramName && urlParams.has(paramName)) {
