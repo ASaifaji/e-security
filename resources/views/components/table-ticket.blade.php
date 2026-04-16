@@ -17,9 +17,11 @@
                 <x-dropdown.navi-item href="#" text="CSV" icon="la la-file-text-o" />
                 <x-dropdown.navi-item href="#" text="PDF" icon="la la-file-pdf-o" />
             </x-dropdown.dropdown-button> --}}
-            <x-button.button href="/tickets/create" text="Add New" >
-                <x-slot name="icon"><x-icons.flatten /></x-slot>
-            </x-button.button>
+            @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                <x-button.button href="/tickets/create" text="Add New" >
+                    <x-slot name="icon"><x-icons.flatten /></x-slot>
+                </x-button.button>
+            @endif
         </div>
     </div>
 

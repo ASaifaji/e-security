@@ -19,9 +19,9 @@
                     <a href="{{ route('tickets.index') }}" class="btn btn-dark-outline font-weight-bolder mr-2">
                         <i class="la la-arrow-left"></i> Back
                     </a>
-                    <a href="#" class="btn btn-security-primary font-weight-bolder">
+                    {{-- <a href="#" class="btn btn-security-primary font-weight-bolder">
                         <i class="la la-edit text-white"></i> Edit Ticket
-                    </a>
+                    </a> --}}
                 </div>
             </div>
 
@@ -192,7 +192,7 @@
                                             <span class="text-white font-weight-bold">{{ $ticket->assigned->name() }}</span>
                                         </div>
                                     @else
-                                        <form action="{{ route('tickets.assign-assigned', $ticket->id) }}" method="POST" class="d-flex align-items-center m-0 assigned-user-form">
+                                        <form action="{{ route('tickets.assign-user', $ticket->id) }}" method="POST" class="d-flex align-items-center m-0 assigned-user-form">
                                             @csrf
                                             <div style="width: 140px; height: 36px;">
                                                 <x-form.select-picker name="assigned_id" search="true" required={{ true }} >
@@ -222,9 +222,9 @@
 
                             </div>
                         </div>
-                        @if ((Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->id == $ticket->assigned_id) && $ticket->status_id != 5)
+                        @if ((Auth::user()->role_id == 1 || Auth::user()->id == $ticket->requester_id || Auth::user()->id == $ticket->assigned_id) && $ticket->status_id != 5)
                             @if(!$ticket->resolved_at)
-                                @if(Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                                @if(Auth::user()->role_id == 1 || Auth::user()->id == $ticket->requester_id)
                                     <form action="{{ route('tickets.pending', $ticket->id) }}" method="POST" style="display: inline-block; margin-right: 10px;">
                                         @csrf
                                         <button type="submit" class="btn font-weight-bolder" style="background-color: rgba(52, 211, 153, 0.15); color: #34D399; border: 1px solid rgba(52, 211, 153, 0.3);" onclick="return confirm('Are you sure you want to mark this ticket as resolved?')">
@@ -241,13 +241,13 @@
                                     @endif
                                 @else
                                     @if($ticket->status_id == 3)
-                                        <button class="btn font-weight-bolder disabled" style="background-color: rgba(100, 116, 139, 0.1); color: #64748B; border: 1px dashed #334155;" disabled>
-                                            <i class="la la-clock text-muted-slate"></i> Awaiting Approval
+                                        <button class="btn font-weight-bolder disabled" style="background-color: rgba(255, 168, 0, 0.15); color: #FFA800; border: 1px solid rgba(255, 168, 0, 0.3);" disabled>
+                                            <i class="la la-clock text-warning"></i> Awaiting Approval
                                         </button>
                                     @else
                                         <form action="{{ route('tickets.pending', $ticket->id) }}" method="POST" style="display: inline-block; margin-right: 10px;">
                                             @csrf
-                                            <button type="submit" class="btn font-weight-bolder" style="background-color: rgba(52, 211, 153, 0.15); color: #34D399; border: 1px solid rgba(52, 211, 153, 0.3);" onclick="return confirm('Are you sure you want to mark this ticket as resolved?')">
+                                            <button type="submit" class="btn font-weight-bolder" style="background-color: rgba(52, 211, 153, 0.15); color: #34D399; border: 1px solid rgba(52, 211, 153, 0.3);" onclick="return confirm('Are you sure you want to resolve this ticket?')">
                                                 <i class="la la-check text-success"></i> Resolve Ticket
                                             </button>
                                         </form>
