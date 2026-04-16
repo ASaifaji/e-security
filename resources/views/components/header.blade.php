@@ -6,7 +6,7 @@
         <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
             <!--begin::Header Menu-->
             <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
-                <!--begin::Header Nav-->
+                {{-- <!--begin::Header Nav-->
                 <ul class="menu-nav">
 
                     <x-header.menu-classic href="{{ url('/') }}" text="Pages" >
@@ -70,7 +70,7 @@
                     </x-header.menu-fixed>
                     
                 </ul>
-                <!--end::Header Nav-->
+                <!--end::Header Nav--> --}}
             </div>
             <!--end::Header Menu-->
         </div>
