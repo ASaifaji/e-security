@@ -28,7 +28,7 @@ class TicketSeeder extends Seeder
             'severity_id' => 2,
             'status_id' => 4,
             'resolved_at' => now(),
-            'created_at' => now(),
+            'created_at' => now()->subDays(rand(0, 6)),
             'updated_at' => now(),
         ]);
 
@@ -44,7 +44,7 @@ class TicketSeeder extends Seeder
             'severity_id' => 1,
             'status_id' => 1,
             'resolved_at' => null,
-            'created_at' => now(),
+            'created_at' => now()->subDays(rand(0, 6)),
             'updated_at' => now(),
         ]);
 
@@ -60,7 +60,7 @@ class TicketSeeder extends Seeder
             'severity_id' => 1,
             'status_id' => 2,
             'resolved_at' => null,
-            'created_at' => now(),
+            'created_at' => now()->subDays(rand(0, 6)),
             'updated_at' => now(),
         ]);
 
@@ -76,7 +76,7 @@ class TicketSeeder extends Seeder
             'severity_id' => 4,
             'status_id' => 1,
             'resolved_at' => null,
-            'created_at' => now(),
+            'created_at' => now()->subDays(rand(0, 6)),
             'updated_at' => now(),
         ]);
     }

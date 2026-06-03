@@ -27,11 +27,11 @@
                             <x-form.form-section text="Ticket Info:">
                                 <x-form.text-input name="subject" label="Subject" required={{ true }}/>
                                 <x-form.text-input name="description" label="Description" />
-                                <x-form.select-picker id="ticket_type" name="ticket_type" label="Type">
+                                {{-- <x-form.select-picker id="ticket_type" name="ticket_type" label="Type">
                                     <option value="1">Deploy</option>
                                     <option value="2" selected>Test</option>
                                     <option value="3">Laporan</option>
-                                </x-form.select-picker>
+                                </x-form.select-picker> --}}
                                 <x-form.text-input name="vulnerability_details" label="Vulnerabilities Detail" sublabel="Can be Emptied" />
                             </x-form.form-section>
 
