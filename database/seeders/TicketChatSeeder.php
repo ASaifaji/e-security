@@ -39,8 +39,8 @@ class TicketChatSeeder extends Seeder
                 'ticket_id' => $ticket->id,
                 'user_id'   => $user->id,
                 'message'   => '<p>' . $faker->paragraph . '</p>',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => now()->subDays(rand(0, 6)),
+                'updated_at' => now()->subDays(rand(0, 6)),
             ]);
 
             
@@ -50,8 +50,8 @@ class TicketChatSeeder extends Seeder
                 'type'     => 'image/png',       
                 'path'     => 'placeholders/sample.png', 
                 'filename' => 'screenshot_error_' . rand(1, 100) . '.png',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => now()->subDays(rand(0, 6)),
+                'updated_at' => now()->subDays(rand(0, 6)),
             ]);
 
             
@@ -59,8 +59,8 @@ class TicketChatSeeder extends Seeder
                 'ticket_id' => $ticket->id,
                 'user_id'   => $users->random()->id,
                 'message'   => '<p>Thank you for the update. We are checking the logs.</p>',
-                'created_at' => now()->addMinutes(5),
-                'updated_at' => now()->addMinutes(5),
+                'created_at' => now()->subDays(rand(0, 6)),
+                'updated_at' => now()->subDays(rand(0, 6)),
             ]);
         }
     }

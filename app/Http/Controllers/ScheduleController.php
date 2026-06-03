@@ -16,7 +16,6 @@ class ScheduleController extends Controller
             'title'      => 'required|string',
             'start_date' => 'required|date',
             'end_date'   => 'nullable|date|after_or_equal:start_date',
-            'event_type' => 'required|string',
             'bg_color'   => 'required|string',
         ];
 
@@ -31,7 +30,6 @@ class ScheduleController extends Controller
 
         $dataToSave = [
             'title'      => $request->title,
-            'event_type' => $request->event_type,
             'bg_color'   => $request->bg_color,
             'start_date' => $request->start_date,
             'end_date'   => $request->end_date,
@@ -111,7 +109,6 @@ class ScheduleController extends Controller
                 
                 // Masukkan data tambahan ke extendedProps (opsional, jika Anda butuh)
                 'extendedProps'   => [
-                    'eventType'    => $schedule->event_type,
                     'appId'        => $schedule->app_id,
                     'picId'        => $schedule->pic_id,
                     'ticketId'     => $schedule->ticket_id,
@@ -129,7 +126,7 @@ class ScheduleController extends Controller
         
         $schedule->delete();
 
-        Activity::log("Removed a scheduled {$schedule->event_type} event: {$schedule->title}", 'danger');
+        Activity::log("Removed a scheduled test event: {$schedule->title}", 'danger');
 
         return response()->json([
             'status' => 'success',

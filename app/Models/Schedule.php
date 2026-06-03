@@ -11,7 +11,6 @@ class Schedule extends Model
 
     protected $fillable = [
         'title',
-        'event_type',
         'app_id',
         'pic_id',
         'bg_color',

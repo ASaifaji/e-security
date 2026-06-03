@@ -27,7 +27,7 @@
         <div class="row mb-8 pb-4 border-bottom border-dark">
             <div class="col-md-4 mb-4">
                 <label class="text-white-85">Priority</label>
-                <select class="form-control select2-filter datatable-filter" data-column="7" multiple="multiple" data-placeholder="Select Ticket Priorities">
+                <select class="form-control select2-filter datatable-filter" data-column="6" multiple="multiple" data-placeholder="Select Ticket Priorities">
                     <option value="Critical">Critical</option>
                     <option value="High">High</option>
                     <option value="Medium">Medium</option>
@@ -36,7 +36,7 @@
             </div>
             <div class="col-md-4 mb-4">
                 <label class="text-white-85">Severity</label>
-                <select class="form-control select2-filter datatable-filter" data-column="8" multiple="multiple" data-placeholder="Select Ticket Severities">
+                <select class="form-control select2-filter datatable-filter" data-column="7" multiple="multiple" data-placeholder="Select Ticket Severities">
                     <option value="Critical">Critical</option>
                     <option value="Major">Major</option>
                     <option value="Moderate">Moderate</option>
@@ -45,7 +45,7 @@
             </div>
             <div class="col-md-4 mb-4"> 
                 <label class="text-white-85">Status</label>
-                <select class="form-control select2-filter datatable-filter" data-column="9" multiple="multiple" data-placeholder="Select Ticket Statuses">
+                <select class="form-control select2-filter datatable-filter" data-column="8" multiple="multiple" data-placeholder="Select Ticket Statuses">
                     <option value="Open">Open</option>
                     <option value="In Progress">In Progress</option>
                     <option value="Pending">Pending</option>
@@ -272,7 +272,7 @@
 
                 $('.datatable-filter').each(function() {
                     let colIndex = $(this).data('column');
-                    let paramMap = { 7: 'priority', 8: 'severity', 9: 'status' };
+                    let paramMap = { 6: 'priority', 7: 'severity', 8: 'status' };
                     let paramName = paramMap[colIndex];
 
                     if (paramName && urlParams.has(paramName)) {

@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'first_name' => 'Manager/Team Lead',
-            'last_name' => '1',
+            'last_name' => 'One',
             'email' => 'team@helpdesk.com',
             'password' => Hash::make('abcd1234'),
             'role_id' => 2,

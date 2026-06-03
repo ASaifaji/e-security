@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             AppSeeder::class,
             TicketSeeder::class,
             TicketChatSeeder::class,
+            ActivitySeeder::class,
         ]);
     }
 }
