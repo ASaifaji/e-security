@@ -124,7 +124,7 @@ class TicketController extends Controller
         $request->validate([
             'assigned_id' => 'required|exists:users,id'
         ]);
-        $ticket->update(['assigned_id' => $request->assigned_id]);
+        $ticket->update(['assigned_id' => $request->assigned_id, 'status_id' => 2]);
         $link = '<a href="' . route('tickets.show', $ticket->id) . '" style="color: #88BDF2;" class="font-weight-bold">#' . $ticket->ticket_number . '</a>';
         $user = $ticket->assigned;
         Activity::log("Assigned {$user->name()} to ticket {$link}", 'info');
